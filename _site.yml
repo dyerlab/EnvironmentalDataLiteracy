@@ -1,0 +1,26 @@
+name: "Environmental Data Literacy"
+navbar:
+  title: "Environmental Data Literacy"
+  type: default
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "Gathering"
+      href: gathering.html
+    - text: "Visualizing"
+      href: visualizing.html
+    - text: "Manipulating"
+      href: manipulating.html
+    - text: "Analyzing"
+      href: analyzing.html
+    - text: "Communicating"
+      href: communicating.html
+output:
+  html_document:
+    theme: default #flatly
+    highlight: textmate
+    include:
+      after_body: footer.html
+    css: styles.css
+    fig_caption: true
+    df_print: paged
