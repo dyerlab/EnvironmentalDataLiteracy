@@ -1,5 +1,8 @@
 ---
 title: "Gathering Data"
+output: 
+  html_output:
+    toc: false;
 ---
 
 ```{r setup, include=FALSE}
@@ -9,9 +12,9 @@ knitr::opts_chunk$set(echo = TRUE)
 ## Impetus
 
 This Unit focues on developing the R environment on your computer and making sure you are familiar with a set of skills to allow you to function in R.  You will learn:  
-- [Setting Up R](./getting_R.html)  
-- Data Types in R  
-- Data Containers  
-- Acquiring Data  
+- [Setting Up R](./getting_R.html)   
+- [Data Types in R](./data_types.html)   
+- [Data Containers](./data_containers.html)  
+- [Acquiring Data](./data_sources.html)   
 
 
