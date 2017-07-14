@@ -1,12 +1,21 @@
-name: "Environmental Data Literacy"
+name: "ENVS543"
 navbar:
-  title: "Environmental Data Literacy"
+  title: ""
   type: default
   left:
-    - text: "Home"
+    - text: "ENVS543"
       href: index.html
     - text: "Gathering"
       href: gathering.html
+      menu:
+        - text: "The R Ecosystem"
+          href: getting_R.html
+        - text: "Data Types"
+          href: data_types.html
+        - text: "Data Containers"
+          href: data_containers.html
+        - text: "Data Sources"
+          href: data_sources.html
     - text: "Visualizing"
       href: visualizing.html
     - text: "Manipulating"
@@ -23,4 +32,10 @@ output:
       after_body: footer.html
     css: styles.css
     fig_caption: true
+    fig_align: center
     df_print: paged
+    number_sections: no
+    toc: true
+    toc_depth: 3
+    toc_float: true
+
