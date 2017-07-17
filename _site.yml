@@ -19,23 +19,42 @@ navbar:
           href: programming_R.html
     - text: "Univariate"
       menu:
-        - text: "Distributions"
-        - text: "Visualizing"
-        - text: "Models"
-          href: visualizing_spatial.html
+        - text: "Built-in Graphics"
+          href: uni_graphics_builtin.html
+        - text: "GGPlot Visualization"
+          href: uni_graphics_ggplot.html
+        - text: "Normality & Transformations"
+          href: uni_transformations.html
+        - text: "Statistical Inferences"
+          href: uni_statistical_inferences.html
+        - text: "Centrality & Dispersion"
+          href: uni_centrality_dispersion.html
+        - text: "Equality of Means"
+          href: uni_anova.html
     - text: "Bivariate"
       menu:
-        - text: "Distributions"
-        - text: "Visualizing"
-        - text: "Models"
+        - text: "Distribution & Visualization"
+          href: bivar_distributions_visualization.html
+        - text: "Correlation"
+          href: bivar_correlation.html
+        - text: "Linear Regression"
+          href: bivar_regression.html
+        - text: "Logistic Regression"
+          href: bivar_logistic_regression.html
     - text: "Spatial"
       menu:
-        - text: "Distributions"
-        - text: "Visualizing"
-        - text: "Models"
-          href: visualizing_spatial.html
+        - text: "Spatial Data"
+          href: spatial_data.html
+        - text: "Mapping"
+          href: spatial_mapping.html
+        - text: "Habitat Analysis"
+          href: spatial_habitat.html
+        - text: "Autocorrelation"
+          href: spatial_autocorrelation.html
     - text: "Communicating"
       menu:
+        - text: "Reproducable Reserach"
+          href: r_markdown.html
         - text: "Print"
         - text: "Video"
 output:
