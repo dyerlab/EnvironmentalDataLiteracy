@@ -15,7 +15,7 @@ theme_set( theme_bw() )
 For this example, we will go back to our old friend, the Beer Styles data set.
 
 ```{r}
-data <- read.csv("Beer_Styles.csv")
+data <- read.csv("./Data/Beer_Styles.csv")
 summary(data)
 ```
 
@@ -644,7 +644,7 @@ rm(list=ls())
 I've saved a subset of the data as a `data.frame` that you can download from the website.  They can be loaded in and examined as:
 
 ```{r}
-load("locus306.rda")
+load("./Data/locus306.rda")
 summary( locus306 )
 ```
 
@@ -721,7 +721,7 @@ Finally, I should add that each of the data files that I saved are named `bio`. 
 
 ```{r message=FALSE, warning=FALSE}
 library(raster)
-load("bio1.rda")
+load("./Data/bio1.rda")
 plot(bio)
 ```
 

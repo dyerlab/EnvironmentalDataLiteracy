@@ -65,7 +65,7 @@ Make sure to put it in the correct folder and then load it in using the command 
 \end{mdframed}
 
 ```{r echo=FALSE}
-flowers <- read.csv("iris.csv")
+flowers <- read.csv("./Data/iris.csv")
 ```
 
 Saving materials in R is a bit easier.  If you are needing to export the file back into a CSV format then you can use `write.csv()` (see `?write.csv` for specifics and examples) and it will write the file as a text file.  However, if you are only working in R with that file, you can save it as an R object without translating it back and forth through a CSV file.  Using the example data from above, you could save the `data.frame` as an R data object using:

@@ -477,7 +477,7 @@ Common raster formats include GeoTiff, essentially an image file with some metad
 From Worldclim, I downloaded the elevation raster for Tile 22 and can load it into R using the `raster()` function as:
 
 ```{r warning=FALSE, message=FALSE}
-alt <- raster("./spatial_data/alt.tif")
+alt <- raster("./Data/alt.tif")
 alt
 ```
 
@@ -669,7 +669,7 @@ Here is one way of going this.  I first define an extent, which consists of a ve
 ```{r}
 library(sp)
 library(raster)
-alt <- raster("./spatial_data/alt.tif")
+alt <- raster("./Data/alt.tif")
 e <- extent( c(-115,-109,22,30) )
 baja_california <- crop( alt, e )
 plot(baja_california, xlab="Longitude",ylab="Latitude")
@@ -781,8 +781,8 @@ So far, the rasters have been confined to representing a single static object.  
 For queries of the first kind, we can use the `extract()` function.  For this I downloaded the average temperature and precipitation rasters from Worldclim.
 
 ```{r}
-baja_temp <- raster("./spatial_data/bio1.tif")
-baja_prec <- raster("./spatial_data/bio12.tif")
+baja_temp <- raster("./Data/bio1.tif")
+baja_prec <- raster("./Data/bio12.tif")
 ```
 
 And then extract the values from each of these layers into the `coords` data we already have set up.
@@ -952,7 +952,7 @@ length( data[[1]])
 When working with rasters, we can reproject these onto other projections rather easily.  Here is an example from the worldclim elevation tile we used previously.
 
 ```{r message=FALSE, warning=FALSE}
-alt <- raster("data/bioclim/alt_22.tif")
+alt <- raster("./Data/alt.tif")
 e <- extent( c(-115,-109,22,30) )
 baja_california <- crop( alt, e )
 baja_california
@@ -961,7 +961,7 @@ baja_california
 We can now project it to another projection, lets say Lambert Conic Conformal.
 
 ```{r warning=FALSE,message=FALSE}
-library(rgdal)
+library(rgdal, quietly = TRUE)
 projection(baja_california)
 baja_lcc <- projectRaster( baja_california, crs="+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +ellps=WGS84")
 baja_lcc
