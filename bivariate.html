@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Bivariate Data</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="site_libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">ENVS543</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Gathering
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="getting_R.html">The R Ecosystem</a>
+    </li>
+    <li>
+      <a href="data_types.html">Data Types</a>
+    </li>
+    <li>
+      <a href="data_containers.html">Data Containers</a>
+    </li>
+    <li>
+      <a href="data_sources.html">Data Sources</a>
+    </li>
+    <li>
+      <a href="programming_R.html">Scripting</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Visualizing
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Univariate Data</li>
+    <li class="dropdown-header">Bivariate Data</li>
+    <li>
+      <a href="visualizing_spatial.html">Spatial Data</a>
+    </li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Manipulating
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Normality Transformations</li>
+    <li class="dropdown-header">Alternate Projections</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Analyzing
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Frequentist vs. Bayesian</li>
+    <li>
+      <a href="univariate.html">Univariate</a>
+    </li>
+    <li>
+      <a href="bivariate.html">Bivariate</a>
+    </li>
+    <li class="dropdown-header">Spatial</li>
+  </ul>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Communicating
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li class="dropdown-header">Print</li>
+    <li class="dropdown-header">Video</li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Bivariate Data</h1>
+
+</div>
+
+
+<blockquote>
+<p>In this activity, we will be exploring the use of correlation and how we can get inferences about the degree of correlation between sets of data. The most important thing to remember is that correlation does not imply causation, it is only designed to determine the way variables systematically change.</p>
+</blockquote>
+<div id="the-data" class="section level2">
+<h2>The Data</h2>
+<p>For this example, we will go back to our old friend, the Beer Styles data set.</p>
+<pre class="r"><code>data &lt;- read.csv(&quot;Beer_Styles.csv&quot;)
+summary(data)</code></pre>
+<pre><code>##                  Styles      Yeast       ABV_Min         ABV_Max      
+##  Altbier            : 1   Ale   :69   Min.   :2.400   Min.   : 3.200  
+##  Amber Kellerbier   : 1   Either: 4   1st Qu.:4.200   1st Qu.: 5.475  
+##  American Amber Ale : 1   Lager :27   Median :4.600   Median : 6.000  
+##  American Barleywine: 1               Mean   :4.947   Mean   : 6.768  
+##  American Brown Ale : 1               3rd Qu.:5.500   3rd Qu.: 8.000  
+##  American IPA       : 1               Max.   :9.000   Max.   :14.000  
+##  (Other)            :94                                               
+##     IBU_Min         IBU_Max          SRM_Min         SRM_Max     
+##  Min.   : 0.00   Min.   :  8.00   Min.   : 2.00   Min.   : 3.00  
+##  1st Qu.:15.00   1st Qu.: 25.00   1st Qu.: 3.50   1st Qu.: 7.00  
+##  Median :20.00   Median : 35.00   Median : 8.00   Median :17.00  
+##  Mean   :21.97   Mean   : 38.98   Mean   : 9.82   Mean   :17.76  
+##  3rd Qu.:25.00   3rd Qu.: 45.00   3rd Qu.:14.00   3rd Qu.:22.00  
+##  Max.   :60.00   Max.   :120.00   Max.   :30.00   Max.   :40.00  
+##                                                                  
+##      OG_Min          OG_Max          FG_Min          FG_Max     
+##  Min.   :1.026   Min.   :1.032   Min.   :0.998   Min.   :1.006  
+##  1st Qu.:1.040   1st Qu.:1.052   1st Qu.:1.008   1st Qu.:1.012  
+##  Median :1.046   Median :1.060   Median :1.010   Median :1.015  
+##  Mean   :1.049   Mean   :1.065   Mean   :1.009   Mean   :1.016  
+##  3rd Qu.:1.056   3rd Qu.:1.075   3rd Qu.:1.010   3rd Qu.:1.018  
+##  Max.   :1.080   Max.   :1.130   Max.   :1.020   Max.   :1.040  
+## </code></pre>
+<p>Intuitively, we have been displaying data in the manner appropriate for correlations for some time using the scatter plot. Here is an example display using the maximum Original Gravity (a measure of how much sugar is in the pre-fermented beer—technically called wort) and the final level of alcohol (what the yeast makes by munching on the sugar). These are obviously related variables, you cannot have a high alcohol fermented liquid by starting with a low sugar wort.</p>
+<pre class="r"><code>library( ggplot2 )
+x &lt;- data$OG_Max
+y &lt;- data$ABV_Max
+df &lt;- data.frame( x, y )
+ggplot( df, aes(x,y) ) + geom_point() + xlab(&quot;ABV&quot;) + ylab(&quot;OG&quot;)</code></pre>
+<p><img src="bivariate_files/figure-html/unnamed-chunk-2-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>The extent to which these variables change together is quantified by a correlation statistic.</p>
+<pre class="r"><code>cor(x,y)</code></pre>
+<pre><code>## [1] 0.9541928</code></pre>
+<p>This correlation statistic, <span class="math inline">\(\rho\)</span>, is bound between -1 (perfect negative correlation) and +1 (perfect positive correlation). In our example here, the correlation is <span class="math inline">\(\rho=\)</span> 0.954, suggesting that there is a positive association and it is quite strong (close to +1).</p>
+<p>Using a combination of either <code>plot()</code> or <code>geom_point()</code> and <code>cor()</code>, we can both display and evaluate the correlation between two variables. For more than two, we can either iteratively go through all possible pairs and plot/evaluate them individually, or we can use the <code>GGally</code> package to plot all pairs of variables. You may need to install the <code>GGally</code> package (it is not installed by default). If you get an error message when you use <code>library(GGally)</code> install the package from CRAN using the command <code>install.packages(&quot;GGally&quot;)</code>. Here I plot the maximum values for each property of the styles (and change the base font size so that it shows up properly on the PDF output).</p>
+<pre class="r"><code>library(GGally)
+ggpairs(data[c(4,6,8,10,12)]) + theme_bw(base_size = 8)</code></pre>
+<p><img src="bivariate_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>There are three components to this graphical output. Above the diagonal is the pair-wise correlation, on the diagonal is the density (histogram) of each variable, and below the diagonal is the plot. The <code>ggpairs()</code> function is quite extensible. You can specify the kinds of plots to be used above, on, and below the diagonal. You can also mix and match different types of data and it will plot them accordingly. Here is an example if I include the <code>data$Yeast</code> column, which is a factor.</p>
+<pre class="r"><code>ggpairs(data[c(2,4,6,8)]) + theme_bw(base_size = 8)</code></pre>
+<p><img src="bivariate_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>Because it is a factor, it presents the pair-wise correlations in a slightly different way. A word of caution. You should be very careful when using this plot with a lot of data types. It takes a bit of time to create each of these graphical outputs and display them. If you make the mistake of doing too many, you might as well go get some coffee because it will take a bit of time for it to finish.</p>
+</div>
+<div id="correlations" class="section level2">
+<h2>Correlations</h2>
+<div id="parametric" class="section level3">
+<h3>Parametric</h3>
+<p>The most common kind of correlation is Pearson’s product moment statistic. It is defined as:</p>
+<p><span class="math display">\[
+\rho = \frac{\sum_{i=1}^N(x_i-\bar{x})(y_i-\bar{y})}{\sqrt{\sum_{i=1}^N(x_i-\bar{x})^2} \sqrt{\sum_{i=1}^N(x_i-\bar{x})^2}}
+\]</span></p>
+<p>where the numerator is a measure of the covariance between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span>, divided by the product of the individual variable variance estimates. The resulting parameter <span class="math inline">\(r\)</span>, which approximates the statistic <span class="math inline">\(\rho\)</span>, relies upon assumptions of normality.</p>
+<p>To date, we’ve been using the <code>cor()</code> function to estimate correlations. Check out the documentation on it by running. You will see there are several options.</p>
+<pre class="r"><code>?cor</code></pre>
+<p>For our example data, we can estimate the correlation as:</p>
+<pre class="r"><code>cor(x,y)</code></pre>
+<pre><code>## [1] 0.9541928</code></pre>
+<p>whose default is Pearson’s estimator. Simply having a correlation is not sufficient though. Is this value significantly different than zero? How do we know? To evaluate our confidence in this statistic being significantly different than zero (both negative and positive), we can use the <code>cor.test()</code> function.</p>
+<pre class="r"><code>cor.test(x,y)</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  x and y
+## t = 31.572, df = 98, p-value &lt; 2.2e-16
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  0.9325548 0.9690002
+## sample estimates:
+##       cor 
+## 0.9541928</code></pre>
+<p>Here, we have the option of setting the null hypothesis in terms of what we are testing. This comes down to evaluating what the alternative hypothesis should be.</p>
+<ol style="list-style-type: decimal">
+<li><code>alternative=&quot;two.sided&quot;</code> Are we evaluating both greater than or less than?</li>
+<li><code>alternative=&quot;less&quot;</code> Are we only concerned about rejecting the null hypothesis if it is less</li>
+<li><code>alternative=&quot;greater&quot;</code> Are we only concerned with rejections if it is greater?</li>
+</ol>
+<p>These alternative dictate where we determine the ‘area under the curve’ for assigning probabilities.</p>
+<p>Just like in other examples, the analysis itself in <code>R</code> returns on object that is a type of variable.</p>
+<pre class="r"><code>rho &lt;- cor.test(x,y)
+class(rho)</code></pre>
+<pre><code>## [1] &quot;htest&quot;</code></pre>
+<p>This type can be considered a list and you can gain access to the internal components in it.</p>
+<pre class="r"><code>names(rho)</code></pre>
+<pre><code>## [1] &quot;statistic&quot;   &quot;parameter&quot;   &quot;p.value&quot;     &quot;estimate&quot;    &quot;null.value&quot; 
+## [6] &quot;alternative&quot; &quot;method&quot;      &quot;data.name&quot;   &quot;conf.int&quot;</code></pre>
+<p>using the normal methods</p>
+<pre class="r"><code>rho$estimate</code></pre>
+<pre><code>##       cor 
+## 0.9541928</code></pre>
+<pre class="r"><code>rho$alternative</code></pre>
+<pre><code>## [1] &quot;two.sided&quot;</code></pre>
+<p>This can come in handy when you want to add components of an analysis to some graphical output. In this example, I add the estimate and the probability of the correlation being significantly different than zero to a scatter plot.</p>
+<pre class="r"><code>plot(x,y,xlab=&quot;The X Value&quot;, ylab=&quot;The Y Value&quot;, bty=&quot;n&quot;)
+r &lt;- paste( &quot;r =&quot;, format( rho$estimate, digits=4) )
+p &lt;- paste( &quot;P =&quot;, format( rho$p.value, digits=4) )
+msg &lt;- paste( r, p, sep=&quot;\n&quot;)
+text( 1.050, 12, msg)</code></pre>
+<p><img src="bivariate_files/figure-html/unnamed-chunk-12-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="non-parametric" class="section level3">
+<h3>Non-Parametric</h3>
+<p>In addition to parametric approaches, we have a host of non-parametric approaches that we can use to evaluate the correlation between variables. The most common one is Spearman’s Rank Correlation. The idea here is that if your data are not conforming to assumptions of normality, you can summarize your data by ranking them instead and derive the correlation based upon the ranks of your data instead of on the raw data itself.</p>
+<p>Here is an example where I rank both <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> in the <code>data.frame</code>.</p>
+<pre class="r"><code>df &lt;- df[ order(df$x),]
+df$X_Rank &lt;- 1:nrow(df)
+df &lt;- df[ order(df$y),]
+df$Y_Rank &lt;- 1:nrow(df)
+df[1:10,]</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["x"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["y"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["X_Rank"],"name":[3],"type":["int"],"align":["right"]},{"label":["Y_Rank"],"name":[4],"type":["int"],"align":["right"]}],"data":[{"1":"1.035","2":"3.2","3":"4","4":"1"},{"1":"1.032","2":"3.3","3":"2","4":"2"},{"1":"1.034","2":"3.6","3":"3","4":"3"},{"1":"1.038","2":"3.6","3":"6","4":"4"},{"1":"1.032","2":"3.8","3":"1","4":"5"},{"1":"1.038","2":"3.8","3":"5","4":"6"},{"1":"1.039","2":"3.8","3":"7","4":"7"},{"1":"1.040","2":"3.9","3":"9","4":"8"},{"1":"1.044","2":"4.1","3":"11","4":"9"},{"1":"1.040","2":"4.2","3":"8","4":"10"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>You can see that the smallest values in <span class="math inline">\(x\)</span> are not the smallest values in <span class="math inline">\(y\)</span> but they are pretty close. in fact, the estimator for this statistic is identical to that for Pearson’s <span class="math inline">\(\rho\)</span> except that instead of using the raw data, we use the rank.</p>
+<p><span class="math display">\[
+\rho_{Spearman} = \frac{\sum_{i=1}^N(Rx_i-\bar{Rx})(Ry_i-\bar{Ry})}{\sqrt{\sum_{i=1}^N(Rx_i-\bar{Rx})^2} \sqrt{\sum_{i=1}^N(Rx_i-\bar{Rx})^2}}
+\]</span></p>
+<pre class="r"><code>cor(x,y,method = &quot;spearman&quot;)</code></pre>
+<pre><code>## [1] 0.9493338</code></pre>
+<p>If there are no ties in the values (e.g., how we assign a rank to a set of <span class="math inline">\(x\)</span> or <span class="math inline">\(y\)</span> values that are identical), then</p>
+<p><span class="math display">\[
+\rho_{Spearman} = \frac{6\sum_{i=1}^N d_i^2}{N(N^2-1)}
+\]</span></p>
+<p>where <span class="math inline">\(d_i = Rx_i - Ry_i\)</span> (e.g., the difference in the rank values). If there are ties in the raw data (as we have in ours) then fractional ranks are given to all the values that have the same observation. Look at the output above, we see that for the values of <span class="math inline">\(y\)</span> we have two that both have an assigned value of 3.6, the third and fourth observation. To assigned tied ranks we would assign both of them a rank of 3.5. We would assign a rank of 6 for those whose values are 3.8, etc. If there are ties, we are warned about this when we test significance</p>
+<pre class="r"><code>cor.test( x, y, method=&quot;spearman&quot;)</code></pre>
+<pre><code>## Warning in cor.test.default(x, y, method = &quot;spearman&quot;): Cannot compute
+## exact p-value with ties</code></pre>
+<pre><code>## 
+##  Spearman&#39;s rank correlation rho
+## 
+## data:  x and y
+## S = 8443.5, p-value &lt; 2.2e-16
+## alternative hypothesis: true rho is not equal to 0
+## sample estimates:
+##       rho 
+## 0.9493338</code></pre>
+<p>You could get around it a bit if you either increase the specificity of your measurements or throw away data. In our case, I can do neither so it requires me to take a hit in the way in which the probability is estimated. No ties allows some simplifying assumptions to be me, whereas having them does prevents us from using them.</p>
+</div>
+<div id="differences" class="section level3">
+<h3>Differences</h3>
+<p>So what is the difference? Why use one over approach over the other?</p>
+<p>In general, if they give similar responses to the same data</p>
+<pre class="r"><code>cor(x,y)</code></pre>
+<pre><code>## [1] 0.9541928</code></pre>
+<pre class="r"><code>cor(x,y,method=&quot;spearman&quot;)</code></pre>
+<pre><code>## [1] 0.9493338</code></pre>
+<p>Here the difference between them is 0.004859 with the parametric one giving a slightly larger correlation. There is some loss of power going from observations to ranked observations.</p>
+<p>This is not always the case though. Consider the data<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> below.</p>
+<pre class="r"><code>a &lt;- seq(-1.6, 1.6, by=0.05)
+b &lt;- sin(a)*20 + rnorm(length(a),sd=1)
+plot(a,b)</code></pre>
+<p><img src="bivariate_files/figure-html/unnamed-chunk-17-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>As we should expect, these data are probably not normally distributed.</p>
+<pre class="r"><code>qqnorm(b)
+qqline(b,col=&quot;red&quot;)</code></pre>
+<p><img src="bivariate_files/figure-html/unnamed-chunk-18-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>with deviations on the tails.</p>
+<pre class="r"><code>shapiro.test(b)</code></pre>
+<pre><code>## 
+##  Shapiro-Wilk normality test
+## 
+## data:  b
+## W = 0.89883, p-value = 6.394e-05</code></pre>
+<p>But if we look at the correlations</p>
+<pre class="r"><code>cor(a,b)</code></pre>
+<pre><code>## [1] 0.9894486</code></pre>
+<pre class="r"><code>cor(a,b,method=&quot;spearman&quot;)</code></pre>
+<pre><code>## [1] 0.9942308</code></pre>
+<p>in this case, the rank correlation is higher (0.0047822, not a lot but enough to prove the point that parametric approximations are not <u>always</u> producing higher estimates.</p>
+</div>
+<div id="permutation" class="section level3">
+<h3>Permutation</h3>
+<p>Before we finish, I want to make a diversion into permutation. A lot of what we do in Biology may be done on data whose underlying distributional assumptions (normality, etc.) are generally unknown. Many times, we can make assumptions (or transform our data) in such a way as to approximate the underlying assumptions. However, that is not always the case. In the last decade, we’ve relied upon permutation as a method for evaluating probabilities associated with correlations (and a whole host of other statistics) and have opened a large door onto a lot of new analyses.</p>
+<p>The main idea behind permutation is that you have a null hypothesis, say:</p>
+<p><span class="math display">\[
+H_O: \rho=0
+\]</span></p>
+<p>That is, you are expecting that the correlation between <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> is non-existent. If this is <code>TRUE</code> then the value of <span class="math inline">\(\rho\)</span> you estimate should be just as big if you took one of your data sets, say <span class="math inline">\(y\)</span>, and permuted it. If the NULL hypothesis is <code>TRUE</code> any permutation of <span class="math inline">\(y\)</span> should produce values of <span class="math inline">\(\hat{\rho}\)</span> that are as large as you got in the original analysis.</p>
+<p>So, one way to test the amount of support we have in <span class="math inline">\(H_O\)</span> is to do just that. Say we want to evaluate the significance associated with rejecting the null hypothesis of no correlation when we observed <span class="math inline">\(\rho =\)</span> 0.9542. We can create a large number (say 999 permuted values) and look at the distribution of <span class="math inline">\(\hat{\rho}\)</span> estimates.</p>
+<pre class="r"><code># Make place to store permuted and observed values
+r_null &lt;- rep(NA,999)
+# Assign observed value
+r_null[1000] &lt;- cor( x, y )
+# Make 1000 permutation, each time assigning new rho
+for( i in 1:999) {
+  yp &lt;- sample( y, size = length(x), replace = FALSE)
+  r_null[i] &lt;- cor( x, yp )
+}</code></pre>
+<p>If we look at these values, we see that our observed correlation is way out on the right end of the NULL distribution.</p>
+<pre class="r"><code>df &lt;- data.frame( rho=r_null )
+observation &lt;- c( rep( &quot;Permuted&quot;,999), &quot;Observed&quot; )
+df$Observation &lt;- factor( observation )
+ggplot( df, aes(x=rho,fill=Observation)) + geom_histogram(bins=50)</code></pre>
+<p><img src="bivariate_files/figure-html/unnamed-chunk-22-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>We can evaluate the Probability of the NULL being correct as the fraction of all those values which are as large or larger than the observed one.</p>
+<pre class="r"><code>P &lt;- sum( r_null &gt;= cor(x,y) ) / 1000
+P</code></pre>
+<pre><code>## [1] 0.001</code></pre>
+<p>Which in this case is 1/1000! The observed value is the largest. You will see more and more statistical approaches that use this ‘trick’ (it is really a trick and drives many statisticians a bit crazy) in Biology and Ecology because the underlying distributions are largely unknown. It does become tricky though, when you have more complicated models and there is currently a lot of research being conducted on models that have nesting (e.g., populations within regions, etc.) or other designs more complicated than the most simple ones.</p>
+</div>
+</div>
+<div id="least-squares-linear-regression" class="section level2">
+<h2>Least Squares Linear Regression</h2>
+<p>For this exercise, we will play with some different data. In this case, we will use some data that is in the <code>MASS</code> package describing 1993 vehicles.</p>
+<pre class="r"><code>library(MASS)
+names(Cars93)</code></pre>
+<pre><code>##  [1] &quot;Manufacturer&quot;       &quot;Model&quot;              &quot;Type&quot;              
+##  [4] &quot;Min.Price&quot;          &quot;Price&quot;              &quot;Max.Price&quot;         
+##  [7] &quot;MPG.city&quot;           &quot;MPG.highway&quot;        &quot;AirBags&quot;           
+## [10] &quot;DriveTrain&quot;         &quot;Cylinders&quot;          &quot;EngineSize&quot;        
+## [13] &quot;Horsepower&quot;         &quot;RPM&quot;                &quot;Rev.per.mile&quot;      
+## [16] &quot;Man.trans.avail&quot;    &quot;Fuel.tank.capacity&quot; &quot;Passengers&quot;        
+## [19] &quot;Length&quot;             &quot;Wheelbase&quot;          &quot;Width&quot;             
+## [22] &quot;Turn.circle&quot;        &quot;Rear.seat.room&quot;     &quot;Luggage.room&quot;      
+## [25] &quot;Weight&quot;             &quot;Origin&quot;             &quot;Make&quot;</code></pre>
+<p>These data were taken from Car and Driver in 1993 and contain information on 93 different models that were produced that year.</p>
+<p>If both your predictor and response data are <code>numeric</code> and you are attempting to create a mathematical representation of one variable in terms of the other, a regression approach is appropriate. The simplest model, containing one predictor and one response variable can be written as:</p>
+<p><span class="math display">\[
+y_{ij} = \beta_0 + \beta_1x_i + \epsilon_j
+\]</span></p>
+<p>Where <span class="math inline">\(y_{ij}\)</span> is the observed value, <span class="math inline">\(\beta_0\)</span> is the intercept term (where the line crosses the y-axis), <span class="math inline">\(\beta_1\)</span> is the slope coefficient on the <span class="math inline">\(x_1\)</span> variable, and <span class="math inline">\(\epsilon_j\)</span> is the error term–what is not explained by the model.</p>
+<p>Least Squares Linear Regression is perhaps the most commonly used method to estimate a regression model and it is the one that is implemented in the functions below. To estimate the model, it follows the basic steps (illustrated in the figure below).</p>
+<ol style="list-style-type: decimal">
+<li>The regression model will fit a line consisting of points we will call <span class="math inline">\(\hat{y}\)</span>.</li>
+<li>This line will go through the mean of both the x- and y- data points (<span class="math inline">\(\bar{x}\)</span> and <span class="math inline">\(\bar{y}\)</span> respectively).</li>
+<li>The slope of the line, anchored at <span class="math inline">\((\bar{x}, \bar{y})\)</span>, will be determined by finding a regression coefficient, <span class="math inline">\(\beta_1\)</span>, that minimizes the sum of the distances between each observed value and its corresponding fitted value (e.g., select a <span class="math inline">\(\beta_1\)</span> that makes the smallest <span class="math inline">\(\sum (y_i - \hat{y}_i)^2\)</span>).</li>
+<li>Estimate <span class="math inline">\(\beta_0\)</span> the equation above using <span class="math inline">\(\beta_1\)</span> while inserting <span class="math inline">\(\bar{y}\)</span> and <span class="math inline">\(\bar{x}\)</span> for the response and predictor variables.</li>
+</ol>
+<div class="figure">
+<img src="LeastSquaresRegression.png" alt="Least squares regression fitting." />
+<p class="caption">Least squares regression fitting.</p>
+</div>
+<p>It is a rather simple approach and one that is expandable across a broad range of conditions. However, there are some assumptions that need to be met when using a least squares linear regression. These include:</p>
+<ol style="list-style-type: decimal">
+<li><em>A linear relationship.</em> The terms we used above are specifically linear (e.g., there are no higher order exponents on any of the values). If you suspect that there is a non-linear relationship between the variables, you can explore models that use modifications of the original data (e.g., <span class="math inline">\(\sqrt{y}\)</span>, <span class="math inline">\(x^3\)</span>, etc.).</li>
+<li><em>Normality of the data</em>. As we saw earlier in the semester, we need to make certain assumptions about the underlying form of the data we are working with. In this case, we will be assuming that the data we are working with conform to normal expectations. You should test that <em>a priori</em> and we will see a bit later how it can be examined in the variation in the response not described by the model (e.g., the <span class="math inline">\(\epsilon\)</span> in the equation above).</li>
+<li><em>Homoscedasticity</em>. Scedasticity measures the variation in a variable throughout its range. It is important for us to look to make sure that the variation in our response variable is roughly uniform across its range (homoscedastic) as opposed to having a lot of variation on one end and little on the other (a condition of heteroscedasticity).</li>
+<li><em>No autocorrelation</em>. For ecological data, this is an important component. If we are collecting data, the spatial proximity of where we collect the data should not contribute to similarity in the response variable.<br />
+</li>
+<li><em>No colinearity among predictors</em>. If you are fitting a model with more than one predictor variable, they should not be co-linear. What does this mean? It means that you should not use predictor variables that are highly correlated. How high? Well, one thought is that if <span class="math inline">\(1-R^2 &lt; 0.2\)</span> you may need to be concerned (where <span class="math inline">\(R^2\)</span> is the fraction of the variation you can explain in one predictor by another using a linear regression approximation).</li>
+</ol>
+<div id="fitting-a-linear-model" class="section level3">
+<h3>Fitting a Linear Model</h3>
+<p>To fit a model in R, we use the function <code>lm()</code> (literally short of ‘linear model’) and specify the formula we are trying to fit. In the following example, we will be looking to see the extent to which we can predict horsepower as a function of engine size.</p>
+<pre class="r"><code>library(ggplot2)
+p &lt;- ggplot( Cars93, aes(x=EngineSize, y=Horsepower) ) + geom_point() 
+p + geom_text( aes(label=Make, y=Horsepower+10), data=Cars93[57,])</code></pre>
+<div class="figure" style="text-align: center">
+<img src="bivariate_files/figure-html/unnamed-chunk-25-1.png" alt="Horsepower as a function of engine size (in Liters) for 93 different vehicles available in 1993.  The Mazda RX-7 is labeled as it is a rotary engine, an entirely different kind of engine than the rest." width="576" />
+<p class="caption">
+Horsepower as a function of engine size (in Liters) for 93 different vehicles available in 1993. The Mazda RX-7 is labeled as it is a rotary engine, an entirely different kind of engine than the rest.
+</p>
+</div>
+<p>As such, we specify the formula</p>
+<p><code>Horsepower ~ EngineSize</code></p>
+<p>which means, literally, that Horsepower is a function of EngineSize.</p>
+<pre class="r"><code>fit &lt;- lm( Horsepower ~ EngineSize, data=Cars93)
+fit</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Horsepower ~ EngineSize, data = Cars93)
+## 
+## Coefficients:
+## (Intercept)   EngineSize  
+##       45.22        36.96</code></pre>
+<p>The interesting terms here are the intercept (<span class="math inline">\(\beta_0\)</span>) and the coefficient (the <span class="math inline">\(\beta_1\)</span>) for the model fitting <em>Horsepower</em> to <em>EngineSize</em>.</p>
+<p>As we saw previously in the case of a <code>cor.test()</code> examples, the thing that is returned from a <code>lm()</code> function call is a specific type of R object (it is really just a list),</p>
+<pre class="r"><code>class(fit)</code></pre>
+<pre><code>## [1] &quot;lm&quot;</code></pre>
+<p>one with specific names and terms contained within it.</p>
+<pre class="r"><code>names(fit)</code></pre>
+<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
+##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
+##  [9] &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;         &quot;model&quot;</code></pre>
+<p>As before, we can use this to make a plot of the model and the data.</p>
+<pre class="r"><code>plot( Horsepower ~ EngineSize, data=Cars93, xlab =&quot;Engine Size (Liters)&quot;, ylab=&quot;Horsepower&quot; )
+abline(a=fit$coefficients[1], b=fit$coefficients[2], col=&quot;red&quot;)
+b0 &lt;- format( fit$coefficients[1], digits=3)
+b1 &lt;- format( fit$coefficients[2], digits=3)
+msg &lt;- paste( &quot;y = &quot;,b0, &quot; + &quot;, b1, &quot;x&quot;, sep=&quot;&quot;)
+text( 4.5,100, msg)</code></pre>
+<p><img src="bivariate_files/figure-html/unnamed-chunk-29-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>How does the model look? Do you think it is a good fit? Lets look at some output of the <code>lm</code> object.</p>
+<pre class="r"><code>summary(fit)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Horsepower ~ EngineSize, data = Cars93)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -75.910 -19.664  -9.146  15.247 161.728 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   45.219     10.312   4.385 3.11e-05 ***
+## EngineSize    36.963      3.605  10.253  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 35.87 on 91 degrees of freedom
+## Multiple R-squared:  0.536,  Adjusted R-squared:  0.5309 
+## F-statistic: 105.1 on 1 and 91 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p>We see the terms, an estimate of their magnitude, and associated probability of keeping them in the model (assuming they are not zero). In the middle of the output, we see the R-squared values.</p>
+<p><span class="math display">\[
+R^2 = \frac{SS_{Model}}{SS_{Total}}
+\]</span></p>
+<p>which tells us what fraction of the variation in the response variable is actually explained by the model. A higher value for <span class="math inline">\(R^2\)</span> means that we are explaining more of the overall variation, whereas a smaller value means less of the variance is being explained. There is a caveat here, the magnitude of <span class="math inline">\(R^2\)</span> will increase as we add more predictor variables. To get around this, we can look at an adjusted-<span class="math inline">\(R^2\)</span>, one that is corrected by the number of terms we have in the model. The formula for that is:</p>
+<p><span class="math display">\[
+R^2_{Adj} = R^2 - (1-R^2)\frac{p}{N-p-1}
+\]</span></p>
+<p>where <span class="math inline">\(R^2\)</span> is as above, <span class="math inline">\(p\)</span> is the number of terms in the model, and <span class="math inline">\(N\)</span> is the number of observations.</p>
+<p>In the lower part of the output, we see the estimated <span class="math inline">\(F\)</span> statistic, the degrees of freedom, and the associated P-Value. The <span class="math inline">\(F\)</span> statistic is the test statistic for the model and is defined as the ratio of the variation explained by the model to that of the underlying data. The more variation explained, the larger the <span class="math inline">\(F\)</span> statistic and the less likely that the model should be rejected.</p>
+<p>For a look at the classic ANOVA table, we see the degrees of freedom, the Sums of Squares, the Mean Squares and the estimate <span class="math inline">\(F\)</span> statistic.</p>
+<pre class="r"><code>anova(fit)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["Sum Sq"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Mean Sq"],"name":[3],"type":["dbl"],"align":["right"]},{"label":["F value"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Pr(>F)"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"135266.5","3":"135266.524","4":"105.1204","5":"7.57334e-17"},{"1":"91","2":"117096.7","3":"1286.777","4":"NA","5":"NA"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>The degrees of freedom are assigned as follows:</p>
+<ol style="list-style-type: decimal">
+<li>The total degrees of freedom is <span class="math inline">\(N-1\)</span>.</li>
+<li>You allocate a degree of freedom for each predictor variable.</li>
+<li>The residual degrees of freedom (e.g. that which we did not explain) is the the rest (e.g., <span class="math inline">\(N - p - 1\)</span>).</li>
+</ol>
+<p>The terms for the sums of squares come from the underlying data in the following way. The total sums of squared deviations are defined as:</p>
+<p><span class="math display">\[
+SS_{Total} = \sum_{i=1}^N (y_i - \bar{y})^2
+\]</span></p>
+<p>which are composed of the model sums of squares (the variation in the response explained by the model)</p>
+<p><span class="math display">\[
+SS_{Model} = \sum_{i=1}^N (\hat{y}_i - \bar{y})^2
+\]</span></p>
+<p>and the residual (sometimes called error) variation</p>
+<p><span class="math display">\[
+SS_{Residual} = \sum{i=1}^N (y - \hat{y}_i)^2
+\]</span></p>
+<p>These values denote the fit of the underlying model to the data, however, they are influenced by the number of samples that were collected. To estimate the mean deviation in the sums of squares, a set of parameters called the Mean Squares, you divide each of the sums of squares by its degrees of freedom.</p>
+<span class="math display">\[\begin{align*}
+MS_{Model} &amp;= \frac{SS_{Model}}{df_{Model}} \\
+MS_{Residual} &amp;= \frac{SS_{Residual}}{df_{Residual}} \\
+MS_{Total} &amp;= \frac{SS_{Total}}{df_{Total}} 
+\end{align*}\]</span>
+<p>The <span class="math inline">\(MS_{Residual}\)</span> term is our best estimator of the underlying variation in the model, whereas the <span class="math inline">\(MS_{Model}\)</span> is the variation associated with fitting the model. The ratio of these two terms create the test statistic, <span class="math inline">\(F\)</span>.</p>
+<p><span class="math display">\[
+F = \frac{MS_{Model}}{MS_{Residual}}
+\]</span></p>
+<p>This test-statistic, a ratio of variances, has a well known distribution IF the underlying data are normal. As this is well characterized, we can look up the probability of observing a value of this statistic as large or larger than that observed. To do this, we must know the degrees of freedom—more <span class="math inline">\(df\)</span> means larger <span class="math inline">\(F\)</span> and we need to take this into account.</p>
+<p>The expected value of <span class="math inline">\(F\)</span> at <span class="math inline">\(x\)</span> is defined as:</p>
+<p><span class="math display">\[
+F_{x,df_1,df_2} = \frac{\sqrt{\frac{(df_1x)^{df_1}df_2^{df_2}}{(df_1x+df_2)^{df_1+df_2}}}}{x\mathbf{B}\left(\frac{df_1}{2},\frac{df2}{2}\right)}
+\]</span></p>
+<p>where <span class="math inline">\(df_1\)</span> and <span class="math inline">\(df_2\)</span> are the model and error degrees of freedom and <span class="math inline">\(\mathbf{B}\)</span> is the beta function.</p>
+<p>So the model ‘looks’ like it is one that explains a lot of the variation, (<span class="math inline">\(R^2 =\)</span> 0.5309), the amount of which appears to be of a magnitude that suggests the null hypothesis, <span class="math inline">\(H_O: \beta_1 = 0\)</span> is not true (e.g., <span class="math inline">\(P &lt; 2.2e-16\)</span>). But is it a model that fits the assumptions and is well behaved? We can absolutely have significant models that whose underlying data are not consistent with the assumptions.</p>
+<p>Fortunately, the <code>lm()</code> object has some built-in plotting options that help us to diagnose the appropriateness of the model.</p>
+<p>If you type <code>plot(fit)</code> you will be led through a series of plots depicted in the next figure.</p>
+<pre class="r"><code>par(mfrow=c(2,2))
+plot(fit, which=1)
+plot(fit, which=2)
+plot(fit, which=3)
+plot(fit, which=5)</code></pre>
+<p><img src="bivariate_files/figure-html/unnamed-chunk-32-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>These depict the following items.</p>
+<ol style="list-style-type: decimal">
+<li><em>Residuals vs. Fitted</em> - This gives an indication of what is not explained by the model. Here if there are general trends (e.g., the residuals show systematic patterns of increase, decrease or non-linearity) these depict variance that is not explained by the underlying model.<br />
+</li>
+<li><em>Residuals QQPlot</em> - The variation that is not explained should also be normal, if it deviates from normality this suggests that the assumptions of the error terms may not be met in the underlying model.</li>
+<li><em>Scale-Location</em> - A measure that removes any skew in the expected values.</li>
+<li><em>Leverage</em> - A measure of the amount of differential influence that individual points may have in the estimation of the</li>
+</ol>
+<p>You must always check these values for validity in the underlying model.</p>
+</div>
+</div>
+<div id="multiple-regression" class="section level2">
+<h2>Multiple Regression</h2>
+<p>What if we have several potential predictor variables that we may want to put into a model? How can we determine which should be added to the model and which should not?</p>
+<p>In this example, I’m going to take vehicle weight and see if it is predicted by</p>
+<pre class="r"><code>fit.1 &lt;- lm( Weight ~ Length, data=Cars93)
+fit.2 &lt;- lm( Weight ~ Width, data=Cars93)
+fit.3 &lt;- lm( Weight ~ EngineSize, data=Cars93)
+fit.4 &lt;- lm( Weight ~ Fuel.tank.capacity, data=Cars93)
+fit.5 &lt;- lm( Weight ~ Length + Width, data=Cars93)
+fit.6 &lt;- lm( Weight ~ Width + Fuel.tank.capacity, data=Cars93)
+fit.7 &lt;- lm( Weight ~ Length + EngineSize, data=Cars93)
+fit.8 &lt;- lm( Weight ~ Length + Fuel.tank.capacity, data=Cars93)</code></pre>
+<p>So how do we determine which of these model is better? Look at the output from each, which do you think?</p>
+<p>One way we could evaluate them is to look at the a</p>
+<pre class="r"><code>R2 &lt;- c( summary(fit.1)$r.squared, 
+         summary(fit.2)$r.squared,
+         summary(fit.3)$r.squared,
+         summary(fit.4)$r.squared,
+         summary(fit.5)$r.squared,
+         summary(fit.6)$r.squared,
+         summary(fit.7)$r.squared,
+         summary(fit.8)$r.squared)
+names(R2) &lt;- paste(&quot;fit&quot;,1:8, sep=&quot;.&quot;)
+R2</code></pre>
+<pre><code>##     fit.1     fit.2     fit.3     fit.4     fit.5     fit.6     fit.7 
+## 0.6500782 0.7655560 0.7141523 0.7992683 0.7888728 0.8707672 0.7693030 
+##     fit.8 
+## 0.8675266</code></pre>
+<p>Another way to evaluate different models is through the use of a measure such as AIC (Akaike’s Information Criteria) or relatives. The notion of these parameters is that there needs to be a price paid for adding additional terms to a model. It is possible for one to add additional predictor variables and eventually inflate the observed <span class="math inline">\(R^2\)</span> for the model. You can even add random variables and see the same thing, they will incrementally account for small amounts of variation in the response variable. AIC is defined as:</p>
+<p><span class="math display">\[
+AIC = 2k - 2\log(L)
+\]</span></p>
+<p>where <span class="math inline">\(k\)</span> is the number of terms in the model and <span class="math inline">\(L\)</span> is an estimate of the log Likelihood estimator of the model.</p>
+<pre class="r"><code>aic.vals &lt;- c( AIC(fit.1), AIC(fit.2), 
+               AIC(fit.3), AIC(fit.4), 
+               AIC(fit.5), AIC(fit.6), 
+               AIC(fit.7), AIC(fit.8) )
+names(aic.vals) &lt;- names(R2)
+aic.vals</code></pre>
+<pre><code>##    fit.1    fit.2    fit.3    fit.4    fit.5    fit.6    fit.7    fit.8 
+## 1357.933 1320.687 1339.124 1306.249 1312.945 1267.296 1321.189 1269.600</code></pre>
+<p>The better models are those with the smallest AIC values. They may be positive or negative but the smallest ones are considered to be models that are better fit. How much of a difference is considered smaller? Well, the general approach is to estimate <span class="math inline">\(\delta_{AIC}\)</span> as the difference in magnitude of the alternative AIC values from the smallest one</p>
+<pre class="r"><code>dAIC &lt;- (aic.vals - min( aic.vals ))
+dAIC</code></pre>
+<pre><code>##     fit.1     fit.2     fit.3     fit.4     fit.5     fit.6     fit.7 
+## 90.636733 53.390921 71.827437 38.952887 45.648586  0.000000 53.892522 
+##     fit.8 
+##  2.303289</code></pre>
+<p>General consensus is that <span class="math inline">\(\delta_{AIC}\)</span> values that are between 0-2 are small enough that the models are indistinguishable—they should all be considered as equally informative. Values of <span class="math inline">\(\delta_{AIC}\)</span> between 3-5 suggest that the models are pretty close and you may want to explore them further. Values greater than 5 suggest that those models are not as good as the one with the smallest AIC.</p>
+<p>Here is a more readable output from these model tests.</p>
+<pre class="r"><code>Models &lt;- as.character( c( formula(fit.1$terms),
+             formula(fit.2$terms),
+             formula(fit.3$terms),
+             formula(fit.4$terms),
+             formula(fit.5$terms),
+             formula(fit.6$terms),
+             formula(fit.7$terms),
+             formula(fit.8$terms)))
+df &lt;- data.frame( Model=names(dAIC),
+                  Terms=Models,
+                  R2=R2,
+                  AIC=aic.vals,
+                  Delta.AIC=dAIC)
+knitr::kable(df, row.names = FALSE,digits = 3)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Model</th>
+<th align="left">Terms</th>
+<th align="right">R2</th>
+<th align="right">AIC</th>
+<th align="right">Delta.AIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">fit.1</td>
+<td align="left">Weight ~ Length</td>
+<td align="right">0.650</td>
+<td align="right">1357.933</td>
+<td align="right">90.637</td>
+</tr>
+<tr class="even">
+<td align="left">fit.2</td>
+<td align="left">Weight ~ Width</td>
+<td align="right">0.766</td>
+<td align="right">1320.687</td>
+<td align="right">53.391</td>
+</tr>
+<tr class="odd">
+<td align="left">fit.3</td>
+<td align="left">Weight ~ EngineSize</td>
+<td align="right">0.714</td>
+<td align="right">1339.124</td>
+<td align="right">71.827</td>
+</tr>
+<tr class="even">
+<td align="left">fit.4</td>
+<td align="left">Weight ~ Fuel.tank.capacity</td>
+<td align="right">0.799</td>
+<td align="right">1306.249</td>
+<td align="right">38.953</td>
+</tr>
+<tr class="odd">
+<td align="left">fit.5</td>
+<td align="left">Weight ~ Length + Width</td>
+<td align="right">0.789</td>
+<td align="right">1312.945</td>
+<td align="right">45.649</td>
+</tr>
+<tr class="even">
+<td align="left">fit.6</td>
+<td align="left">Weight ~ Width + Fuel.tank.capacity</td>
+<td align="right">0.871</td>
+<td align="right">1267.296</td>
+<td align="right">0.000</td>
+</tr>
+<tr class="odd">
+<td align="left">fit.7</td>
+<td align="left">Weight ~ Length + EngineSize</td>
+<td align="right">0.769</td>
+<td align="right">1321.189</td>
+<td align="right">53.893</td>
+</tr>
+<tr class="even">
+<td align="left">fit.8</td>
+<td align="left">Weight ~ Length + Fuel.tank.capacity</td>
+<td align="right">0.868</td>
+<td align="right">1269.600</td>
+<td align="right">2.303</td>
+</tr>
+</tbody>
+</table>
+<p>It appears that both models <code>fit.6</code> and <code>fit.8</code>, the two models with the size of the fuel tank, do a pretty reasonable job of describing the weight of the cars. Strictly speaking <code>fit.6</code> is probably the most explanatory of the models with <code>fit.8</code> being pretty close.</p>
+</div>
+<div id="logistic-regression" class="section level2">
+<h2>Logistic Regression</h2>
+<p>Logistic regression is an extension of the normal regression model with the distinction that the response variable is a binary option.</p>
+<div class="figure" style="text-align: center">
+<img src="bivariate_files/figure-html/unnamed-chunk-38-1.png" alt="Example of logistic regression where the predictor variable is continuous (say something like the number of homework assignments in stats completed) and the response variable is binary (such as passing stats).  The red line is an example of a regression line" width="576" />
+<p class="caption">
+Example of logistic regression where the predictor variable is continuous (say something like the number of homework assignments in stats completed) and the response variable is binary (such as passing stats). The red line is an example of a regression line
+</p>
+</div>
+<p>The underlying model is one where some probability in the response variable results in a success (<span class="math inline">\(P(y=1) = \hat{p}\)</span>) or failure (<span class="math inline">\(P(y=0) = 1 - \hat{p}\)</span>) is determined based upon the set of one or more predictor variables. The regression equation in these models is thus,</p>
+<p><span class="math display">\[
+ln\left( \frac{\hat{p}}{1-\hat{p}}\right) = \beta_0 + \beta_1x + \epsilon
+\]</span></p>
+<p>Just as in the case of linear regression, we are specifying a model that has an intercept term, <span class="math inline">\(\beta_0\)</span>, and a regression coefficient (<span class="math inline">\(\beta_1\)</span>) on a single predictor variable (<span class="math inline">\(x\)</span>).</p>
+<p>The expected values of a logistic model can be estimated from the coefficients as:</p>
+<p><span class="math display">\[
+\hat{p} = \frac{exp(\beta_0 + \beta_1x)}{1 + exp(\beta_0 + \beta_1x)}
+\]</span></p>
+<p>Given these expectations, we need to change the way in which we talk about the regression coefficients. In linear regression, we interpreted a term like <span class="math inline">\(\beta_1\)</span> to indicate the <em>change in the response variable per unit change in the predictor</em>, which is not longer appropriate since we are now predicting <span class="math inline">\(\hat{p}\)</span> by a ratio of the regression models using the exponent function. In logistic regression, we refer to the regression coefficient as the <em>odds ratio</em>.</p>
+<p>Odds ratios are interesting and very interpretable. The odds ratio can be estimated as <span class="math inline">\(exp(\beta_1)\)</span>. If the odds ratio of your regression coefficient equals 0.5, this indicates that per unit change in the predictor (<span class="math inline">\(x\)</span>) variable the response is half as likely, an odds ratio of exactly 1.0 indicates no relationship, and one equal to 2.0 means it is twice as likely. In the example shown in the plot above, where we are predicting passing stats by the number of homework assignments a student actually completes, the model can be specified in R as:</p>
+<pre class="r"><code>fit &lt;- glm(y~x, family=binomial(logit))</code></pre>
+<p>and the coefficients are</p>
+<pre class="r"><code>beta &lt;- coefficients(fit)
+beta</code></pre>
+<pre><code>## (Intercept)           x 
+##   -4.077713    1.504645</code></pre>
+<p>which translates into an odds ratio of</p>
+<pre class="r"><code>exp(beta[2])</code></pre>
+<pre><code>##        x 
+## 4.502557</code></pre>
+<p>meaning that it is roughly 5 times more likely to pass stats per homework that is turned in!</p>
+<p>To examine the fit of the overall model, we can us the <code>anova()</code> function to create the classic ANOVA table testing the underlying hypothesis, <span class="math inline">\(H_O: \beta=0\)</span>.</p>
+<pre class="r"><code>anova(fit, test=&quot;Chisq&quot;)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["Df"],"name":[1],"type":["int"],"align":["right"]},{"label":["Deviance"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["Resid. Df"],"name":[3],"type":["int"],"align":["right"]},{"label":["Resid. Dev"],"name":[4],"type":["dbl"],"align":["right"]},{"label":["Pr(>Chi)"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"NA","2":"NA","3":"19","4":"27.72589","5":"NA"},{"1":"1","2":"11.66613","3":"18","4":"16.05976","5":"0.0006364826"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>So these data suggest that doing the homework does actually have a significant impact on the likelihood of passing stats!</p>
+<div id="model-performance" class="section level3">
+<h3>Model Performance</h3>
+<p>Unfortunately, an exact value of <span class="math inline">\(R^2\)</span> is a bit difficult to determine using these models. There are a few pseudo-<span class="math inline">\(R^2\)</span> approaches that have been suggested, here is on called the McFadden <span class="math inline">\(R^2\)</span>. It is in a packages that you probably do not already have (so install it using <code>install.packages('pscl')</code> if necessary).</p>
+<pre class="r"><code>library(pscl)
+pR2( fit )</code></pre>
+<pre><code>##         llh     llhNull          G2    McFadden        r2ML        r2CU 
+##  -8.0298785 -13.8629436  11.6661303   0.4207667   0.4419499   0.5892665</code></pre>
+<p>This <span class="math inline">\(R^2\)</span> is defined as the ratio of the likelihood of the fit model over the model with only an intercept term. In this example, the McFadden $R^2 =$0.42.</p>
+<p>Another way to evaluate the model is to evaluate the <em>receiving operating characteristic</em> (otherwise known as ROC) which tests the classification performance of a model. This is a technique that you will see in ecological niche modeling, particularly for MaxEnt-style models. It is an approach that can also be visualized as the testing of the function in terms of the times it can correctly predict the outcome to the times it incorrectly predicts the outcome. For these kinds of approaches, we need to partition our data into two groups, those that are used to define the model and those that are used to test the efficacy of the model. In our example above, we do not have enough data to do this directly. However, in your own data (particularly if you are doing niche modeling), you must have enough data to be able to both build the model and evaluate it. In R, the libraries <code>pROC</code> and <code>ROCR</code> allow you to do these approaches on your logistic models and I refer you to their documentation when you start playing with your data.</p>
+</div>
+<div id="an-evolutionary-example" class="section level3">
+<h3>An Evolutionary Example</h3>
+<p>For this one, we will step away from the Beer and Iris data sets and look at some landscape genomic data from my own laboratory.</p>
+<p>The data for this analysis are part of a larger data set that have been collected to look at the genetic structure and demographic/evolutionary history of a species of bark beetle in the Sonoran desert. This particular species, <em>Araptus attenuatus</em> is only known to inhabit the senescing stems of the endemic plant, <em>Euphorbia lomelii</em>, one of the only non-pokey plants in the Sonoran desert.</p>
+<p>I’ve saved a subset of the data as a <code>data.frame</code> that you can download from the website. They can be loaded in and examined as:</p>
+<pre class="r"><code>load(&quot;locus306.rda&quot;)
+summary( locus306 )</code></pre>
+<pre><code>##    Population    NoAllele       HasAllele       Longitude     
+##  12     : 1   Min.   :0.000   Min.   :0.000   Min.   :-114.3  
+##  153    : 1   1st Qu.:2.500   1st Qu.:1.000   1st Qu.:-113.2  
+##  159    : 1   Median :4.000   Median :2.000   Median :-112.5  
+##  160    : 1   Mean   :3.526   Mean   :2.789   Mean   :-112.5  
+##  161    : 1   3rd Qu.:5.000   3rd Qu.:4.500   3rd Qu.:-111.5  
+##  162    : 1   Max.   :6.000   Max.   :7.000   Max.   :-110.5  
+##  (Other):13                                                   
+##     Latitude    
+##  Min.   :24.13  
+##  1st Qu.:26.11  
+##  Median :27.18  
+##  Mean   :27.04  
+##  3rd Qu.:28.13  
+##  Max.   :29.33  
+## </code></pre>
+<p>Here every row is the summary of a population. For each population a set of individuals were collected and genotyped for hundreds of loci. The kind of genetic marker used here is called an AFLP (<em>A</em>mplified <em>F</em>ragment <em>L</em>ength <em>P</em>olymorphism) and the genotype given to an individual is binary, either they have a copy of the fragment or they do not. Summarized across the population, the data record the number of individuals with a band and those without.</p>
+<p>These samples were collected from throughout the species range and can be visualized using the normal mapping methods we covered already in class by defining a center location and grabbing a map tile from Google.</p>
+<pre class="r"><code>library(ggplot2)
+library(ggrepel)
+library(ggmap)
+location &lt;- c( mean(locus306$Longitude), mean(locus306$Latitude))
+map &lt;- get_map( location, zoom=7 )
+p &lt;- ggmap( map ) + geom_point( aes(Longitude,Latitude), data=locus306 ) 
+p &lt;- p + geom_label_repel( aes(Longitude,Latitude, label=Population), data=locus306) 
+p + xlab(&quot;Longitude&quot;) + ylab(&quot;Latitude&quot;)</code></pre>
+<p><img src="bivariate_files/figure-html/unnamed-chunk-46-1.png" width="576" style="display: block; margin: auto;" /></p>
+</div>
+<div id="the-hypothesis" class="section level3">
+<h3>The Hypothesis</h3>
+<p>The main question here is to determine if the presence of specific alleles are associated with any particular features of the local environment. We are invoking a question about local adaptation here and I should preface it a bit with a disclaimer. From an evolutionary perspective, we will not be testing if the particular allele is adaptive, only if it is genetically linked to something that shows systematic changes across the landscape that are predicted by external variables. To show ‘adaptive’ consequences we would have to go much further into identifying what is functionally connecting the physiology of the organism to the environmental variation.</p>
+<p>What we do below is acquire a set of predictor data that may or may not be associated with changes in allele presence in the desert beetle. We will then go fit logistic models where each has a single environmental variable used to describe the landscape level patterns of allelic presence. We can then evaluate if any of the environmental variables are associated with variation at this locus.</p>
+</div>
+<div id="getting-the-environmental-data" class="section level3">
+<h3>Getting the Environmental Data</h3>
+<p>So, to do this, we will use some data from <a href="http://www.worldclim.org/" class="uri">http://www.worldclim.org/</a>. These data are estimated temperature and precipitation data that has been mapped onto rasters covering the planet. They have a resolution of ~1km at the most fine-scale. For our example, we are sampling across hundreds of kilometers of the landscape so these kinds of data may be appropriate. The raw temperature and precipitation data are translated into 19 well characterized bioclimatic features, hypothesized to be meaningful for large-scale ecological analyses. The features used are:</p>
+<ul>
+<li>BIO1 = Annual Mean Temperature</li>
+<li>BIO2 = Mean Diurnal Range (Mean of monthly (max temp - min temp))</li>
+<li>BIO3 = Isothermality (BIO2/BIO7) (* 100)</li>
+<li>BIO4 = Temperature Seasonality (standard deviation *100)</li>
+<li>BIO5 = Max Temperature of Warmest Month</li>
+<li>BIO6 = Min Temperature of Coldest Month</li>
+<li>BIO7 = Temperature Annual Range (BIO5-BIO6)</li>
+<li>BIO8 = Mean Temperature of Wettest Quarter</li>
+<li>BIO9 = Mean Temperature of Driest Quarter</li>
+<li>BIO10 = Mean Temperature of Warmest Quarter</li>
+<li>BIO11 = Mean Temperature of Coldest Quarter</li>
+<li>BIO12 = Annual Precipitation</li>
+<li>BIO13 = Precipitation of Wettest Month</li>
+<li>BIO14 = Precipitation of Driest Month</li>
+<li>BIO15 = Precipitation Seasonality (Coefficient of Variation)</li>
+<li>BIO16 = Precipitation of Wettest Quarter</li>
+<li>BIO17 = Precipitation of Driest Quarter</li>
+<li>BIO18 = Precipitation of Warmest Quarter</li>
+<li>BIO19 = Precipitation of Coldest Quarter</li>
+</ul>
+<p>I have downloaded and saved the 19 layers as R raster objects. They are in a zip file on the webpage. Download the zip and unpack it in the same file as you are currently working.</p>
+<p>What we will do is to iterate through the files, open each raster up, and then extract the values from the raster for each of the locations we have sampled beetles from.</p>
+<p>This is going to use a <code>for-loop</code> structure to iterate through each file. As such, I will make a couple caveats.</p>
+<ol style="list-style-type: decimal">
+<li>We first define a vector of files to iterate through. I’ve saved each of the layers are an R data object, whose file name indicates which feature it is.</li>
+<li>I then make a set of <code>SpatialPoints</code> objects so that we can extract the bioclimatic data from each raster with this set.</li>
+<li>The looping here is defined by the code <code>for( file in files)</code> code. What this means is that for the data in the variable <code>files</code>, each element will be taken in turn and assigned to a variable called <code>file</code>. The first time through, it will equal the first file name, the next time it will equal the next one, etc. until there are no more file names we haven’t used in the <code>files</code> vector.</li>
+<li>During each iteration, the stuff in the curly brackets following the <code>for</code> loop code will be executed. In this case, I’m going to use the coordinates of the population in the data to <code>extract()</code> values from each raster then append these data onto our <code>locus306</code> data frame.</li>
+</ol>
+<p>Finally, I should add that each of the data files that I saved are named <code>bio</code>. So when we <code>load(filename)</code>, we are loading the raster into memory and that raster variable is named <code>bio</code>. Look at the first one and plot it to verify.</p>
+<pre class="r"><code>library(raster)
+load(&quot;bio1.rda&quot;)
+plot(bio)</code></pre>
+<p><img src="bivariate_files/figure-html/unnamed-chunk-48-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p>OK, now for the looping and data acclimation.</p>
+<pre class="r"><code>library(sp)
+files &lt;- list.files(path=&quot;./Data&quot;, pattern=&quot;*.tif&quot;, full.names = TRUE)
+pts &lt;- SpatialPoints( locus306[,c(&quot;Longitude&quot;,&quot;Latitude&quot;)] )
+
+for( file in files ) {
+  # load the raster into memory
+  bio &lt;- raster(file)
+  # extract the data from each raster
+  vals &lt;- extract(bio,pts)
+  # format the name of the variable from the file name
+  bio_name &lt;- substr( file, 8, nchar(file)-4)
+  # insert the column of data into the data frame
+  locus306[[bio_name]] &lt;- vals
+}
+
+
+summary( locus306 )</code></pre>
+<pre><code>##    Population    NoAllele       HasAllele       Longitude     
+##  12     : 1   Min.   :0.000   Min.   :0.000   Min.   :-114.3  
+##  153    : 1   1st Qu.:2.500   1st Qu.:1.000   1st Qu.:-113.2  
+##  159    : 1   Median :4.000   Median :2.000   Median :-112.5  
+##  160    : 1   Mean   :3.526   Mean   :2.789   Mean   :-112.5  
+##  161    : 1   3rd Qu.:5.000   3rd Qu.:4.500   3rd Qu.:-111.5  
+##  162    : 1   Max.   :6.000   Max.   :7.000   Max.   :-110.5  
+##  (Other):13                                                   
+##     Latitude          alt              bio1           bio12      
+##  Min.   :24.13   Min.   :  6.00   Min.   :178.0   Min.   : 81.0  
+##  1st Qu.:26.11   1st Qu.: 39.75   1st Qu.:203.5   1st Qu.:117.5  
+##  Median :27.18   Median :208.50   Median :215.0   Median :126.5  
+##  Mean   :27.04   Mean   :228.06   Mean   :214.7   Mean   :136.1  
+##  3rd Qu.:28.13   3rd Qu.:366.75   3rd Qu.:222.8   3rd Qu.:142.2  
+##  Max.   :29.33   Max.   :681.00   Max.   :240.0   Max.   :245.0  
+##                  NA&#39;s   :1        NA&#39;s   :1       NA&#39;s   :1      
+##      bio13           bio15            bio17            bio2      
+##  Min.   :19.00   Min.   : 61.00   Min.   :0.000   Min.   :129.0  
+##  1st Qu.:22.25   1st Qu.: 70.50   1st Qu.:0.250   1st Qu.:149.0  
+##  Median :30.00   Median : 85.50   Median :1.000   Median :163.0  
+##  Mean   :32.89   Mean   : 85.33   Mean   :1.722   Mean   :157.2  
+##  3rd Qu.:37.50   3rd Qu.:102.25   3rd Qu.:2.750   3rd Qu.:167.5  
+##  Max.   :68.00   Max.   :109.00   Max.   :5.000   Max.   :175.0  
+##  NA&#39;s   :1       NA&#39;s   :1        NA&#39;s   :1       NA&#39;s   :1      
+##       bio5            bio6             bio7            bio8      
+##  Min.   :331.0   Min.   : 48.00   Min.   :232.0   Min.   :126.0  
+##  1st Qu.:349.8   1st Qu.: 71.25   1st Qu.:262.5   1st Qu.:180.0  
+##  Median :357.0   Median : 81.50   Median :280.0   Median :275.5  
+##  Mean   :356.2   Mean   : 81.72   Mean   :274.4   Mean   :243.7  
+##  3rd Qu.:365.5   3rd Qu.: 85.75   3rd Qu.:287.0   3rd Qu.:285.0  
+##  Max.   :372.0   Max.   :121.00   Max.   :291.0   Max.   :302.0  
+##  NA&#39;s   :1       NA&#39;s   :1        NA&#39;s   :1       NA&#39;s   :1</code></pre>
+<p>We have 1 site where there are <code>NA</code> values. Lets clean this up by disregarding that site (this is a case where the pixel size defined boundaries on the ground such that one of our sampling locations is put into the water).</p>
+<pre class="r"><code>locus306 &lt;- locus306[ !is.na(locus306$bio1 ),]</code></pre>
+<p>Perfect! Now we have some data to work with.</p>
+</div>
+<div id="fitting-the-models" class="section level3">
+<h3>Fitting the Models</h3>
+<p>So now we have both the response variable (the presence/absence of particular alleles) and a set of predictor variables (the bioclimatic conditions at each population). Our alternative hypothesis is that there is some kind of relationship between these variables such that one can predict the likelihood of an allele being present by the values of the environmental variables.</p>
+<p>Lets test this using the <code>glm()</code> approach we used above. In this case, what I am going to do is to create a new <code>data.frame</code> that has the names of the bio layers as rows and for each of these we will record specifics of the models (the <span class="math inline">\(\beta_1\)</span> coefficient, pseudo <span class="math inline">\(R^2\)</span>, <span class="math inline">\(P\)</span>, and <span class="math inline">\(AIC\)</span>).</p>
+<pre class="r"><code>library(pscl)
+genetic &lt;- cbind( locus306$NoAllele, locus306$HasAllele)
+df &lt;- data.frame( Bio=names(locus306)[6:16] )
+df$Beta1 &lt;- NA
+df$R2 &lt;- NA
+df$P &lt;- NA
+df$AIC &lt;- NA
+
+for( feature in df$Bio ){
+  x &lt;- locus306[[feature]]
+  fit &lt;- glm( genetic ~ x, family=binomial(logit))
+  df$Beta1[ df$Bio == feature ] &lt;- coefficients(fit)[2]
+  df$R2[ df$Bio == feature] &lt;- pR2( fit )[4]
+  anova_table &lt;- anova( fit, test=&quot;Chisq&quot;)
+  df$P[ df$Bio == feature] &lt;- anova_table$`Pr(&gt;Chi)`[2]
+  df$AIC[ df$Bio == feature ] &lt;- fit$aic
+}</code></pre>
+<p>Once we have these data, we can evaluate the alternative models using our pseudo <span class="math inline">\(R^2\)</span> and <span class="math inline">\(AIC\)</span> values. I’m going to add another column to it first, the <span class="math inline">\(\delta AIC\)</span> (e.g., <span class="math inline">\(AIC - min(AIC)\)</span>) to help in our comparisons and then before, printing out the table, sort it by this value.</p>
+<pre class="r"><code>df$deltaAIC &lt;- df$AIC - min( df$AIC )
+df &lt;- df[ order(df$deltaAIC),]
+knitr::kable(df, row.names = FALSE)</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Bio</th>
+<th align="right">Beta1</th>
+<th align="right">R2</th>
+<th align="right">P</th>
+<th align="right">AIC</th>
+<th align="right">deltaAIC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">bio15</td>
+<td align="right">0.0536753</td>
+<td align="right">0.2209534</td>
+<td align="right">0.0000200</td>
+<td align="right">68.12667</td>
+<td align="right">0.000000</td>
+</tr>
+<tr class="even">
+<td align="left">bio7</td>
+<td align="right">-0.0607739</td>
+<td align="right">0.1936644</td>
+<td align="right">0.0000653</td>
+<td align="right">70.37295</td>
+<td align="right">2.246277</td>
+</tr>
+<tr class="odd">
+<td align="left">bio8</td>
+<td align="right">0.0121555</td>
+<td align="right">0.1840294</td>
+<td align="right">0.0000994</td>
+<td align="right">71.16604</td>
+<td align="right">3.039372</td>
+</tr>
+<tr class="even">
+<td align="left">bio6</td>
+<td align="right">0.0459434</td>
+<td align="right">0.1618165</td>
+<td align="right">0.0002626</td>
+<td align="right">72.99449</td>
+<td align="right">4.867818</td>
+</tr>
+<tr class="odd">
+<td align="left">bio13</td>
+<td align="right">0.0624704</td>
+<td align="right">0.1421920</td>
+<td align="right">0.0006235</td>
+<td align="right">74.60986</td>
+<td align="right">6.483193</td>
+</tr>
+<tr class="even">
+<td align="left">bio2</td>
+<td align="right">-0.0417716</td>
+<td align="right">0.0925331</td>
+<td align="right">0.0057827</td>
+<td align="right">78.69750</td>
+<td align="right">10.570830</td>
+</tr>
+<tr class="odd">
+<td align="left">bio12</td>
+<td align="right">0.0147744</td>
+<td align="right">0.0797853</td>
+<td align="right">0.0103859</td>
+<td align="right">79.74683</td>
+<td align="right">11.620156</td>
+</tr>
+<tr class="even">
+<td align="left">bio1</td>
+<td align="right">0.0320769</td>
+<td align="right">0.0780869</td>
+<td align="right">0.0112356</td>
+<td align="right">79.88663</td>
+<td align="right">11.759957</td>
+</tr>
+<tr class="odd">
+<td align="left">bio17</td>
+<td align="right">-0.1692659</td>
+<td align="right">0.0228699</td>
+<td align="right">0.1700485</td>
+<td align="right">84.43178</td>
+<td align="right">16.305111</td>
+</tr>
+<tr class="even">
+<td align="left">alt</td>
+<td align="right">-0.0009780</td>
+<td align="right">0.0126581</td>
+<td align="right">0.3073698</td>
+<td align="right">85.27235</td>
+<td align="right">17.145683</td>
+</tr>
+<tr class="odd">
+<td align="left">bio5</td>
+<td align="right">0.0063637</td>
+<td align="right">0.0015420</td>
+<td align="right">0.7216419</td>
+<td align="right">86.18737</td>
+<td align="right">18.060702</td>
+</tr>
+</tbody>
+</table>
+<p>From these data, we can see several things:</p>
+<ol style="list-style-type: decimal">
+<li>There are many models that seem to be significant (e.g., small <span class="math inline">\(P\)</span>).<br />
+</li>
+<li>The amount of variation explained in the allelic occurrence ranges from 0.1% to 23.9%.<br />
+</li>
+<li>From a model fitting perspective, <span class="math inline">\(AIC\)</span> suggests that there are two models that we should consider (e.g., if we follow the <span class="math inline">\(\delta AIC &lt; 2.0\)</span> suggestions), one of which is <code>bio18</code> (Precipitation of Warmest Quarter) and the other is <code>bio15</code> (Precipitation Seasonality).</li>
+<li>The best fit model estimates an <em>odds ratio</em> that per unit change in mm of precipitation during the driest quarter, the presence of the allele at this locus is 1.055142 time more likely.</li>
+</ol>
+<p>From these analyses, we can make a few statements about the underlying evolutionary question. The features indicated both point to precipitation during the summer being something that may be physiologically linked to the location in the genome where this marker is located. These analyses suggest that there may be some mechanism for drought tolerance or water-use efficiency or some other physiological process that is influenced by the amount (or variation) in hot quarter precipitation. These results suggest several different subsequent analyses that may need to be performed including collecting of more data to validate the model, some laboratory experiments on the organisms to look at performance under various precipitation regimes, and further molecular genetic work to tease apart what it is actually that is causing this systematic change.</p>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>I am making this data up, it uses a random number generator and your data is <em>probably</em> not going to produce the same identical correlation but it will be close.<a href="#fnref1">↩</a></p></li>
+</ol>
+</div>
+
+
+<hr>
+<p>Copyright &copy; 2017 R.J. Dyer. All rights reserved.</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

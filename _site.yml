@@ -6,7 +6,6 @@ navbar:
     - text: "ENVS543"
       href: index.html
     - text: "Gathering"
-      href: gathering.html
       menu:
         - text: "The R Ecosystem"
           href: getting_R.html
@@ -16,20 +15,36 @@ navbar:
           href: data_containers.html
         - text: "Data Sources"
           href: data_sources.html
+        - text: "Scripting"
+          href: programming_R.html
     - text: "Visualizing"
-      href: visualizing.html
+      menu:
+        - text: "Univariate Data"
+        - text: "Bivariate Data"
+        - text: "Spatial Data"
+          href: visualizing_spatial.html
     - text: "Manipulating"
-      href: manipulating.html
+      menu:
+        - text: "Normality Transformations"
+        - text: "Alternate Projections"
     - text: "Analyzing"
-      href: analyzing.html
+      menu:
+        - text: "Frequentist vs. Bayesian"
+        - text: "Univariate"
+          href: univariate.html
+        - text: "Bivariate"
+          href: bivariate.html
+        - text: "Spatial"
     - text: "Communicating"
-      href: communicating.html
+      menu:
+        - text: "Print"
+        - text: "Video"
 output:
   html_document:
     theme: default #flatly
     highlight: textmate
     include:
-      after_body: footer.html
+      after_body: footer.Rmd
     css: styles.css
     fig_caption: true
     fig_align: center
