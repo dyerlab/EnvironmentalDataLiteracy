@@ -43,13 +43,13 @@ During this semester, you will be primarily working on data.  This requires us t
 
 The syllabus covers the logistics of the course.  You must read and in the space below agree to the conditions of the syllabus before we start this course.
 
-<iframe src="https://docs.google.com/document/d/19a-jliGboUPsGKMJnGuCtBTnqhwKRdP_dTlqF8-a298/pub?embedded=true"  frameborder="1" width="600" height="389" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe src="https://docs.google.com/document/d/19a-jliGboUPsGKMJnGuCtBTnqhwKRdP_dTlqF8-a298/pub"  frameborder="1" width="600" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 ### Schedule of Topics
 
 Here is the course calendar.  
 
-<iframe src="https://docs.google.com/spreadsheets/d/1ZxR-J_kcQKo5Kn0zf1UBZxH9aZfZVFPfk81ba_VNrPc/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"  frameborder="1" width="600" height="389" ></iframe>
+<iframe src="https://docs.google.com/spreadsheets/d/1ZxR-J_kcQKo5Kn0zf1UBZxH9aZfZVFPfk81ba_VNrPc/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"  frameborder="1" width="600" height="400" ></iframe>
 
 
 ### Contact Information
