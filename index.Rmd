@@ -27,6 +27,13 @@ The process of data analysis has a relativley predictable life-cycle, as depicte
 knitr::include_graphics("./media/DataLiteracyEcosystem.png")
 ```
 
+In this course, we are going to pursue this life cycle for three general kinds of data:  
+ - *Univariate Data* - Data measured on a single variable.  The kinds of numerical inferences typically sought with univariate data have to do with determining if the mean (the center of gravity) or the variance (the variation around the center of gravity) is equal to some hypothesized value.  We will investigate a single data input across a range of model complexities ranging from a $t$-test (determining the mean of a set of observations) up to an analysis of variance (ANOVA; determining if the mean of observations differs across treatments).  
+ - *Bivariate Data* - There we have more than one observation (two to be precise which is why we use the *Bi-* prefix after all) to explore the relationships among sets of observations.  In this section, we will discuss correlation, linear regression, multiple regression, and logistic regression.  
+ - *Spatial Data* - Almost everything we do in our research has a spatial context that must be considered.  In this section we explore how to work with spatial data and explore methods for quantifying spatial and autocorrelative structure.  
+
+For each of these domains of data, we will walk through the life cycle of Collection $\to$ Visualizing $\to$ Manipulating $\to$ Modeling $\to$ Communicating.
+ 
 
 ## Course Logistics
 

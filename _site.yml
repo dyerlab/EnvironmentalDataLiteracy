@@ -5,7 +5,7 @@ navbar:
   left:
     - text: "ENVS543"
       href: index.html
-    - text: "Gathering"
+    - text: "R Ecosystem"
       menu:
         - text: "The R Ecosystem"
           href: getting_R.html
@@ -17,24 +17,23 @@ navbar:
           href: data_sources.html
         - text: "Scripting"
           href: programming_R.html
-    - text: "Visualizing"
+    - text: "Univariate"
       menu:
-        - text: "Univariate Data"
-        - text: "Bivariate Data"
-        - text: "Spatial Data"
+        - text: "Distributions"
+        - text: "Visualizing"
+        - text: "Models"
           href: visualizing_spatial.html
-    - text: "Manipulating"
+    - text: "Bivariate"
       menu:
-        - text: "Normality Transformations"
-        - text: "Alternate Projections"
-    - text: "Analyzing"
+        - text: "Distributions"
+        - text: "Visualizing"
+        - text: "Models"
+    - text: "Spatial"
       menu:
-        - text: "Frequentist vs. Bayesian"
-        - text: "Univariate"
-          href: univariate.html
-        - text: "Bivariate"
-          href: bivariate.html
-        - text: "Spatial"
+        - text: "Distributions"
+        - text: "Visualizing"
+        - text: "Models"
+          href: visualizing_spatial.html
     - text: "Communicating"
       menu:
         - text: "Print"
