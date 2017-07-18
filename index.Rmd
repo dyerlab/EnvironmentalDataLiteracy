@@ -1,13 +1,15 @@
 ---
-title: "Home"
+title: "ENVS 543"
 output:
   html_document:
     toc: false
     css: style.css
 ---
 
+<div class="chapter_image"><img src="./media/RRC_Canopy.jpg"></div>
+
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
 ```
 
 > Moreover, the dynamic integration of data generated through observation and simulation is enabling the development of new scientific methods that adapt intelligently to evolving conditions to reveal new understanding.  The enormous growth in the availability and utility of scientific data is increasing scholarly research productivity, accelerating the transformation of research outcomes into products and services, and enhancing the effectiveness of learning across the spectrum of human endeavor.  [National Science Foundation](http://www.nsf.gov/pubs/2007/nsf0728/)
@@ -24,7 +26,7 @@ Being able to attain, work with, visualize, manipulate, and analyze data is an a
 The process of data analysis has a relativley predictable life-cycle, as depicted below.  Our ability to gain biologically or environmenally relevant inferences from the data we collect depends upon the inner loop wherein visualization, transformation, and modeling feed back in an iterative chain of increased understanding.
 
 ```{r fig.cap="A graphical representation of the life cycle of data science.  In this course the recursive inner loop will be emphasized such that you gain skills of iterative data analysis and inferences.", echo=FALSE}
-knitr::include_graphics("./media/DataLiteracyEcosystem.png")
+knitr::include_graphics("./media/DataLiteracyEcosystemSmall.png",dpi = 72)
 ```
 
 In this course, we are going to pursue this life cycle for three general kinds of data:  
@@ -43,13 +45,13 @@ During this semester, you will be primarily working on data.  This requires us t
 
 The syllabus covers the logistics of the course.  You must read and in the space below agree to the conditions of the syllabus before we start this course.
 
-<iframe src="https://docs.google.com/document/d/19a-jliGboUPsGKMJnGuCtBTnqhwKRdP_dTlqF8-a298/pub"  frameborder="1" width="600" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+<iframe src="https://docs.google.com/document/d/19a-jliGboUPsGKMJnGuCtBTnqhwKRdP_dTlqF8-a298/pub"  frameborder="1" width="100%" height="400" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
 
 ### Schedule of Topics
 
 Here is the course calendar.  
 
-<iframe src="https://docs.google.com/spreadsheets/d/1ZxR-J_kcQKo5Kn0zf1UBZxH9aZfZVFPfk81ba_VNrPc/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"  frameborder="1" width="600" height="400" ></iframe>
+<iframe src="https://docs.google.com/spreadsheets/d/1ZxR-J_kcQKo5Kn0zf1UBZxH9aZfZVFPfk81ba_VNrPc/pubhtml?gid=0&amp;single=true&amp;widget=true&amp;headers=false"  frameborder="1" width="100%" height="400" ></iframe>
 
 
 ### Contact Information

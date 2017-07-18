@@ -2,6 +2,9 @@
 title: "Data Types"
 ---
 
+<div class="chapter_image"><img src="./media/RRC_knees.jpg"></div>
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```

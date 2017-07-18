@@ -2,6 +2,8 @@
 title: "Data Containers"
 ---
 
+<div class="chapter_image"><img src="./media/RRC_Stream_Sampling.jpg"></div>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
