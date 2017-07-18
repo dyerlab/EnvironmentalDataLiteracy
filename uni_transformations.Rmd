@@ -1,0 +1,29 @@
+---
+title: "Univariate Visualization I: Built-in Graphics"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Univariate Data
+
+
+
+
+## Histogram Plots
+
+
+
+
+
+## Box and Whiskers
+
+
+
+## Normality
+
+
+
+
+

@@ -1,0 +1,159 @@
+---
+title: "Univariate Visualization I: Built-in Graphics"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 6, fig.height=5, warning=FALSE, message=FALSE)
+library( ggplot2 )
+theme_set( theme_bw(base_size = 14) )
+```
+
+
+A fundamental component of this entire course is the necessity that we visualize our data.  There is perhaps no greater example of that necessity than a recent presentation entitled, *Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing* at the ACM SIGCHI Conference on Human Factors in Computing Systems in Chicago by Matejka & Fitzmaurice.  Their example is presented below.
+
+![A recent example published by [Matejka & Fitzmaurice](https://www.autodeskresearch.com/publications/samestats) demonstrating the importance of visualizing our data.  In all cases shown, the data have the exact same mean, varaiance, and correlation.](./media/DinoSequentialSmaller.gif)
+
+Across all of these plots, both the mean and variance of each individual variable as well as the joint correlation between them remains unchanged.  If we were to just look at these summary statistics without visualizing the raw data, we could be left with an incorrect, though statisticaly sound, interpretation of the data^[Just imagine if you plot your data and you got a dinosaur!].  While this is a bit extreme, it does drive home the rationalle as to why you need to be able to look at your data in many different ways.
+
+For this and the rest of the semester, we will be playing with some temporal data collected at the [Rice Rivers Center](http://ricerivers.vcu.edu/).  These data were shown to you already in the example for loading raw data from a Google Drive account.
+
+
+```{r}
+library(RCurl)
+url <- "https://docs.google.com/spreadsheets/d/1Mk1YGH9LqjF7drJE-td1G_JkdADOU0eMlrP01WFBT8s/pub?gid=0&single=true&output=csv"
+link <- getURL( url )
+con <- textConnection( link )
+data <- read.csv(con,header=TRUE)
+names(data)
+```
+
+These data consist of a large number of observations of different kinds of data (fortunately for us) and we will be using this throughout the rest of the exercises.  Take a moment and look through the different raw data types to get an of how these data are collected.  
+
+```{r}
+data
+```
+
+A couple of immediate points:  
+1. Each row of the data set (and there are `r nrow(data)` of them) represents a specific time at which the 20 variables estimated.  
+2. Samples were collected every 15 minutes and recorded here during the entire 2014 calendar year.
+3. The kind of data that each column was interpreted as are:
+```{r}
+var_types <- lapply(data,class)
+cbind( names(var_types), as.character(var_types) )
+```
+
+As you can see, some of the numeric data is recorded as 'integer' instead of 'numeric'.  Another important point here is that just because the data consist of numbers does not mean that they all act the same way, something we will see very shortly.
+
+## Histogram Plots
+
+One of the first things we can do with our data is to look at its overall shape. For univariate data (e.g., a single column in our `data.frame`) we can do this by imposing a histogram on it.
+
+```{r}
+hist(data$AirTempF)
+```
+
+What a historgram does is to break down all the data into a set of 'bins' and then count the number of times an observation falls into the range specified by each bin.  We can get an idea of what is going on *under the hood* here by retaining the underlying data that goes into the plot.  
+
+```{r}
+h <- hist( data$AirTempF, plot=FALSE )
+class(h)
+```
+
+Here the response, $h$, is a "`r class(h)`" type of variable.  If we look at what it is, 
+
+```{r}
+h
+```
+
+it looks a lot like a list.  In fact, it is a list.
+
+```{r}
+is.list(h)
+```
+
+just a specific kind of list called a "`r class(h)`".  You will see this kind of behavior (e.g., a function returning a specific collection of data defined as its own class) all the time in R because it makes it really easy to apply common functions to collections of data if we know what those data represent.  For example, because this is of type "`r class(h)`", when we type 
+
+```{r}
+plot(h)
+```
+
+the underlying `plot()` function knows exactly what to do to produce a plot of a histogram.  When you get into defining your own data types or analyses, you can define how your objects are printed, plotted, summarized, etc. 
+
+At any rate, in the default case, the raw data were divided into `r length(h$counts)` different bins (I think of them as 'buckets') whose break points are defined as:
+
+```{r}
+h$breaks
+```
+
+whose center is located at 
+
+```{r}
+h$mids
+```
+
+and for which we have 
+
+```{r}
+h$counts
+```
+
+observations in each bin.
+
+We can change the way the bins are configured by passing it either the nubmer of bins we want:
+
+```{r}
+hist( data$AirTempF, breaks=50 )
+```
+
+A set of values defining a vector of break points
+
+```{r}
+hist(data$AirTempF, breaks=seq(0,100,by=2.5), probability = TRUE)
+```
+
+or a function that creates creates the break points. Here is one that over has more bins but of variable sizes to try to have more bins with the same number of observations in them.
+
+```{r}
+dyerBin <- function( x ) {
+  x <- sort( x + rnorm(length(x))/10000 )
+  idx <- seq(1,length(x),by=50)
+  breaks <- c( floor(min(x)), x[idx], ceiling(max(x)))
+  return( breaks )
+}
+hist( data$AirTempF, breaks=dyerBin, probability = FALSE )
+```
+
+In addition to the normal plot, we can also perform a `density` estimation. Here instead of creating individuals bins with discrete values, we can attempt to define the density funcion aross the observed values.
+
+```{r}
+d <- density( data$AirTempF )
+plot(d)
+```
+
+As for the "historgram" object, the thing we are plotting is actually a "`r class(d)`" object (a list as well) with the following properties.
+
+```{r}
+names(d)
+```
+
+
+
+## Customizing Plots
+
+The plotting done thus far are part of the built-in graphics proceedures available in R.  These are very general and not at all fancy plots **but** they do get the job done in a quick and efficient way.  As such, you can get a lot of information and insights from these plots.  
+
+However, there is a need to be able to customize the plots for the most basic of displays.  For the built-in graphics, we have the ability to customize the display by specifying several optional parameters when plotting.  In this section, we will start off with some of the most basic.
+
+
+
+
+## Box and Whiskers
+
+
+
+## Normality
+
+
+
+
+

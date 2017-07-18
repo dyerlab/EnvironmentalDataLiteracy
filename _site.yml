@@ -8,7 +8,7 @@ navbar:
     - text: "R Ecosystem"
       menu:
         - text: "The R Ecosystem"
-          href: getting_R.html
+          href: data_getting_R.html
         - text: "Data Types"
           href: data_types.html
         - text: "Data Containers"
@@ -16,14 +16,12 @@ navbar:
         - text: "Data Sources"
           href: data_sources.html
         - text: "Reproducable Research"
-          href: programming_R.html
+          href: data_reproducable_research.html
     - text: "Univariate"
       menu:
         - text: "Built-in Graphics"
-          href: uni_graphics_builtin.html
+          href: uni_graphics.html
         - text: "GGPlot Visualization"
-          href: uni_graphics_ggplot.html
-        - text: "Normality & Transformations"
           href: uni_transformations.html
         - text: "Statistical Inferences"
           href: uni_statistical_inferences.html
@@ -53,8 +51,6 @@ navbar:
           href: spatial_autocorrelation.html
     - text: "Communicating"
       menu:
-        - text: "Reproducable Reserach"
-          href: r_markdown.html
         - text: "Print"
         - text: "Video"
 output:
