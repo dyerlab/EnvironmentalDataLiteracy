@@ -26,13 +26,19 @@ For the time being, lets stick with documents and keep the default setting for H
 
 In a markdown document, it is all text.  As such, we need to do typographic things like make headings, bold, italics, etc.  Markdown accomplishes these by using symbols around the textual items you are changing.  Here are some examples as an image (if I typed them into this document, which is RMarkdown, they would be converted so you wouldn't see them).
 
+Here are some encoding for differen sized headers.
+
 ```{r echo=FALSE}
 knitr::include_graphics("./media/Headers.png")
 ```
 
+Some ways to provide emphasis via either italics or bold font faces.
+
 ```{r echo=FALSE}
 knitr::include_graphics("./media/Emphasis.png")
 ```
+
+And several ways that you can create lists (either ordered or unordered) with sublists.  The main point here is that you *must* have at least two spaces at the end of the line *before* the list and at the end of each line for each list item.
 
 ```{r echo=FALSE}
 knitr::include_graphics("./media/Lists.png")
@@ -46,13 +52,13 @@ In markdown, code is contained with what is called a 'chunk'.  This chunk can be
 
 You can insert a chunk of code by selecting the R option from the Insert menu just above the editor (see below). There is also a keyboard shortcut that can be used to insert a chunk without going to the menu (and it is much faster), though they are platform dependent.
 
-```{r echo=FALSE, dpi=200}
+```{r echo=FALSE}
 knitr::include_graphics("./media/RStudioInsertChunk.png")
 ```
 
 Once you insert a chunk, RStudio provides a highlighted section within which you can insert your code.  Everything within the chunk itself is going to be interpreted just as if it were written in a normal R script.  
 
-```{r echo=FALSE, dpi=200}
+```{r echo=FALSE}
 knitr::include_graphics("./media/chunk.png")
 ```
 
@@ -71,14 +77,17 @@ There are many additional options that can be found in the documentation for kni
 
 Variables and values from the R code in your document can be inserted into the text as well.  To do this, you enclose the R code you are using in between a backslash plus the letter r ("`r") and a trailing backslash ("`").  Here is an image of an example 
 
-```{r echo=FALSE, dpi=200}
+```{r echo=FALSE}
 knitr::include_graphics("./media/intext_chunk.png")
 ```
 
 and the output:
 
+```
 My all time favorite number is `r rpois(1,10)` and always has been.
+```
 
+Notice how the R code oin the backslashes are replaced with normal text and the values executed by the R code as if it was typed inline.  This is how you can interdigitate R results into your textual output.
 
 
 
