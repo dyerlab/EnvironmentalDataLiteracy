@@ -15,7 +15,7 @@ navbar:
           href: data_containers.html
         - text: "Data Sources"
           href: data_sources.html
-        - text: "Scripting"
+        - text: "Reproducable Research"
           href: programming_R.html
     - text: "Univariate"
       menu:
