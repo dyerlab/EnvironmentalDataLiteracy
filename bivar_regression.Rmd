@@ -1,11 +1,9 @@
----
-title: "Bivariate Data"
----
+# Correlation
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 6, fig.height=5)
+knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 6, fig.height=5, warning=FALSE, message=FALSE)
 library( ggplot2 )
-theme_set( theme_bw() )
+theme_set( theme_bw(base_size = 14) )
 ```
 
 > In this activity, we will be exploring the use of correlation and how we can get inferences about the degree of correlation between sets of data.  The most important thing to remember is that correlation does not imply causation, it is only designed to determine the way variables systematically change.
@@ -798,6 +796,7 @@ From these data, we can see several things:
 4. The best fit model estimates an *odds ratio* that per unit change in mm of precipitation during the driest quarter, the presence of the allele at this locus is `r exp(df$Beta1[1])` time more likely.
 
 From these analyses, we can make a few statements about the underlying evolutionary question.  The features indicated both point to precipitation during the summer being something that may be physiologically linked to the location in the genome where this marker is located.  These analyses suggest that there may be some mechanism for drought tolerance or water-use efficiency or some other physiological process that is influenced by the amount (or variation) in hot quarter precipitation.  These results suggest several different subsequent analyses that may need to be performed including collecting of more data to validate the model, some laboratory experiments on the organisms to look at performance under various precipitation regimes, and further molecular genetic work to tease apart what it is actually that is causing this systematic change.   
+
 
 
 

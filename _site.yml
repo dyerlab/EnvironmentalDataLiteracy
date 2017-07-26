@@ -37,8 +37,8 @@ navbar:
           href: bivar_correlation.html
         - text: "Linear Regression"
           href: bivar_regression.html
-        - text: "Logistic Regression"
-          href: bivar_logistic_regression.html
+        - text: "Ordination"
+          href: bivar_ordination.html
     - text: "Spatial"
       menu:
         - text: "Spatial Data"
