@@ -6,7 +6,7 @@ output:
     css: style.css
 ---
 
-<div class="chapter_image"><img src="./media/RRC_Canopy.jpg"></div>
+<div class="chapter_image"><img src="./media/RRC0_Canopy.jpg"></div>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE)

@@ -2,6 +2,8 @@
 title: "Centrality & Dispersion"
 ---
 
+<div class="chapter_image"><img src="./media/RRC2_MilkyClose.jpg"></div>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 6, fig.height=5, warning=FALSE, message=FALSE)
 library( ggplot2 )
@@ -14,7 +16,7 @@ theme_set( theme_bw(base_size = 14) )
 
 For these data, we will use the `iris` data set as an example.  This data set is built into `R` and is has the quantitative measurements for Sepal Width, Sepal Length, Petal Length, and Petal Width for 150 samples taken from individuals in three different species of *Iris*.
 
-```{r}
+```{r uni_centrality_dispersion}
 summary(iris)
 ```
 
@@ -167,96 +169,8 @@ y1 <- y0 + as.numeric( sepal.sd)
 arrows( x,y0,x,y1, angle = 90 )
 ```
 
-## Ordination
-
-There is a group of routines that are used to visualize and reformat data called "ordination."  These approaches are not necessarily analyses, they are more commonly used to understand the underlying data or to reduce the dimensionality of multivariate data.  
-
-In this section, we are going to explore a bit about principal component (PC) rotation.  A PC rotation is one that takes the original columns of data and performs a rotation on the values to align onto new ‘synthetic' axes.  Consider the example in the next figure.  Here, some bivariate data is plot in 2-space, though this can be done for much higher dimensions of data as well—in fact it is more beneficial with more columns of data and this can be used as a way of reducing the dimensionality of the data while loosing very little (or no) content.  The axes of a PC rotation are taken as linear combinations of the existing axes and define a new coordinate set onto which the points are plot.  All points are rigidly constrained to keep the same relationship and there is no loss of information.  The PC axes are defined by determining the most variable stretch through the data. In the figure, we see the raw data plot onto the X- and Y-axes.  The axis of highest variance does not align with either of the original ones, and instead can be defined as a combination of both X- and Y- coordinates.  
-
-```{r echo=FALSE}
-knitr::include_graphics("PCA.png")
-```
 
 
-If we take the blue axis as the first PC axis, the coordinate of the points would be taken along that new synthetic axis.  The next PC axis is defined as being perpendicular to the previous one(s) and is identified as covering the largest variance in the data as before.  This process continues until there are no more axes.  In our case, the second axis would be at a right angle from the blue line (above).  You can, at maximum, have as many PC axes as there are columns of data.  However, the later axes may not explain significant portions of the underlying data, the process of rotating based upon axes of maximal variation may be able to capture the complete data set with fewer axes than the total set.  This is where a technique like this may be helpful in reducing the dimensionality of the data as well as finding the 'big trends' that may exist in the data set.
 
-To perform this rotation on the *iris* data, we use the `princomp()` function.  Here we focus only on the numerical data (of course) as the `factor` is not something we can do this kind of rotation with.
-
-
-```{r}
-fit.pca <- princomp(iris[,1:4], cor = TRUE)
-```
-
-
-Here are the first 8 (out of 50 potential) axes for the arapat data set.
-
-```{r}
-summary(fit.pca)
-```
-
-This output has two important components to it.  First, it shows the axes, in decreasing order of importance and how much of the total variation they describe.  The first Comp.1 axis explains 72.9% of the variance, the second explains 22.8%, etc.  Second, it shows the cumulative proportion of the variation explained.  From the 4 axes we started with, we can explain 95.8% of the variance by using just the first two PC axes.
-
-Where this becomes meaningful for us is in how we can project our original data onto these new coordinate locations and look at the distribution to see if there are any obvious trends, partitions, gradients, etc.  
-
-```{r warning=FALSE, message=FALSE}
-library(ggplot2)
-pred <- predict(fit.pca)
-df <- data.frame(PC1 = pred[, 1], PC2 = pred[, 2])
-df$Species <- iris$Species
-ggplot(df) + geom_point(aes(x = PC1, y = PC2, color = Species), size = 3, alpha = 0.75)
-```
-
-We can see from the plot that the the samples are clustered in an obvious way.  The designation of ‘Species' as depicted by the color of the points, shows definite partitions between *I. setosa* and the remaining species (along the PC1 axis). However, projected onto the PC2 axis, there does not seem to be a partitioning of the samples differentiating the species in an obvious way.  
-
-## Hierarchical Clustering
-
-In the previous section, we defined a new coordinate space for all samples in the data set.  The rotation of the data was able to describe over 95% of the observed variation using only the first two PC axes.  In this section, we are going to use the rotated coordinates to evaluate species-level differences using a hierarchical clustering method.  Hierarchical clustering are very helpful in understanding groupings in the data, particularly if there is a ‘nesting' structure.  While there are many ways to do it, they all generally proceed as follows:  
-1. Define a numeric metric that measured the distances between all K groups.  
-2. Find the two groups that have the smallest distance and coalesce them together into a pair.  
-3. Assume that the coalesced pair now constitutes a single entity, estimate the numeric metric among all K-1 groups in the data set.  
-4. Go to #2 and repeat until you have coalesced all the groups together.
-
-Here again, it is the data that is telling us how it is structured rather than us imposing a model onto the data to see if it fits.
-
-To perform a clustering, we first need to start with a distance matrix based upon the original data.
-
-```{r}
-iris.dist <- dist( iris[,1:4] )
-```
-
-We can then perform the above algorithm using the `hclust()` function.
-
-```{r}
-h <- hclust( iris.dist )
-plot( h )
-```
-
-Which shows a deep separation between groups.  Lets see if we can get a bit more interpretive power out of it by changing the labels to show species:
-
-```{r}
-h$labels <- iris$Species 
-plot( h , cex=0.5)
-```
-
-You may need to 'zoom' that one a bit to understand the labels because I reduced their font size (the `cex` bit in the plot statement).   This is interesting but would be helpful if we could provide a bit of color to the plot to differentiate the `Species`.  Unfortunately, we cannot just add `col=Species` (for reasons I don't quite understand) to the plot but there is a way to change the `h` object into one that can be colored.  However, you **must** first install a new library if you don't already have it, which I am guessing if this is the first time you've done some work using trees in R you have not.  Install it in the normal fashion 
-
-```{r eval=FALSE}
-install.packages("dendextend")
-```
-
-Then we can use it like
-
-```{r warning=FALSE, message=FALSE}
-library( dendextend )
-d <- as.dendrogram( h )
-labels_colors( d ) <- as.numeric( iris$Species )
-plot( d )
-```
-
-There are some interesting things to notice here.   
-- The green *setosa* group seems to be nicely separated from the rest, just like we saw in the PC plot.
-- There are some individual samples that are a bit mixed, the *I. virginica* and *I. versicolor* samples are mixed together not forming a coherent group.
-
-These plot suggest that morphology along may be a good indicator of species differences for *I. setosa* but not perhaps that good for telling the differences between the *I. virginica* and *I. versicolor* samples.
-
+# Normality
 

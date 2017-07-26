@@ -1,6 +1,8 @@
 ---
-title: "Univariate Visualization I: Built-in Graphics"
+title: "Graphical Display of Data"
 ---
+
+<div class="chapter_image"><img src="./media/RRC2_pier2_winter.jpg"></div>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 6, fig.height=5, warning=FALSE, message=FALSE)
@@ -18,7 +20,7 @@ Across all of these plots, both the mean and variance of each individual variabl
 For this and the rest of the semester, we will be playing with some temporal data collected at the [Rice Rivers Center](http://ricerivers.vcu.edu/).  These data were shown to you already in the example for loading raw data from a Google Drive account.
 
 
-```{r}
+```{r uni_graphics}
 library(RCurl)
 url <- "https://docs.google.com/spreadsheets/d/1Mk1YGH9LqjF7drJE-td1G_JkdADOU0eMlrP01WFBT8s/pub?gid=0&single=true&output=csv"
 link <- getURL( url )

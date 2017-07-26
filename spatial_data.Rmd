@@ -1,7 +1,8 @@
 ---
-title: "Visualizing Spatial Data"
+title: "Spatial Data"
 ---
 
+<div class="chapter_image"><img src="./media/RRC4_Winter_sunrise.jpg"></div>
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE)

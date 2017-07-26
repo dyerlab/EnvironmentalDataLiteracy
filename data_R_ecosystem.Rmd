@@ -2,6 +2,9 @@
 title: "The R Ecosystem"
 ---
 
+<div class="chapter_image"><img src="./media/RRC1_Drone_Wetlands.jpg"></div>
+
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 6, fig.height=5, warning=FALSE, message=FALSE)
 library( ggplot2 )

@@ -8,7 +8,7 @@ navbar:
     - text: "R Ecosystem"
       menu:
         - text: "The R Ecosystem"
-          href: data_getting_R.html
+          href: data_R_ecosystem.html
         - text: "Data Types"
           href: data_types.html
         - text: "Data Containers"
@@ -19,10 +19,8 @@ navbar:
           href: data_reproducable_research.html
     - text: "Univariate"
       menu:
-        - text: "Built-in Graphics"
+        - text: "Graphical Display"
           href: uni_graphics.html
-        - text: "GGPlot Visualization"
-          href: uni_transformations.html
         - text: "Statistical Inferences"
           href: uni_statistical_inferences.html
         - text: "Centrality & Dispersion"

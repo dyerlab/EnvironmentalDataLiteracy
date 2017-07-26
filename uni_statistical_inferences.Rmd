@@ -2,6 +2,8 @@
 title: "Statistical Inferences"
 ---
 
+<div class="chapter_image"><img src="./media/RRC2_Oak_Leaf.jpg"></div>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, fig.align = "center", fig.width = 6, fig.height=5, warning=FALSE, message=FALSE)
 library( ggplot2 )
@@ -25,7 +27,7 @@ This species is not native to this region, it is endemic to the midwest drainage
 
 As a simple example, consider the case where you went out and caught 50 fish, 37 of which were blue cats.
 
-```{r message=FALSE, warning=FALSE, echo=FALSE}
+```{r uni_stats1, message=FALSE, warning=FALSE, echo=FALSE}
 library(ggplot2)
 df <- data.frame( Species=c("Blue Catfish","Other Species"), N=c(37,13) )
 ggplot(df,aes(Species,N)) + geom_bar(stat="identity") 
