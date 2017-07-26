@@ -24,3 +24,7 @@ img {
   width:auto !important;
   z-index: 2;
 }
+
+blockquote {
+  margin-top: 15px;
+}
