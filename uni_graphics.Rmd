@@ -113,17 +113,26 @@ A set of values defining a vector of break points
 hist(data$AirTempF, breaks=seq(0,100,by=2.5), probability = TRUE)
 ```
 
-or a function that creates creates the break points. Here is one that over has more bins but of variable sizes to try to have more bins with the same number of observations in them.
+or a function that creates creates the break points. Here is one that over has more bins but of variable sizes to try to have more bins with the same number of observations in them (n.b., I had to add a little randomness to the data--the `rnorm()` part in the first line of the function--so that there are no ties as this uses a cheap and quick sorting approach).
 
 ```{r}
+# dyerBin() takes a set of data and determines how to allocate breaks in the data so that
+#   there are even numbers of observations in each break (more or less).
 dyerBin <- function( x ) {
   x <- sort( x + rnorm(length(x))/10000 )
   idx <- seq(1,length(x),by=50)
   breaks <- c( floor(min(x)), x[idx], ceiling(max(x)))
   return( breaks )
 }
+```
+
+Now, we can specify this function to be used to define the breaks.
+
+```{r}
 hist( data$AirTempF, breaks=dyerBin, probability = FALSE )
 ```
+
+## Density Plots
 
 In addition to the normal plot, we can also perform a `density` estimation. Here instead of creating individuals bins with discrete values, we can attempt to define the density funcion aross the observed values.
 
@@ -136,9 +145,12 @@ As for the "historgram" object, the thing we are plotting is actually a "`r clas
 
 ```{r}
 names(d)
+class(d)
 ```
 
+You will notice that this `density` object has specific features that are used for plotting (the `x` and `y` are obvious) and for describing the data itself.  The function, `plot()` here, knows how to extract the appropriate components from a `density` object and make a default graphical display.  If you get into programming objects in R yourself, you an overload basic functions like `plot()` and `print()` to provide customized output for your anlaysis objects.
 
+ 
 
 ## Customizing Plots
 
