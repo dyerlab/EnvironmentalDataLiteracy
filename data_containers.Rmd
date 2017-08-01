@@ -356,3 +356,32 @@ df$Names[df$Score > 90 & df$Passed_Class==TRUE]
 
 
 This is why `data.frame` objects are very database like.  They can contain lots of data and you can extract from them subsets that you need to work on.  This is a VERY important feature, one that is vital for reproducible research.  Keep you data in one and only one place.
+
+
+## Tibbles
+
+A `data.frame` is a basic object, within which we can keep all the different types of data we work with in R.  Another commonly used container, which is very similar to a `data.frame` is a tibble (a play on the word table I suppose), defeind in the `tidyverse` library.  As a point of reference, `tidyverse` is a constellation of libraries created by the same people who brought us RStudio, that allow the maniupulation of large data to be done in a much easier fashion.  We will use both `data.frame` and `tibble` objects throughout as it is important to understand the limitations and benefits of each.
+
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+We can create a `tibble` from an existing `data.frame` as:
+
+```{r}
+tbl <- as.tibble(df)
+tbl
+```
+
+You can also create a tibble from scratch either just like you did for a `data.frame` 
+
+```{r}
+tbl <- tibble( Wind_Direction = runif(1000) * 360,
+               Water_Depth = factor( 
+                 sample( c("North","South","East","West"), 1000, replace=TRUE)
+                 ),
+               Names = sample( df$Names, 1000, replace=TRUE ))
+tbl
+
+```
+
