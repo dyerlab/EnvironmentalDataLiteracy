@@ -166,7 +166,7 @@ Points are defined by *SpatialPoints* objects.  A collection of points may have 
 
 Confused yet?  Lets get to the point and make some coordinates.  
 
-```{r}
+```{r sp1}
 library(sp)
 x <- c( -110.2725, -110.0960, -109.3270 )
 y <- c( 24.21441, 24.0195, 26.63783 )
@@ -386,28 +386,28 @@ The library is build upon the idea of the grammar of graphics.  Essentially, a g
 
 At a bare minimum, ggplot requires your data to be in a `data.frame` object.  Columns of data will define the x-, y-, z-, color, shape, and other characteristics.
 
-```{r}
+```{r strata_coords}
 coords <- strata_coordinates(arapat)
 summary(coords)
 ```
 
 You initiate a ggplot by specifying the data and an aesthetic. Here the aesthetic maps the names of the columns of the data onto the x- and y- axes.  To show the graphical output I just print the object.
 
-```{r}
+```{r ggplot_coords_no_points}
 p <- ggplot( coords, aes(x=Longitude, y=Latitude))
 p
 ```
 
 There is nothing shown because we have not specified how to display the data in x- and y- space.  It did however set up the range and labels for us automatically.  To do that, we need to add (again literally add it to the object just like an equation) a geometric layer.
 
-```{r}
+```{r ggplot_coords_points}
 p <- p + geom_point()
 p
 ```
 
 By default it makes the points filled and black.  Since this is a projected set of data, we should probably change the coordinate space so it knows that these are supposed to be mapped onto a projection in decimal degrees.  If you look at the figure above, you will see that the x- and y- limits are maximized in the graphic display, not scaled to be spatially coherent.  To change the coordinate system, we add a coordinate transformation to the data.
 
-```{r}
+```{r ggplot_coords_points_projection}
 p <- p + coord_map("mercator")
 p
 ```
@@ -543,15 +543,9 @@ plot(bio_layers)
 
 From which values may be extracted using normal methods as outlined above.
 
-```{r}
-library(sp)
-library(gstudio)
-data(arapat)
-coords <- strata_coordinates(arapat)
-pts <- SpatialPoints( coords[,2:3])
-coords <- strata_coordinates( arapat )
-pts <- SpatialPoints( coords[,2:3] )
-df <- extract( bio_layers, pts)
+```{r extracting}
+library(raster)
+df <- raster::extract( bio_layers, pts)
 df <- df[ !is.na(df[,1]),]
 head(df)
 ```
@@ -716,7 +710,7 @@ pts
 
 From these points, we construct a `SpatialPolygons` object (see \@ref{polygons} for more info on this convoluted construction) and then can overlay onto the map to make sure it in the correct vicinity (here we are eyeballing it a bit).  For more on why this next line of code looks so crazy, see \@ref(polygons).
 
-```{r}
+```{r plot_spatial_polygons}
 polys <- SpatialPolygons(list(Polygons(list(Polygon(pts)),"Polygon")))
 plot(baja, legend=FALSE)
 plot(polys, add=TRUE)
@@ -724,7 +718,7 @@ plot(polys, add=TRUE)
 
 To use the polygon to crop the raster, we have to both remove the part of the raster that is not contained within the polygon (`mask`) and then cut down the remaining raster to change the bounding box to that representing the portion of the data that remains (`trim`).  If you do not trim the raster, it will have the same amount of data associated with it as the previous raster (e.g., the underlying data matrix will have 960 rows and 720 columns) but the part that is masked will be represented by `NA` values.  For many rasters, the data is held in-memory (see the entry for 'data source` in the summary above) and as such removing as much of a raster that is `NA` improves your ability to manipulate it better.
 
-```{r, fig.cap="Extraction of region within polygon from the full Baja California raster."}
+```{r loreto_region, fig.cap="Extraction of region within polygon from the full Baja California raster."}
 loredo <- trim( mask( baja, polys ) )
 plot(loredo, xlab="Longitude",ylab="Latitude")
 ```
@@ -737,7 +731,7 @@ Cropping by a polygon like demonstrated in the previous example is a 'by hand' a
 
 For this example, I'm going to use the populations found along the peninsula and find the minimal area encompassing those points. 
 
-```{r message=FALSE, warning=FALSE}
+```{r plot_baja_all, message=FALSE, warning=FALSE}
 baja_coords <- coords[ !(coords$Stratum %in% c("101","102","32")), ]
 baja_pts <- SpatialPoints( baja_coords[,2:3])
 plot(baja, legend=FALSE)
@@ -747,7 +741,7 @@ plot(baja_pts,add=T,col="darkred",pch=16)
 
 The methods for finding the hull and adding a buffer around it are found in the `rgeos` package.  These are pretty easy functions to use and are very helpful.  If you are having trouble installing the `rgeos` package from source, see my webpage (http://dyerlab.com), there is a short tutorial.
 
-```{r message=FALSE,warning=FALSE}
+```{r baja_plot_gConvex_hull, message=FALSE,warning=FALSE}
 library(rgeos) # loads in gConvexHull & gBuffer functions
 hull <- gConvexHull(baja_pts)
 plot(baja, legend=FALSE)
@@ -758,7 +752,7 @@ plot(hull,add=T,border="red")
 
 The function `gConvexHull()` returns an object of type *SpatialPolygons*, just like we created before.  However, we now have a polygon that has each of our most 'outward' populations on the very edge of the polygon.  It may be beneficial for us to add a buffer around this polygon.
 
-```{r}
+```{r baja_hull_buffer}
 hull_plus_buffer <- gBuffer(hull,width=.2)
 plot(baja, legend=FALSE)
 plot(baja_pts,add=T,col="darkred")
@@ -768,7 +762,7 @@ plot(hull_plus_buffer, add=T, border="red")
 
 Now, we can mask and trim it to include only the area of interest.
 
-```{r}
+```{r baja_pop_hull}
 pop_hull <- trim( mask(baja,hull_plus_buffer) )
 plot(pop_hull, legend=FALSE, xlab="Longitude", ylab="Latitude")
 plot(baja_pts,add=T,col="darkred",pch=16)
@@ -783,14 +777,14 @@ So far, the rasters have been confined to representing a single static object.  
 
 For queries of the first kind, we can use the `extract()` function.  For this I downloaded the average temperature and precipitation rasters from Worldclim.
 
-```{r}
+```{r baja_temp_precip_load}
 baja_temp <- raster("./Data/bio1.tif")
 baja_prec <- raster("./Data/bio12.tif")
 ```
 
 And then extract the values from each of these layers into the `coords` data we already have set up.
 
-```{r}
+```{r coords_temp_precip}
 coords$elevation <- extract( baja_california, coords[,c(2,3)])
 coords$mean_temp <- extract( baja_temp, coords[,c(2,3)])
 coords$mean_precip <- extract( baja_prec, coords[,c(2,3)])
@@ -799,7 +793,7 @@ coords[1:10,]
 
 A note should be made on the temperature and precipitation values.  Temperature is denoted in tenths of a degree Celsius.  Though it does get quite hot at times, it does not average 188&deg;C at population 88!  Similarly, the units for precipitation are mm (or tenths of centimeters if you will...).
 
-```{r warning=FALSE, message=FALSE}
+```{r plot_elevation, warning=FALSE, message=FALSE}
 library(ggrepel)
 coords <- coords[ order(coords$Latitude),]
 p <- ggplot( coords, aes(x=Latitude,y=elevation)) + geom_line(color="lightgrey") 
@@ -865,11 +859,12 @@ Examples
 r <- raster(system.file("external/test.grd", package="raster"))
 #plot(r)
 #click(r)
-#now click on the plot (map)</pre></div>
+#now click on the plot (map)
+</pre></div>
 
 Here is the output from a single inquire on the `baja_california` raster map, asking for both the coordinates and the elevation of a particular location.  
 
-```{r eval=FALSE}
+```{r plot_click, eval=FALSE}
 plot( baja_california, legend=FALSE)
 click(baja_california, xy=TRUE)
 ##           x        y value
@@ -879,13 +874,14 @@ click(baja_california, xy=TRUE)
 In a similar fashion, you can interactively create polygon points.
 
 ```{r eval=FALSE}
-> cape_pts <- click(baja_california, n=5, xy=TRUE, type="p")
+cape_pts <- click(baja_california, n=5, xy=TRUE, type="p")
 ```
 
 and after you have selected the points, you get something like.
 
 ![Raster points around the Cape region identified manually.](../media/click_raster_example.png)
-```{r echo=FALSE}
+
+```{r load_click_data, echo=FALSE}
 load("./Data/click_raster_example_pts.rda")
 ```
 
@@ -901,7 +897,7 @@ This is an extremely helpful approach for cropping and manipulating your raster 
 
 Just as with points, we can also extract data around individual locations defined by either points with a buffer or from a polygon.  The first approach requires us to put a buffer around the coordinate points and then extract the raster data.  I'll use the five most southern sites as an example.
 
-```{r}
+```{r ordering_coords_proj}
 coords <- coords[ order( coords$Latitude) , ]
 cape_coords <- coords[1:5,]
 pts <- SpatialPoints( cape_coords[,2:3] )
@@ -911,7 +907,7 @@ pts
 
 These points are in the Cape region, which we can crop out of the `baja_california` raster as using the `cape_pts` we clicked out to form a polygon:
 
-```{r}
+```{r plot_sptaial_points_cape_pts}
 cpts <- SpatialPoints( cape_pts[,1:2] )
 b <- bbox( cpts )
 cape <- crop(baja_california, b)
@@ -921,7 +917,7 @@ plot( pts, add=TRUE)
 
 We can buffer these points 
 
-```{r}
+```{r plot_gBuffer}
 buff <- gBuffer(pts, byid=TRUE, width=0.01)
 plot( cape )
 plot( buff, add=TRUE)
@@ -929,21 +925,21 @@ plot( buff, add=TRUE)
 
 And we can extract the data from within those polygons for each of the five regions.
 
-```{r}
+```{r extract_cape_buff}
 vals <- extract( cape, buff )
 vals
 ```
 
 You can do the same thing for larger polygons, as we established above when we drew the polygon around Loreto, BCS.
 
-```{r}
+```{r baja_plot_poly}
 plot( baja, legend=FALSE )
 plot( polys, add=TRUE)
 ```
 
 The resulting data is just a lot bigger in size.
 
-```{r}
+```{r extract_baja_polys}
 data <- extract( baja_california, polys )
 length( data[[1]])
 ```
@@ -954,7 +950,7 @@ length( data[[1]])
 
 When working with rasters, we can reproject these onto other projections rather easily.  Here is an example from the worldclim elevation tile we used previously.
 
-```{r message=FALSE, warning=FALSE}
+```{r baja_california, message=FALSE, warning=FALSE}
 alt <- raster("./Data/alt.tif")
 e <- extent( c(-115,-109,22,30) )
 baja_california <- crop( alt, e )
@@ -963,7 +959,7 @@ baja_california
 
 We can now project it to another projection, lets say Lambert Conic Conformal.
 
-```{r warning=FALSE,message=FALSE}
+```{r baja_lcc, warning=FALSE,message=FALSE}
 library(rgdal, quietly = TRUE)
 projection(baja_california)
 baja_lcc <- projectRaster( baja_california, crs="+proj=lcc +lat_1=48 +lat_2=33 +lon_0=-100 +ellps=WGS84")
@@ -972,7 +968,7 @@ baja_lcc
 
 These two projections influence the region as shown below.
 
-```{r echo=FALSE}
+```{r biplot, echo=FALSE}
 par(mfrow=c(1,2))
 plot(baja_california, legend=FALSE)
 plot(baja_lcc, legend=FALSE )
@@ -981,7 +977,7 @@ par(mfrow=c(1,1))
 
 As usual, there is probably a way to plot these values in `ggplot` to make the output just a little bit more awesome. Projections of data in `ggplot` displays can be manipulated by appending a `coord_*` object to the plot as we showed above.  Here are two examples using a Mercator and azimuth equal area projection of the state maps.
 
-```{r message=FALSE, warning=FALSE}
+```{r mercator, message=FALSE, warning=FALSE}
 library(ggplot2)
 states <- map_data("state")
 map <- ggplot( states, aes(x=long,y=lat,group=group))
@@ -992,13 +988,13 @@ map + coord_map("mercator")
 
 Conversely, we can plot it using the equal area Azimuth projection
 
-```{r}
+```{r azequalarea}
 map + coord_map("azequalarea")
 ```
 
 or fish-eye
 
-```{r}
+```{r fisheye}
 map + coord_map("fisheye",par=3)
 ```
 
