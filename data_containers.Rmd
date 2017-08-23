@@ -362,7 +362,7 @@ This is why `data.frame` objects are very database like.  They can contain lots 
 
 A `data.frame` is a basic object, within which we can keep all the different types of data we work with in R.  Another commonly used container, which is very similar to a `data.frame` is a tibble (a play on the word table I suppose), defeind in the `tidyverse` library.  As a point of reference, `tidyverse` is a constellation of libraries created by the same people who brought us RStudio, that allow the maniupulation of large data to be done in a much easier fashion.  We will use both `data.frame` and `tibble` objects throughout as it is important to understand the limitations and benefits of each.
 
-```{r message=FALSE, warning=FALSE}
+```{r message=FALSE, warning=FALSE, error=FALSE}
 library(tidyverse)
 ```
 

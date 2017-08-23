@@ -6,9 +6,12 @@ title: "Spatial Data"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE, error = FALSE)
+unloadNamespace("tidyverse")
+if( "package:tidyverse" %in% search() ) detach("package:tidyverse",unload=TRUE,character.only = TRUE)
 library(ggplot2)
 theme_set( theme_bw() )
 ```
+
 
 
 ## Synopsis
@@ -544,7 +547,6 @@ plot(bio_layers)
 From which values may be extracted using normal methods as outlined above.
 
 ```{r extracting}
-library(raster)
 df <- raster::extract( bio_layers, pts)
 df <- df[ !is.na(df[,1]),]
 head(df)
@@ -763,7 +765,7 @@ plot(hull_plus_buffer, add=T, border="red")
 Now, we can mask and trim it to include only the area of interest.
 
 ```{r baja_pop_hull}
-pop_hull <- trim( mask(baja,hull_plus_buffer) )
+pop_hull <- trim( mask(baja, hull_plus_buffer) )
 plot(pop_hull, legend=FALSE, xlab="Longitude", ylab="Latitude")
 plot(baja_pts,add=T,col="darkred",pch=16)
 ```
@@ -778,6 +780,7 @@ So far, the rasters have been confined to representing a single static object.  
 For queries of the first kind, we can use the `extract()` function.  For this I downloaded the average temperature and precipitation rasters from Worldclim.
 
 ```{r baja_temp_precip_load}
+library(raster)
 baja_temp <- raster("./Data/bio1.tif")
 baja_prec <- raster("./Data/bio12.tif")
 ```
@@ -785,13 +788,15 @@ baja_prec <- raster("./Data/bio12.tif")
 And then extract the values from each of these layers into the `coords` data we already have set up.
 
 ```{r coords_temp_precip}
-coords$elevation <- extract( baja_california, coords[,c(2,3)])
-coords$mean_temp <- extract( baja_temp, coords[,c(2,3)])
-coords$mean_precip <- extract( baja_prec, coords[,c(2,3)])
+coords$elevation <- raster::extract( baja_california, coords[,c(2:3)] )
+coords$mean_temp <- raster::extract( baja_temp,  coords[,c(2:3)] )
+coords$mean_precip <- raster::extract( baja_prec , coords[,c(2:3)] )
 coords[1:10,]
 ```
 
-A note should be made on the temperature and precipitation values.  Temperature is denoted in tenths of a degree Celsius.  Though it does get quite hot at times, it does not average 188&deg;C at population 88!  Similarly, the units for precipitation are mm (or tenths of centimeters if you will...).
+Two notes should be made here:  
+1. About the temperature and precipitation values.  Temperature is denoted in tenths of a degree Celsius.  Though it does get quite hot at times, it does not average 188&deg;C at population 88!  Similarly, the units for precipitation are mm (or tenths of centimeters if you will...).  
+2. The way that we called the `extract()` function here is with its 'fully specified namespace,' which is why it is `raster::extract()` instead of just `extract()`.  The reason for this is a bit complicated but it goes to show an important issue about functions and libraries in R.  The `raster` library has the `extract()` function nested within it and when you load up this library, it has 
 
 ```{r plot_elevation, warning=FALSE, message=FALSE}
 library(ggrepel)
@@ -926,7 +931,7 @@ plot( buff, add=TRUE)
 And we can extract the data from within those polygons for each of the five regions.
 
 ```{r extract_cape_buff}
-vals <- extract( cape, buff )
+vals <- raster::extract( cape, buff )
 vals
 ```
 
@@ -940,7 +945,7 @@ plot( polys, add=TRUE)
 The resulting data is just a lot bigger in size.
 
 ```{r extract_baja_polys}
-data <- extract( baja_california, polys )
+data <- raster::extract( baja_california, polys )
 length( data[[1]])
 ```
 
