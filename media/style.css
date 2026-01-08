@@ -25,6 +25,11 @@ img {
   z-index: 2;
 }
 
+.image-fluid img {
+  border-radius: 10px;
+  /* Optional: ensure the image content itself is clipped to the border radius */
+  overflow: hidden; 
+}
 blockquote {
   margin-top: 15px;
 }
