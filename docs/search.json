@@ -1,0 +1,422 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Environmental Data Literacy",
+    "section": "",
+    "text": "Preface\nThis is an open source textbook for the graudate-level course that serves as an introduction to data literacy for Environmental Studies majors at Virginia Commonwealth University.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "index.html#acknowledgements",
+    "href": "index.html#acknowledgements",
+    "title": "Environmental Data Literacy",
+    "section": "Acknowledgements",
+    "text": "Acknowledgements\nI wish to thank the Rice Rivers Center for permission to use the images of the Center found on the mastehead of each chapter.",
+    "crumbs": [
+      "Preface"
+    ]
+  },
+  {
+    "objectID": "Introduction.html",
+    "href": "Introduction.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Data Literacy",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "Introduction.html#course-learning-outcomes-clos",
+    "href": "Introduction.html#course-learning-outcomes-clos",
+    "title": "Introduction",
+    "section": "Course Learning Outcomes (CLOs)",
+    "text": "Course Learning Outcomes (CLOs)\nLearning objectives may be applied at several heirarchical levels within this course. Overall, the course has specific objectives that are a de facto statement of what you should expect to get from the content of this class. If you look to your individual degree Program Learning Outcomes, you should see how these course-level objectives map directly onto those outcomes.\nLet’s start with a definition. In this text, all definitions will be styled as follows:\n\n\n\n\n\n\nTipLearning Objective\n\n\n\nLearning Objectives are explicit statements that define the knowledge, skills, and abilities you will demonstrate upon successful completion of this course. All assessments are designed to directly measure your achievement of these objectives, ensuring alignment between what you practice, what you’re evaluated on, and what you ultimately master.\n\n\nThis course has the following Course Learning Objectives (CLOs):\nCLO1- :\n\nx\n\nCLO2- :\n\nx\n\nCLO3- :\n\nx",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "Introduction.html#course-modules",
+    "href": "Introduction.html#course-modules",
+    "title": "Introduction",
+    "section": "Course Modules",
+    "text": "Course Modules\nThis course is partitioned into the following four self-contained, though sequential, learning modules.\n\nModule 1: The R Ecosystem\n\nEstablishing the technical foundation for quantitative analysis in population genetics. Students will master R programming fundamentals, data visualization using the grammar of graphics, and reproducible scientific documentation. These skills are prerequisite for all subsequent evolutionary analyses.\n\nModule Bloom Spread1: ~3.8-4.0\n\nAnalogy Summary:\n\nThe process of learning these foundational skills is like learning to prepare a sophisticated meal. MLO1 teaches you ingredient preparation—correctly identifying your ingredients (data types), organizing them into appropriate containers (data frames/lists), and cleaning or transforming them (Tidyverse verbs) before cooking can begin. MLO2 focuses on presentation—using the “Grammar of Graphics” (rules of plating) to ensure the final dish is attractive and conveys information effectively. MLO3 combines everything into the recipe and plating—documenting every step (code chunks) and integrating narrative (text), results (inline R output), tables, and presentation (visualizations) into a final, shareable, verifiable format (Quarto document). Just as a chef must master ingredients, presentation, and documentation to create reproducible haute cuisine, you must master these three objectives to produce professional, reproducible data analysis.\n\n\n\n\nModule 2:\n\n…\n\nModule Bloom Spread:\n\nAnalogy Summary\n\nsss\n\n\n\n\nModule 3:\n\n…\n\nModule Bloom Spread:\n\nAnalogy Summary\n\n…",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "Introduction.html#course-level-bloom-spread-progression",
+    "href": "Introduction.html#course-level-bloom-spread-progression",
+    "title": "Introduction",
+    "section": "Course-Level Bloom Spread Progression",
+    "text": "Course-Level Bloom Spread Progression\n\n\n\n\n\n\n\n\n\n\nModule\nContent Focus\nBloom Spread\nWeight\nPattern Type\n\n\n\n\n1\nR Ecosystem (Tools)\n3.8-4.0\n17.5%\nSequential Mastery (within)\n\n\n2\n \nX-Y\nX%\nSequential Mastery (within)\n\n\n3\n \nX-Y\nX%\nSequential Mastery (within)\n\n\n4\n \nX-Y\nX%\nSequential Mastery (within)\n\n\nAll\nAll Processes\n3.8 → 5.6\n100%\nConvergent Integration",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "Introduction.html#footnotes",
+    "href": "Introduction.html#footnotes",
+    "title": "Introduction",
+    "section": "",
+    "text": "Bloom spread is metric that quantifies cognitive complexity in course design by aggregating Bloom’s taxonomy classifications from individual assessments through learning objectives to course outcomes. This framework enables temporal analysis of cognitive demand progression across a semester, revealing developmental arcs rather than simple linear progression. See here for an overview of this metric.↩︎",
+    "crumbs": [
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "R_Ecosystem.html",
+    "href": "R_Ecosystem.html",
+    "title": "R Language Ecosystem",
+    "section": "",
+    "text": "Module Learing Objectives\nModule Bloom Spread: ~3.8-4.0\nAnalogy Summary: The process of learning these foundational skills is like learning to prepare a sophisticated meal.\nJust as a chef must master ingredients, presentation, and documentation to create reproducible haute cuisine, you must master these three objectives to produce professional, reproducible data analysis.\nThe content of this module will map onto the following sepecific module-level learning objectives (MLOs).",
+    "crumbs": [
+      "R Language Ecosystem"
+    ]
+  },
+  {
+    "objectID": "R_Ecosystem.html#module-learing-objectives",
+    "href": "R_Ecosystem.html#module-learing-objectives",
+    "title": "R Language Ecosystem",
+    "section": "",
+    "text": "MLO1: Foundational Data Handling & Transformation\n\nApply fundamental R data types (e.g., character, numeric, logical) and containers (e.g., vectors, lists, data frames) to load, inspect, and transform raw biological, ecological, and spatial data into structured formats using multi-step Tidyverse workflows (e.g., select, filter, mutate, summarize).\n\nContent Coverage: Understanding and applying R data types (character, numeric, logical, factor); working with data containers (vectors, lists, data frames); loading data from various formats; inspecting data structure and content; implementing Tidyverse transformation workflows; and preparing raw data for downstream analysis.\n\nMapping to CLO2 (Execute/Interpret)\n\nEstablishes the procedural skill set necessary to “manipulate datasets” and prepare data for analysis. Students must apply R functions and Tidyverse verbs to handle different data representations and convert raw input into structured formats required for population genetic analysis. This is the foundational “Execute” component—students cannot analyze genetic data without first being able to load, inspect, and transform it appropriately.\n\nMapping to CLO3 (Generate/Highlight)\n\nData transformation is the first step in generating scientific outputs. Students must understand that how data is structured affects what analyses are possible and how results can be communicated. Proper data handling enables subsequent generation of tables, figures, and integrated documents.\n\n\nBloom Level: ~3 (Apply - using R functions and Tidyverse workflows on new datasets)\n\n\nMLO2: Publication Quality Data Presentation\n\nImplement methods for creating publication-ready tabular and graphical data representations using knitr and ggplot2. Students will be introduced to evaluating presentation approaches (e.g., tables vs. figures, chart types) to effectively communicate analytical findings, with this rhetorical decision-making reinforced throughout subsequent modules.\n\nContent Coverage: Creating tables using knitr::kable() and related functions; implementing the grammar of graphics framework using ggplot2; mapping data variables to aesthetic elements; constructing multi-layered visualizations; customizing themes and formatting; understanding when tables vs. figures are most appropriate; and meeting technical specifications for publication (DPI, file formats).\n\nMapping to CLO2 (Execute/Interpret)\n\nRequires implementing established visualization and tabulation workflows using professional tools. Students execute ggplot2 code to create figures and knitr functions to format tables, interpreting which aesthetic mappings best represent their data structure.\n\nMapping to CLO3 (Generate/Highlight)\n\nEstablishes the technical foundation for CLO3 (Evidence-Based Communication) by introducing students to the concept that presentation choices are analytical decisions that shape scientific narrative. Module 1 focuses on tool mastery; later modules increasingly emphasize the justification of presentation choices. Students learn to generate visually compelling representations that highlight key patterns in data.\n\n\nBloom Level: ~3-4 (Implement/Execute with introduction to evaluative thinking about presentation choices)\n\n\nMLO3: Reproducible Analysis and Reporting\n\nProduce professional, reproducible Methods and Results documents using Quarto/Markdown by integrating narrative text, executable code chunks, numerical output, tables, and figures. Students will be introduced to publication conventions (text markup, citations, cross-references, figure legends) and code chunk options, with proficiency developing throughout subsequent modules.\n\nContent Coverage: Quarto/Markdown syntax for text formatting; integrating R code chunks with narrative text; controlling code chunk behavior (echo, eval, include); generating inline R output; formatting citations and references; creating cross-references to figures and tables; producing figure legends and captions; and rendering complete Methods and Results documents.\n\nMapping to CLO2 (Execute/Interpret)\n\nLinks technical execution (running code, troubleshooting) with required output (Methods & Results documents). Students must execute Quarto rendering workflows and interpret how code chunk options affect the final document. This establishes the connection between analysis execution and professional documentation.\n\nMapping to CLO3 (Generate/Highlight)\n\nEstablishes the technical and organizational foundation for CLO3 (Evidence-Based Communication) by linking code execution with professional documentation. Module 1 introduces the Quarto workflow and manuscript conventions; later modules increasingly emphasize the coherence and sophistication of integrated scientific arguments. Students learn to produce documents where code, results, and narrative are seamlessly integrated.\n\n\nBloom Level: ~3-4 (Produce/Implement workflows with introduction to document integration concepts)",
+    "crumbs": [
+      "R Language Ecosystem"
+    ]
+  },
+  {
+    "objectID": "R.html",
+    "href": "R.html",
+    "title": "1  Getting R",
+    "section": "",
+    "text": "Getting R Configured\nThe grammar of the R language was derived from another system called S-Plus. S-Plus was a proprietary analysis platform developed by AT&T and licenses were sold for its use, mostly in industry and education. Given the closed nature of the S-Plus platform, R was developed with the goal of creating an interpreter that could read grammar similar to S-Plus but be available to the larger research community. The use of R has increased dramatically due to its open nature and the ability of people to share code solutions with relatively little barriers.\nThe main repository for R is located at the CRAN Repository, which is where you can download the latest version. It is in your best interests to make sure you update the underlying R system, changes are made continually (perhaps despite the outward appearance of the website).\nThe current version of this book uses version R version 4.5.2 (2025-10-31). To get the correct version, open the page and there should be a link at the top for your particular computing platform. Download the appropriate version and install it following the instructions appropriate for your computer.\nIf you are updating your version of R from an older version, you may want to carry over the current set of libraries you have already installed to the new version. R creates a new library folder structure when you update the subversion (e.g., going from 4.3 to 4.4, the libraries are kept separate). So, before you upgrade, do the following\n# grab and save all your current packages.\npkgs &lt;- installed.packages()\npkgs &lt;- names( is.na(pkgs[,4]))\nsave(pkgs,file='~/Desktop/pkgs.rda')\nThen install the latest version of R and instruct it to look at the differences between what the default install has and what you previously had (and install the missing parts).\nnew_pkgs &lt;- installed.packages()\nnew_pkgs &lt;- names( is.na(new_pkgs[,4]))\nload('~/Desktop/pkgs.rda')\nto_install &lt;- setdiff( pkgs, new_pkgs )\ninstall.packages( to_install )\nupdate.packages()\nThis should get you up-to-date on the newest version of R.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting R</span>"
+    ]
+  },
+  {
+    "objectID": "R.html#packages",
+    "href": "R.html#packages",
+    "title": "1  Getting R",
+    "section": "Packages",
+    "text": "Packages\nThe base R system comes with enough functionality to get you going. By default, there is only a limited amount of functionality in R, which is a great thing. You only load and use the packages that you intend to use. There are just too many packages to have them all loaded into memory at all times and there is such a broad range of packages, it is not likely you’d need more than a small fraction of the packages during the course of all your analyses. Once you have a package, you can tell R that you intend to use it by either\n\nlibrary(package_name)\n\nor\n\nrequire(package_name)\n\nThey are approximately equivalent, differing in only that the second one actually returns a TRUE or FALSE indicating the presence of that library on you machine. If you do not want to be mocked by other users of R, I would recommend the library version—there are situations where require will not do what you think you want it to do (even though it is a verb and should probably be the correct one to use grammatically).\nThere are, at present, a few different places you can get packages. The packages can either be downloaded from these online repositories and installed into R or you can install them from within R itself. Again, I’ll prefer the latter as it is a bit more straightforward.\n\nCRAN\nThe main repository for packages is hosted by the r-project page itself. There are packages with solutions to analyses ranging from Approximate Bayesian Computation to Zhang & Pilon’s approaches to characterizing climatic trends. The list of these packages is large and ever growing. It can be found on CRAN under the packages menu. To install a package from this repository, you use the function\n\ninstall.packages(\"thePackageName\") \n\nYou can see that R went to the CRAN mirror site (I use the rstudio one), downloaded the package, look for particular dependencies that that package may have and download them as well for you. It should install these packages for you and give you an affirmative message indicating it had done so.\nAt times, there are some packages that are not available in binary form for all computer systems (the rgdal package is one that comes to mind for which we will provide a work around later) and the packages need to be compiled. This means that you need to have some additional tools and/or libraries on your machine to take the code, compile it, and link it together to make the package. In these cases, the internet and the documentation that the developer provide are key to your sanity.\n\n\nGitHub\nThere are an increasing number of projects that are being developed either in the open source community or shared among a set of developers. These projects are often hosted on http://www.github.com where you can get access to the latest code updates. The packages that I develop are hosted on Github at (http://github.com/dyerlab) and only pushed to CRAN when I make major changes.\nTo install packages from Github you need to install the remotes library from CRAN first\n\nremotes::install_github(\"USER_NAME/REPOSITORY\")",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting R</span>"
+    ]
+  },
+  {
+    "objectID": "R.html#libraries-used-in-text",
+    "href": "R.html#libraries-used-in-text",
+    "title": "1  Getting R",
+    "section": "Libraries Used in Text",
+    "text": "Libraries Used in Text\nThis work requires several libraries that you may need to get from either CRAN or GitHub. The following if you run the following code, you should be up-to-date on the necessary packages used throughout this text.\n\nfiles &lt;- list.files(\".\",pattern=\".qmd\")\nlibraries &lt;- c( \"gstudio\",\n                \"popgraph\",\n                \"ggplot2\", \n                \"tidyverse\", \n                \"sf\", \n                \"gt\",\n                \"terra\")\n\nfor( file in files ) {\n  suppressWarnings( s &lt;- system( paste(\"grep -E -o 'library\\\\(\\\\w+\\\\)'\",\n                                       file), \n                                  intern=TRUE))\n  if( length(s) &gt; 0 ) {\n    s &lt;- strsplit(s,\"(\",fixed=TRUE)\n    for( item in s ){\n      if( length(item) == 2){\n        library &lt;- strsplit(item[2],\")\",fixed=TRUE)[[1]]\n        libraries &lt;- c(libraries,library)\n      }\n    }\n  }\n}\n\n# Sort names\npkgs &lt;- sort( unique(libraries) )\nidx &lt;- which( pkgs == \"package_name\" )\npkgs &lt;- pkgs[-idx]\n\n# Install personal packages from GitHub\n# popgraph\nif( !require(popgraph) ) { \n  remotes::install_github(\"dyerlab/popgraph\")\n  idx &lt;- which( pkgs == \"popgraph\" ) \n  pkgs[ -idx ]\n}\n# gstudio\nif( !require(gstudio) ) { \n  remotes::install_github(\"dyerlab/gstudio\")\n  idx &lt;- which( pkgs == \"popgraph\" ) \n  pkgs[ -idx ]\n}\n\npkgs_df &lt;- data.frame(Name = pkgs, Title = NA)\nfor(i in seq_along(pkgs)){\n    f = system.file(package = pkgs[i], \"DESCRIPTION\")\n    if( nchar(f)&gt; 1) {\n        # Title is always on 3rd line\n        title = readLines(f)\n        title = title[grep(\"Title: \", title)]\n        pkgs_df$Title[i] = gsub(\"Title: \", \"\", title)    \n    }\n}\n\npkgs_df |&gt; \n  dplyr::mutate( Source = ifelse( Name %in% c( \"popgraph\",\n                                                \"gstudio\"), \n                                  \"GitHub\", \n                                  \"CRAN\" )) |&gt;\n  gt::gt()\n\n\n\nTable 1.1: Packages that are used in the text of this book with their official description. Those with a source of CRAN can be installed using install.packages() whereas those from GitHub must be installed using remotes::install_github().\n\n\n\n\n\n\n\n\n\nName\nTitle\nSource\n\n\n\n\nggplot2\nCreate Elegant Data Visualisations Using the Grammar of Graphics\nCRAN\n\n\ngstudio\nTools Related to the Spatial Analysis of Genetic Marker Data\nGitHub\n\n\ngt\nEasily Create Presentation-Ready Display Tables\nCRAN\n\n\npopgraph\nThis is an R package that constructs and manipulates population\nGitHub\n\n\nsf\nSimple Features for R\nCRAN\n\n\nterra\nSpatial Data Analysis\nCRAN\n\n\ntidyverse\nEasily Install and Load the 'Tidyverse'\nCRAN\n\n\n\n\n\n\n\n\n\n\nIf you are rendering this book, the snippet below will install any libraries used (from CRAN) onto your local machine.\n\ninst_pkgs &lt;- installed.packages()\nto_install &lt;- setdiff( pkgs, inst_pkgs )\nif( length(to_install)) {\n  install.packages(to_install, repos=\"https://cran.rstudio.org\")\n}",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Getting R</span>"
+    ]
+  },
+  {
+    "objectID": "Positron.html",
+    "href": "Positron.html",
+    "title": "2  Positron",
+    "section": "",
+    "text": "Integrated Development Environment\nWriting code in R, Python, Julia, or other languges benefit from an interface and ecosystem that helps you accomplish your data analysis tasks. By default, R comes with an interface that you could use to do all your work.\nIt is also possible to use R directly from a terminal app. If you use linux or mac, you can access R from your local terminal application. On Windows, there is a more complicated way of doing it but—I do not undersand Windows so I cannot help with this one.\nThere are several GUI environments that you can use to interface with R beyond the built-in interface. Since February 2011, the RStudio IDE has been a popular interface for R and its development has gone hand-in-hand with the rise of the modern R reproducible reserach stack (e.g., knitr \\(\\to\\) R Markdown \\(\\to\\) tidyverse \\(\\to\\) Quarto). One of the benefits of this interface is that it made it much easier to integrate data, analysis, interpretation, and distribution into a single interface and framework—enhancing reproducibility.\nIn 2023, the next generation of IDE, named Positron focusing specifically on R, Python, Julia, and Quarto was released. This IDE is a fork of the very popular VSCode interface and is designed to support data science workflows across several languages (e.g., you can mix R, Python, Julia, SQL, etc.).\nThis text was written entirely using the Positron IDE, as a way to help me switch from RStudio in my own workflows and teaching. This book does not require you to use any specific interface—though I will have been known to give 10,000 bonus points if you are using emacs or vi in my class… 😏",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Positron</span>"
+    ]
+  },
+  {
+    "objectID": "Positron.html#integrated-development-environment",
+    "href": "Positron.html#integrated-development-environment",
+    "title": "2  Positron",
+    "section": "",
+    "text": "Figure 2.3: The main interface for RStudio.\n\n\n\n\n\n\n\n\n\n\nFigure 2.4: The Positron integrated development environment showing this very page!",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Positron</span>"
+    ]
+  },
+  {
+    "objectID": "DataTypesContainers.html",
+    "href": "DataTypesContainers.html",
+    "title": "3  Data Types & Containers",
+    "section": "",
+    "text": "Numeric Data Types\nThe very first hurdle you need to get over is the oddness in the way in which R assigns values to variables.\nYes that is a less-than and dash character. This is the assignment operator that historically has been used and it is the one that I will stick with. In some cases you can use the ‘=’ to assign variables instead but then it takes away the R-ness of R itself. For decision making, the equality operator (e.g., is this equal to that) is the double equals sign ‘==’. We will get into that below where we talk about logical types and later in decision making.\nIf you are unaware of what type a particular variable may be, you can always use the type() function and R will tell you.\nR also has a pretty good help system built into itself. You can get help for any function by typing a question mark in front of the function name. This is a particularly awesome features because at the end of the help file, there is often examples of its usage, which are priceless. Here is the documentation for the ‘help’ function as given by:\nThere are also package vignettes available (for most packages you download) that provide additional information on the routines, data sets, and other items included in these packages. You can get a list of vignettes currently installed on your machine by:\nand vignettes for a particular package by passing the package name as an argument to the function itself.\nThe quantitative measurements we make are often numeric, in that they can be represented as as a number with a decimal component (think weight, height, latitude, soil moisture, ear wax viscosity, etc.). The most basic type of data in R, is the numeric type and represents both integers and floating point numbers (n.b., there is a strict integer data type but it is often only needed when interfacing with other C libraries and can for what we are doing be disregarded).\nAssigning a value to a variable is easy\nx &lt;- 3\nx\n\n[1] 3\nBy default, R automatically outputs whole numbers numbers within decimal values appropriately.\ny &lt;- 22/7\ny\n\n[1] 3.142857\nIf there is a mix of whole numbers and numbers with decimals together in a container such as\nc(x,y)\n\n[1] 3.000000 3.142857\nthen both are shown with decimals. The c() part here is a function that combines several data objects together into a vector and is very useful. In fact, the use of vectors are are central to working in R and functions almost all the functions we use on individual variables can also be applied to vectors.\nA word of caution should be made about numeric data types on any computer. Consider the following example.\nx &lt;- .3 / 3\nx\n\n[1] 0.1\nwhich is exactly what we’d expect. However, the way in which computers store decimal numbers plays off our notion of significant digits pretty well. Look what happens when I print out x but carry out the number of decimal places.\nprint(x, digits=20)\n\n[1] 0.099999999999999991673\nNot quite 0.1 is it? Not that far away from it but not exact. That is a general problem, not one that R has any more claim to than any other language and/or implementation. Does this matter much, probably not in the realm of the kinds of things we do in population genetics, it is just something that you should be aware of. You can make random sets of numeric data by using using functions describing various distributions. For example, some random numbers from the normal distribution are:\nrnorm(10)\n\n [1]  0.1672189  1.0475240  0.3313410  0.9603622 -0.1519597 -2.5112776\n [7] -1.8041684 -1.0600132 -0.5569387 -0.9205846\nfrom the normal distribution with designated mean and standard deviation:\nrnorm(10,mean=42,sd=12)\n\n [1] 50.28551 48.60337 22.18270 41.34702 34.58415 14.66586 47.76293 40.62223\n [9] 42.37023 38.97201\nA poisson distribution with mean 2:\nrpois(10,lambda = 2)\n\n [1] 2 2 2 0 2 3 3 1 2 0\nand the \\(\\chi^2\\) distribution with 1 degree of freedom:\nrchisq(10, df=1)\n\n [1] 1.631124e-01 4.978950e+00 2.006288e-01 1.057546e-06 9.656761e-02\n [6] 2.267763e+00 3.363315e-02 4.054664e-03 2.007249e-01 1.688059e-01\nThere are several more distributions that if you need to access random numbers, quantiles, probability densities, and cumulative density values are available.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Types & Containers</span>"
+    ]
+  },
+  {
+    "objectID": "DataTypesContainers.html#numeric-data-types",
+    "href": "DataTypesContainers.html#numeric-data-types",
+    "title": "3  Data Types & Containers",
+    "section": "",
+    "text": "Coercion to Numeric\nAll data types have the potential ability to take another variable and coerce it into their type. Some combinations make sense, and some do not. For example, if you load in a CSV data file using read_csv(), and at some point a stray non-numeric character was inserted into one of the cells on your spreadsheet, R will interpret the entire column as a character type rather than as a numeric type. This can be a very frustrating thing, spreadsheets should generally be considered evil as they do all kinds of stuff behind the scenes and make your life less awesome.\nHere is an example of coercion of some data that is initially defined as a set of characters\n\nx &lt;- c(\"42\",\"99\")\nx\n\n[1] \"42\" \"99\"\n\n\nand is coerced into a numeric type using the as.numeric() function.\n\ny &lt;- as.numeric( x )\ny\n\n[1] 42 99\n\n\nIt is a built-in feature of the data types in R that they all have (or should have if someone is producing a new data type and is being courteous to their users) an as.X() function. This is where the data type decides if the values asked to be coerced are reasonable or if you need to be reminded that what you are asking is not possible. Here is an example where I try to coerce a non-numeric variable into a number.\n\nx &lt;- \"The night is dark and full of terrors...\"\nas.numeric( x )\n\n[1] NA\n\n\nBy default, the result should be NA (missing data/non-applicable) if you ask for things that are not possible.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Types & Containers</span>"
+    ]
+  },
+  {
+    "objectID": "DataTypesContainers.html#character-data",
+    "href": "DataTypesContainers.html#character-data",
+    "title": "3  Data Types & Containers",
+    "section": "Character Data",
+    "text": "Character Data\nA collection of letters, number, and or punctuation is represented as a character data type. These are enclosed in either single or double quotes and are considered a single entity. For example, my name can be represented as:\n\nprof &lt;- \"Rodney J. Dyer\"\nprof\n\n[1] \"Rodney J. Dyer\"\n\n\nIn R, character variables are considered to be a single entity, that is the entire prof variable is a single unit, not a collection of characters. This is in part due to the way in which vectors of variables are constructed in the language. For example, if you are looking at the length of the variable I assigned my name to you see\n\nlength(prof)\n\n[1] 1\n\n\nwhich shows that there is only one ‘character’ variable. If, as is often the case, you are interested in knowing how many characters are in the variable prof, then you use the\n\nnchar(prof)\n\n[1] 14\n\n\nfunction instead. This returns the number of characters (even the non-printing ones like tabs and spaces.\n\nnchar(\" \\t \")\n\n[1] 3\n\n\nAs all other data types, you can define a vector of character values using the c() function.\n\nx &lt;- \"I am\"\ny &lt;- \"not\"\nz &lt;- 'a looser'\nterms &lt;- c(x,y,z)\nterms\n\n[1] \"I am\"     \"not\"      \"a looser\"\n\n\nAnd looking at the length() and nchar() of this you can see how these operations differ.\n\nlength(terms)\n\n[1] 3\n\nnchar(terms)\n\n[1] 4 3 8\n\n\n\nConcatenation of Characters\nAnother common use of characters is concatenating them into single sequences. Here we use the function paste() and can set the separators (or characters that are inserted between entities when we collapse vectors). Here is an example, entirely fictional and only provided for instructional purposes only.\n\npaste(terms, collapse=\" \")\n\n[1] \"I am not a looser\"\n\n\n\npaste(x,z)\n\n[1] \"I am a looser\"\n\n\n\npaste(x,z,sep=\" not \")\n\n[1] \"I am not a looser\"\n\n\n\n\nCoercion to Characters\nA character data type is often the most basal type of data you can work with. For example, consider the case where you have named sample locations. These can be kept as a character data type or as a factor (see below). There are benefits and drawbacks to each representation of the same data (see below). By default (as of the version of R I am currently using when writing this book), if you use a function like read_table() to load in an external file, columns of character data will be treated as factors. This can be good behavior if all you are doing is loading in data and running an analysis, or it can be a total pain in the backside if you are doing more manipulative analyses.\nHere is an example of coercing a numeric type into a character type using the as.character() function.\n\nx &lt;- 42\nx\n\n[1] 42\n\n\n\ny &lt;- as.character(x)\ny\n\n[1] \"42\"",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Types & Containers</span>"
+    ]
+  },
+  {
+    "objectID": "DataTypesContainers.html#logical-types",
+    "href": "DataTypesContainers.html#logical-types",
+    "title": "3  Data Types & Containers",
+    "section": "Logical Types",
+    "text": "Logical Types\nA logical type is either TRUE or FALSE, there is no in-between. It is common to use these types in making decisions (see if-else decisions) to check a specific condition being satisfied. To define logical variables you can either use the TRUE or FALSE directly\n\ncanThrow &lt;- c(FALSE, TRUE, FALSE, FALSE, FALSE)\ncanThrow\n\n[1] FALSE  TRUE FALSE FALSE FALSE\n\n\nor can implement some logical condition\n\nstable &lt;- c( \"RGIII\" == 0, nchar(\"Marshawn\") == 8)\nstable\n\n[1] FALSE  TRUE\n\n\non the variables. Notice here how each of the items is actually evaluated as to determine the truth of each expression. In the first case, the character is not equal to zero and in the second, the number of characters (what nchar() does) is indeed equal to 8 for the character string “Marshawn”.\nIt is common to use logical types to serve as indices for vectors. Say for example, you have a vector of data that you want to select some subset from.\n\ndata &lt;- rnorm(20)\ndata\n\n [1] -0.58928739 -1.71437217 -1.68162943  1.89620753 -0.54817003  1.41173564\n [7]  2.33212561  1.02421254  1.39568316 -1.13489794 -1.01138782 -1.02686297\n[13] -1.25141743 -1.60931891 -0.26138790 -0.15815495 -0.05338385  0.60971443\n[19] -1.13809800 -2.03698357\n\n\nPerhaps you are on interested in the non-negative values\n\ndata[ data &gt; 0 ]\n\n[1] 1.8962075 1.4117356 2.3321256 1.0242125 1.3956832 0.6097144\n\n\nIf you look at the condition being passed to as the index\n\ndata &gt; 0\n\n [1] FALSE FALSE FALSE  TRUE FALSE  TRUE  TRUE  TRUE  TRUE FALSE FALSE FALSE\n[13] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE\n\n\nyou see that individually, each value in the data vector is being evaluated as a logical value, satisfying the condition that it is strictly greater than zero. When you pass that as indices to a vector it only shows the indices that are TRUE.\nYou can coerce a value into a logical if you understand the rules. Numeric types that equal 0 (zero) are FALSE, always. Any non-zero value is considered TRUE. Here I use the modulus operator, %%, which provides the remainder of a division.\n\n1:20 %% 2\n\n [1] 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0\n\n\nwhich used as indices give us\n\ndata[ (1:20 %% 2) &gt; 0 ]\n\n [1] -0.58928739 -1.68162943 -0.54817003  2.33212561  1.39568316 -1.01138782\n [7] -1.25141743 -0.26138790 -0.05338385 -1.13809800\n\n\nYou can get as complicated in the creation of indices as you like, even using logical operators such as OR and AND. I leave that as an example for you to play with.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Data Types & Containers</span>"
+    ]
+  },
+  {
+    "objectID": "Markdown.html",
+    "href": "Markdown.html",
+    "title": "4  Markdown",
+    "section": "",
+    "text": "Pandoc Supported Conversions\nIn current data analytics and communication, there are a wide variety of platforms on which we can provide summaries and insights regarding our work. Each of these end points requires a non-insignificant amount of effort to learn these systems. Moreover, they all are cul de sacs in that all the effort you exert to learn one will not allow you to get the benefits of any other platform than the one you just learned.\nEnter Pandoc, the universal document converter. It is essentially the Rosetta Stone of file types. Some really smart programmers have put together a set of software that allows you to convert from or to (and hence between) different document types given that most documents are regularly structured. With Pandoc, it does not matter if you do or do not have Word or PowerPoint or EPub or LaTeX or whatever, as long as you can create one of the supported types, you can convert that input into a huge variety of output types.\nThis is critical for us because Code is just text. Once it is evaluated, it can replaced with:\nAs such, we can embed R code within raw text to create our analyses and documents.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Markdown</span>"
+    ]
+  },
+  {
+    "objectID": "Markdown.html#pandoc-supported-conversions",
+    "href": "Markdown.html#pandoc-supported-conversions",
+    "title": "4  Markdown",
+    "section": "",
+    "text": "Conversion Formats\n\n\n\n\nNumerical values from one or more calculations,\nTextual content from analyses or manipulation, or\nGraphical content from plots.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Markdown</span>"
+    ]
+  },
+  {
+    "objectID": "Markdown.html#installing-quarto",
+    "href": "Markdown.html#installing-quarto",
+    "title": "4  Markdown",
+    "section": "Installing Quarto",
+    "text": "Installing Quarto\nThe first step is to go to quarto and download the quarto engine for your particular computer. If you are using Positron as your IDE, it does come stock with a version of quarto already.\nQuarto will serve as your interface between the text, code, analyses, graphics, tables, citations, and other items in your data analysis workflow. When we start on a analysis that has some kind of graphical output (tabular or charts or maps), more often than not, you’ll be creating a Quarto Document. In fact, this entire book is written as a sequence of Quarto Documents (as is the website it is being hosted from).\nQuarto is your friend.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Markdown</span>"
+    ]
+  },
+  {
+    "objectID": "Markdown.html#markdown-document",
+    "href": "Markdown.html#markdown-document",
+    "title": "4  Markdown",
+    "section": "Markdown Document",
+    "text": "Markdown Document\nA quarto document is simply a text file. Since it is text, it is easily shared and future proofed against vendor lock-in and other problems. It is also a great candidate for using version control (like GitHub and similar repositories for collaboration).\nA document has two parts: the meta data (known as the YAML), and the body.\n\nThe YAML is the part at the top and contains metadata relative to the whole document as well as instructions to what is going to happen when it gets turned into another document. By default, it has a title and a format saying that when this is rendered (by hitting that preview button above it), it will make a HTML document that is titled “Untitled”. For most purposes, html output is sufficient and in some cases (e.g., when deploying dynamical graphical output like maps or dashboards) preferred. You can create docx, pdf, ppt, dashboards, blogs, websites, and a host of other output from this document. Here are some rules about the YAML\n\nIt must be at the top of the document.\nIt must be enclosed by three dashes (and only three dashes) on their own line.\nItems are added as key: value and if it is textual content, enclose it in quotes.\n\nHere is a YAML from a reserach manuscript I’m working on so you can see the extra stuff that can be added.\n‐‐‐\ntitle: |\n Directional Gene Flow: Uncovering Directionality\n in Population Graph Topologies\nformat: html\nauthor:\n - name: Rodney J. Dyer\n   orcid: 0000-0003-4707-3453\n   corresponding: true \n   email: rjdyer@vcu.edu\n   affiliation:\n  - name: Virginia Commonwealth University\n   department: School of Life Sciences and Sustainability\n   city: Richmond\n   state: VA\n   url: https://slss.vcu.edu\nkeywords: |\n   - Asymmetric Gene Flow\n   - Population Graphs\n   - Directionality\n   - Genetic Connectivity\ncopyright: \n  holder: Rodney J. Dyer\n  year: 2026\nbibliography: export.bib\nfunding: |\n   The author received no specific funding for this work.\nabstract: |\n   This manuscript develops a novel approch to estimating \n   relative directionality in genetic connetivity using a \n   Gaussian kernel approach. Stochastic individual-based \n   simulation models are used to determine the sensitivity \n   of this approach to identify asymmetry in gene flow amongst\n   a set of discrete populations showing...  The methodology\n   is applied to two case studies, one evaluating the \n   distribution of genetic variance among spatially separated \n   populations of X and another is applied to an analysis of \n   pollen pool structure. Extensions of this model to answer \n   questions in landscape and conservation genetics are \n   discussed at the end.\n‐‐‐\n\nNotice for some things, you may need to have a list of responses and they are indented underneath the main key. See the documentation. Also, for long lines, you can use the pipe character (|) right after the key and then indent one or more lines of text underneath—I did this here for the title, keywords, fundin, and abstract so it all displayed properly on the page without needing to scroll left/right to see it all. It is not needed in your document unless you like it to not run off the side of your editor. For specifics—for most documents, you’ll only need title, name, and format.\nAfter the YAML part, this is where your text and code goes that will be rendered and turned into the finalized document.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Markdown</span>"
+    ]
+  },
+  {
+    "objectID": "Markdown.html#markdown-syntax",
+    "href": "Markdown.html#markdown-syntax",
+    "title": "4  Markdown",
+    "section": "Markdown Syntax",
+    "text": "Markdown Syntax\nFor maximum usability, the document that we embed our code into should be as widely available as possible—unhindered by the necessity of having a particular program just to view the content. For this, R uses Markdown, created by John Gruber & Aaron Swartz in 2004. Markdown was created so that people are enabled “…to write using an easy-to-read and easy-to-write plain text format…”\nBecause everything is text, it is easy share and collaborate using Markdown, and for R, it is how we can make a wide array of output document types including (but not limited to):\n\nConventional documents (PDF, Word, RTF, etc.)\nHTML pages with interactive elements (this document here is an interactive html document).\nPresentations (LaTeX, PowerPoint, JavaScript, etc.)\nDashboards with interactive content.\n\nWhen we make a document, presentation, or any other output, there are only a finite set of different text components we put into the document. The document itself does not need to be heavy or bloated, it is just text (though surprisingly, a blank Word document on my laptop with nothing in the document itself is still 12KB in size!). Common elements include:\n\nHeaders & Titles\nTypography such as italic, bold, underline, strike through\nLists (numbered or as bullets)\nPictures and links\nPage numbers, tables of contents, etc.\n\nWhat Markdown does is allows you to type these components and use ‘marking’ around the elements to make them different from regular text. It is really, amazingly simple.\n\nHeadings\nTitle and headers are created by prepending a hashtag\n# Header 1\n## Header 2\n### Header 3\n#### Header 4\nare converted into the following headers styles (in docx, html, pdf, etc.).\n\n\n\n\n\n\nFigure 4.1: Example heading formats based on the styles used in this document.\n\n\n\n\n\nText Styles\nThe actual appearance of the headers are determined by where it is being presented (e.g., in Word it will take the default typography and font attributes, etc.). You are more than welcome to customize these settings using style sheets in a variety of formats (see documentation).\nIndividual paragraphs are delimited by either a blank line between them or two spaces at the end of the sentence. I find it much easier to just put the\n\n\n\nMarkdown\nRendered As\n\n\n\n\nplain text\nplain text\n\n\n*italic*\nitalic\n\n\n**bold**\nbold\n\n\n~~strike through~~\nstrike through\n\n\n\n\n\n\n\n\n\nEmbedded Content\nYou can also embed links and images. Both of these are configured in two parts. For links, you need to specify the text that can be clicked upon and it must be surrounded in square brackets. The link to the web or file or image is right next to the square brackets and is contained within parentheses. So the markdown.\n[rodneydyer.com](https://rodneydyer.com)\nbecomes (when rendered)\nrodneydyer.com\nImages are the same except that the whole thing is prepended by an exclamation mark. The stuff you put into the square brackets are either the alt-text or in the case of this document, the figure legend.\nSo,\n![This is the goat.](https://www.flickr.com/photo_download.gne?id=55027807032&secret=9a6f698983&size=o)\nis rendered as:\n\n\n\nThis is the goat.\n\n\n\n\nLists\nLists (both numbered and unordered) are created using dashes or asterisks.\n\nWill be turned into an unordered list as:\n\nBullet 1\n\nBullet 2\n\nBullet 3\n\nWhereas the following raw text.\n\nWill be rendered in list format as:\n\nFirst\n\nSecond\n\nThird\n\nActually, you can just use 1. in front of every line if you like, it will auto-number them for you when it makes a list. I tend to do this because it makes it a bit easier in case I want to reorder the list later and I don’t have to go back and change the numbers.\n\n\nFootNotes\nYou can add a footnote using two components. First, you need to insert the location where you want the footnote to annotate. You do this by enclosing square brackets and a carat symbol (^) where you want to put the footnote in the text and an identifier number (e.g., [^1]). This will designate a link in the text that will allow you to jumpt to the bottom of the page.\nThe next part, the text or content you are going to display needs to be indicated as well. This can be right after the identifying item or at the very end of the text itself. I typically localize the text content near where the superscript is located so they are linked. To indicate to Quarto that this is to be rendered as a footnote, you use the same number that you used for the superscript and enclose it in square brackets and a carat, followed by a colon.\n[^1]:. This is the content of the footnote I made above.\nThis will set up the content that is put into the end of the page (and provide a link back to the location in the document that you jumped from).\nHere is an example1.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Markdown</span>"
+    ]
+  },
+  {
+    "objectID": "Markdown.html#code-text",
+    "href": "Markdown.html#code-text",
+    "title": "4  Markdown",
+    "section": "Code & Text",
+    "text": "Code & Text\nOn of the strengths of Quarto and its integration of R and markdown is the ability to mix code and text together in one place. This allows us to bring all of our analyses and data as close to one another as possible, helping with reproducibility and error reduction. You do not have to do your analysis in one program, copy-and-paste the results to your word processor, then copy and paste to your presentation software, then go to your graphics program and make a figure and copy-and-paste it togehter, etc. It all lives in one place.\n\nCode Chunks\nQuarto supports code chunks (or code cells in Positron), which can be one or many lines of raw R code. This code is executed and the results are merged into the markdown in the document (text, graphical, interactive widgets, whatever) before knitting. You can think of this as a little bit of an R script that you can insert into your document.\nEach chunk is enclosed within boundary rows, the top row must contain three acute accents (back ticks - `) followed by the letter r in curly brackets ```{r}. This back tick is the grave (`) character and not a single quote (on the US English keyboard it is the key in the top left corner).\nThe end of the chunk is indicated by three back ticks ``` on their own line. Everything between these two enclosing lines is treated as R code and is subject to evaluation when you re-knit the document.\n\n\n\n\n\n\nWarning\n\n\n\nIf you mess up the leading and trailing lines of a chunck, the rendering process will get totally hosed in both the IDE (it does not know what to style as text versus code parts) and the rendering (same reasons).\n\n\nHere is what a chunk looks like in markdown that prints out a simple message.\n```{r}\nprint(\"This is text from a chunk\")\n```\n\nWhen it is evaluated, the R interpreter removes the first and last rows, and executes the code within them. By default, the code is presented as a box (gray background in this example) in the document as well as any output that is produced from the code itself.\n\nprint(\"This is text from a chunk\")\n\n[1] \"This is text from a chunk\"\n\n\nNotice, the output from the chunk is shown in the line [1] right after the chunk. Anything you print or show in a chunk will be displayed directly below the chunk itself.\n\nChunk Options\nThere are several options we can apply to a chunk. These can be set at the top of the document, in the YAML, which will impact all the chuncks in the document, or on a per-chunk basis. Here some options you will commonly use.\n\n\n\n\n\n\n\nOption\nDescription\n\n\n\n\necho\nShows the chunk in the final document (T/F).\n\n\neval\nExecute the code in the chunk (T/F).\n\n\nwarning\nShow any code warnings in the output (T/F).\n\n\nerror\nShow any code errors in the output (T/F).\n\n\n\nTo put these in an individual chunk, place them at the top of the chunk (this is important, they should be the first lines of text) preceded by #|. For example, the following chunk will show its contentws, not evaluate the code, and suppress any warnings or errors when it does execute.\n\nfor( i in 1:100000000000000) { \n    print(\"hello world!\")\n}\n\nIt should be noted that some libraries produce copious amounts of junk when you load them in. For these, warning: false is not sufficient and you’ll have to wrap them inside a suppressPackageStartupMessages() call.\n\nsuppressPackageStartupMessages( library( tidyverse ) ) \n\nIn my workflow, I typically develop the document with all my chunks showing\n\n\n\nInline Code\nYou can easily integrate code, into the text, either to be displayed OR to be evaluated. For example, in R you get the value of \\(\\pi\\) by the constant pi. Type that into the console and it will return 3.1415927.\nIf you look at the RMarkdown for that paragraph above, it looks like the following before knitting:\nYou can easily integrate code, into the text, either to \nbe displayed *OR* to be evaluated. For example, in `R` \nyou get the value of $\\pi$ by the constant `pi`. \nType that into the console and it will return 3.1415927.\nNotice the following parts:\n\nSymbols: The \\(\\pi\\) symbol is created by the name of the symbol surrounded by dollar signs. $ $. There are a ton of symbols and equations you can use, all borrowed from LaTeX, so if you need complicated equations or symbols, this is not a problem.\nText rendered as code (in typography) but not evaluated: Both the `R` and the `pi` are examples here. Nothing is evaluated, but it looks like code.\nEvaluated R Code: Any code between r and the ending ` will be evaluated as R code within the text. When you render/preview the document the document, it will be run and the contents between these symbols and replaced the content by the output of the R code itself.. So, the markdown `r pi` will be replaced in the text as 3.1415927 as if you actually wrote out the digits of \\(pi\\).\n\nThis is HUGE! Think of this as how you will never have to update numerical values in your manuscripts again if they come from your anlayses.\n\n\n\n\n\nTip\n\n\n\nYou will never have to change numerical values in your text that are derived from statistical analyses again since you can link the variables (and associated values) in your R code to be displayed in the text as if you typed them yourself. If your analysis changes… your text is changed. Magically.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Markdown</span>"
+    ]
+  },
+  {
+    "objectID": "Markdown.html#tables-figures",
+    "href": "Markdown.html#tables-figures",
+    "title": "4  Markdown",
+    "section": "Tables & Figures",
+    "text": "Tables & Figures",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Markdown</span>"
+    ]
+  },
+  {
+    "objectID": "Markdown.html#margin-content",
+    "href": "Markdown.html#margin-content",
+    "title": "4  Markdown",
+    "section": "Margin Content",
+    "text": "Margin Content",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Markdown</span>"
+    ]
+  },
+  {
+    "objectID": "Markdown.html#footnotes",
+    "href": "Markdown.html#footnotes",
+    "title": "4  Markdown",
+    "section": "",
+    "text": "This is the content of the footnote I made above.↩︎",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Markdown</span>"
+    ]
+  },
+  {
+    "objectID": "FactorData.html",
+    "href": "FactorData.html",
+    "title": "5  Factor Data",
+    "section": "",
+    "text": "Factors\nA factor is a categorical data type. If you are coming from SAS, these are class variables. If you are not, then perhaps you can think of them as mutually exclusive classifications. For example, an sample may be assigned to one particular locale, one particular region, and one particular species. Across all the data you may have several species, regions, and locales. These are finite, and defined, sets of categories. One of the more common headaches encountered by people new to R is working with factor types and trying to add categories that are not already defined.\nSince factors are categorical, it is in your best interest to make sure you label them in as descriptive as a fashion as possible. You are not saving space or cutting down on computational time to take shortcuts and label the locale for Rancho Santa Maria as RSN or pop3d or 5. Our computers are fast and large enough, and our programmers are cleaver enough, to not have to rename our populations in numeric format to make them work (hello STRUCTURE I’m calling you out here). The only thing you have to loose by adopting a reasonable naming scheme is confusion in your output.\nTo define a factor type, you use the function factor() and pass it a vector of values.\nregion &lt;- c(\"North\",\"North\",\"South\",\"East\",\"East\",\"South\",\"West\",\"West\",\"West\")\nregion &lt;- factor( region )\nregion\n\n[1] North North South East  East  South West  West  West \nLevels: East North South West\nWhen you print out the values, it shows you all the levels present for the factor. If you have levels that are not present in your data set, when you define it, you can tell R to consider additional levels of this factor by passing the optional levels= argument as:\nregion &lt;- factor( region, levels=c(\"North\",\"South\",\"East\",\"West\",\"Central\"))\nregion\n\n[1] North North South East  East  South West  West  West \nLevels: North South East West Central\nIf you try to add a data point to a factor list that does not have the factor that you are adding, it will give you an error (or ‘barf’ as I like to say).\nregion[1] &lt;- \"Bob\"\nNow, I have to admit that the Error message in its entirety, with its \"[&lt;-.factor(*tmp*, 1, value = “Bob”)“` part is, perhaps, not the most informative. Agreed. However, the”invalid factor level” does tell you something useful. Unfortunately, the programmers that put in the error handling system in R did not quite adhere to the spirit of the “fail loudly” mantra. It is something you will have to get good at. Google is your friend, and if you post a questions to (http://stackoverflow.org) or the R user list without doing serious homework, put on your asbestos shorts!\nUnfortunately, the error above changed the first element of the region vector to NA (missing data). I’ll turn it back before we move too much further.\nregion[1] &lt;- \"North\"\nFactors in R can be either unordered (as say locale may be since locale A is not &gt;, =, or &lt; locale B) or they may be ordered categories as in Small &lt; Medium &lt; Large &lt; X-Large. When you create the factor, you need to indicate if it is an ordered type (by default it is not). If the factors are ordered in some way, you can also create an ordination on the data. If you do not pass a levels= option to the factors() function, it will take the order in which they occur in data you pass to it. If you want to specify an order for the factors specifically, pass the optional levels= and they will be ordinated in the order given there.\nregion &lt;- factor( region, ordered=TRUE, levels = c(\"West\", \"North\", \"South\", \"East\") )\nregion\n\n[1] North North South East  East  South West  West  West \nLevels: West &lt; North &lt; South &lt; East",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Factor Data</span>"
+    ]
+  },
+  {
+    "objectID": "FactorData.html#factors",
+    "href": "FactorData.html#factors",
+    "title": "5  Factor Data",
+    "section": "",
+    "text": "Missing Levels in Factors\nThere are times when you have a subset of data that do not have all the potential categories.\n\nsubregion &lt;- region[ 3:9 ]\nsubregion\n\n[1] South East  East  South West  West  West \nLevels: West &lt; North &lt; South &lt; East\n\n\n\ntable( subregion )\n\nsubregion\n West North South  East \n    3     0     2     2",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Factor Data</span>"
+    ]
+  },
+  {
+    "objectID": "TabularData.html",
+    "href": "TabularData.html",
+    "title": "7  Tabular Data",
+    "section": "",
+    "text": "Markdown Tables\nThere are several ways to make tabular output in your files: manual and from code.\nWhen I say manual, I mean that the table is written specifically in markdown and rendered as a table. For basic tables, we use the pipe character (|) and dashes (‐) to outline the table. We designate the header row by having a table row underneath it with dashes in it. The ‘columns’ do not need to be the same size, but for me, it always looks better if they are. If you would like to have a caption on the table and a reference to it, put that right under the table where the row of text starts with a colon and the reference is in curley brackets and it will put the caption on the top (proper place for tables) and add a numbered table prefix to it (n.b., a table reference must start with \\#tbl- to be recognized as a table reference).\nWhich will produce the table:\nThen we can reference the table in the text using the @- citation format, here that would be @tbl-example, and would be rendered as Table 7.1 in the final document.\nYou can stylize the contents of the table cells using normal markdown but there is not a lot of customization that can be applied to structure of the tables beyond specify the justification of the contents within each table. By default, it center justifies a column but we can use a colon (:) inside the row that has the dashes to make it left, center, or right justified as well. Here is how that works.\nHere is an example using the table from above.\nWhich will left-justify the first two columns, center justify the Time column, and right justify the Cost column.\nCompare Table 7.1 and Table 7.2 to see how we can customize justifications.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Tabular Data</span>"
+    ]
+  },
+  {
+    "objectID": "TabularData.html#markdown-tables",
+    "href": "TabularData.html#markdown-tables",
+    "title": "7  Tabular Data",
+    "section": "",
+    "text": "| Header | Description     | Time  | Cost  |\n|--------|-----------------|-------|-------|\n| First  | The stuff       |  1    | 3.32  |\n| Second | The other stuff |  3    | 12.32 |\n: This is the header for the table. {#tbl-example}\n\n\n\n\n\nTable 7.1: This is the header for the table.\n\n\n\n\n\nHeader\nDescription\nTime\nCost\n\n\n\n\nFirst\nThe stuff\n1\n3.32\n\n\nSecond\nThe other stuff\n3\n12.32\n\n\n\n\n\n\n\n\n\nA single colon on the left side justifies to the left,\nTwo colons, on on the left and one on the right produces center justifcation, and\n\nA single colon on the right side of the column justifies the contents to the right.\n\n\n| Header | Description     | Time  | Cost  |\n|:-------|:----------------|:-----:|------:|\n| First  | The stuff       |  1    | 3.32  |\n| Second | The other stuff |  3    | 12.32 |\n: This is tabel with left, center, and right justification. {#tbl-example2}\n\n\n\n\n\nTable 7.2: This is tabel with left, center, and right justification.\n\n\n\n\n\nHeader\nDescription\nTime\nCost\n\n\n\n\nFirst\nThe stuff\n1\n3.32\n\n\nSecond\nThe other stuff\n3\n12.32",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Tabular Data</span>"
+    ]
+  },
+  {
+    "objectID": "TabularData.html#rendered-tables",
+    "href": "TabularData.html#rendered-tables",
+    "title": "7  Tabular Data",
+    "section": "Rendered Tables",
+    "text": "Rendered Tables\nMost of the tabular output we see will be derived from data. The key here is to make the data.frame object represent the columns and rows of data that you want displayed and then hand that off to one of several libraries that can make a table for you. Here I am going to use the gt library, but feel free to check out the knitr & kableExtra libraries for a similarly awesome approach.\nHere is a data.frame as an example that takes the mean petal length and width from the built-in iris data set. I’ve set up the data.frame to look exactly like I would like to show up in the output using some common dplyr actions.\n\nlibrary( tidyverse )\n\niris |&gt;\n    group_by( Species ) |&gt;\n    summarize( Length = mean( Petal.Length),\n                Width = mean( Petal.Width) ) |&gt; \n    mutate( Species = paste( \"I.\", Species )) |&gt;\n    rename( `Iris Species` = Species) -&gt; data\n\ndata \n\n# A tibble: 3 × 3\n  `Iris Species` Length Width\n  &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;\n1 I. setosa        1.46 0.246\n2 I. versicolor    4.26 1.33 \n3 I. virginica     5.55 2.03 \n\n\nTo make a table from this data frame, just pipe it to the gt() function.\n\nlibrary( gt )\ndata |&gt;\n    gt() \n\n\n\nTable 7.3: The mean lenght and with of Fishers classic three Iris species.\n\n\n\n\n\n\n\n\n\nIris Species\nLength\nWidth\n\n\n\n\nI. setosa\n1.462\n0.246\n\n\nI. versicolor\n4.260\n1.326\n\n\nI. virginica\n5.552\n2.026\n\n\n\n\n\n\n\n\n\n\nBy default, it shows an alternating row colors and left justifies all the numerical data with a reasonable number of digits.\nThere is a ton of customizations available and I encourage you to go look at the documentation. Here I italicize the species column and identify specific cells and rows of the table based on the values inside.\n\ndata |&gt;\n    gt() |&gt;\n    tab_style(\n        style = list(\n            cell_text(style = \"italic\")\n        ),\n        locations = cells_body(\n            columns = `Iris Species`\n        )\n    ) |&gt;\n    tab_style( \n        style = list( \n            cell_fill( color = \"lightcyan\"),\n            cell_text( weight = \"bold\")\n        ),\n        locations = cells_body(\n            column = Length,\n            rows = Length == min(Length)\n        )\n    ) |&gt;\n    tab_style( \n        style = list( \n            cell_text( color = \"red\")\n        ),\n        locations = cells_body(\n            rows = (Length*Width) == max(Length*Width)\n        )\n    )\n\n\n\nTable 7.4: The mean lenght and with of Fishers classic three Iris species with some customization in the text columns and highlights in the numerical data. The length entry that is the smallest is in bold with a cyan cell fill color and the species row with the largest leaf area is shown with red text.\n\n\n\n\n\n\n\n\n\nIris Species\nLength\nWidth\n\n\n\n\nI. setosa\n1.462\n0.246\n\n\nI. versicolor\n4.260\n1.326\n\n\nI. virginica\n5.552\n2.026\n\n\n\n\n\n\n\n\n\n\nThis output can be exported to html, docx, rtf, \\(\\LaTeX\\), etc.",
+    "crumbs": [
+      "R Language Ecosystem",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Tabular Data</span>"
+    ]
+  },
+  {
+    "objectID": "References.html",
+    "href": "References.html",
+    "title": "References",
+    "section": "",
+    "text": "Anderson, Lorin W, and David R Krathwohl. 2001. A Taxonomy for\nLearning, Teaching and Assessing: A Revision of Bloom’s Taxonomy of\nEducational Objectives: Complete Edition. Longman.",
+    "crumbs": [
+      "Backmatter",
+      "References"
+    ]
+  },
+  {
+    "objectID": "DataSets.html",
+    "href": "DataSets.html",
+    "title": "Appendix A — Data Sets",
+    "section": "",
+    "text": "Example Taxa",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Data Sets</span>"
+    ]
+  },
+  {
+    "objectID": "DataSets.html#example-taxa",
+    "href": "DataSets.html#example-taxa",
+    "title": "Appendix A — Data Sets",
+    "section": "",
+    "text": "Sonoran Desert Bark Beetle\n\n\n\nFlowering Dogwood",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Data Sets</span>"
+    ]
+  },
+  {
+    "objectID": "DataSets.html#simulated-data",
+    "href": "DataSets.html#simulated-data",
+    "title": "Appendix A — Data Sets",
+    "section": "Simulated Data",
+    "text": "Simulated Data",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>A</span>  <span class='chapter-title'>Data Sets</span>"
+    ]
+  },
+  {
+    "objectID": "BloomSpread.html",
+    "href": "BloomSpread.html",
+    "title": "Appendix B — Bloom Spread",
+    "section": "",
+    "text": "Core Framework Components",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Bloom Spread</span>"
+    ]
+  },
+  {
+    "objectID": "BloomSpread.html#core-framework-components",
+    "href": "BloomSpread.html#core-framework-components",
+    "title": "Appendix B — Bloom Spread",
+    "section": "",
+    "text": "Bloom’s Revised Taxonomy Levels\nThe revised taxonomy (Anderson and Krathwohl 2001).\nThis classic taxonomy:\n\nRemembering: Recalling or recognizing information\nUnderstanding: Explaining ideas or concepts\nApplying: Using information in familiar situations\nAnalyzing: Breaking information into parts to explore relationships\nEvaluating: Justifying a decision or course of action\nCreating: Generating new ideas, products, or ways of viewing things",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Bloom Spread</span>"
+    ]
+  },
+  {
+    "objectID": "BloomSpread.html#knowledge-dimensions",
+    "href": "BloomSpread.html#knowledge-dimensions",
+    "title": "Appendix B — Bloom Spread",
+    "section": "Knowledge Dimensions",
+    "text": "Knowledge Dimensions\n\nFactual Knowledge\n\nKnowledge that is basic to specific disciplines. This dimension refers to essential facts, terminology, details or elements students must know or be familiar with in order to understand a discipline or solve a problem in it.\n\nConceptual Knowledge\n\nKnowledge of classifications, principles, generalizations, theories, models, or structures pertinent to a particular disciplinary area.\n\nProcedural Knowledge\n\nInformation or knowledge that helps students to do something specific to a discipline, subject, or area of study. It also refers to methods of inquiry, very specific or finite skills, algorithms, techniques, and particular methodologies.\n\nMetacognitive Knowledge\n\nThe awareness of one’s own cognition and particular cognitive processes. It is strategic or reflective knowledge about how to go about solving problems, cognitive tasks, to include contextual and conditional knowledge and knowledge of self.\n\n\n\n\n\n\nAnderson, Lorin W, and David R Krathwohl. 2001. A Taxonomy for Learning, Teaching and Assessing: A Revision of Bloom’s Taxonomy of Educational Objectives: Complete Edition. Longman.",
+    "crumbs": [
+      "Appendices",
+      "<span class='chapter-number'>B</span>  <span class='chapter-title'>Bloom Spread</span>"
+    ]
+  }
+]

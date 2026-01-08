@@ -1,0 +1,50 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "Environmental Data Literacy"
+  author: "Rodney J. Dyer"
+  date: "1/6/2026"
+  repo-url: "https://github.com/dyerlab/EnvironmentalDataLiteracy/"
+  chapters:
+    - index.qmd
+    - Introduction.qmd
+    - part: R_Ecosystem.qmd
+      chapters:
+        - R.qmd
+        - Positron.qmd
+        - DataTypesContainers.qmd
+        - Markdown.qmd
+        - FactorData.qmd
+        - Tidyverse.qmd
+        - TabularData.qmd
+        - Graphics.qmd
+        - Functions.qmd
+        - Publishing.qmd
+    - part: Backmatter.qmd
+      chapters:
+      - References.qmd
+  appendices: 
+    - DataSets.qmd
+    - BloomSpread.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    number-depth: 1
+    toc-depth: 2 
+    respect-user-color-scheme: true
+    theme:
+      - cosmo
+      - brand
+
+execute:
+  warning: false
+  message: false
+  error: false
+  freeze: auto  # set to false for release 
+  eache: true   # set to false for release
+
+

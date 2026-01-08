@@ -1,0 +1,19 @@
+# Preface {.unnumbered}
+
+This is an open source textbook for the graudate-level course that serves as an introduction to data literacy for Environmental Studies majors at Virginia Commonwealth University.
+
+
+:::{.callout-information}
+
+# The title
+
+this is the description.o
+:::
+
+
+
+
+## Acknowledgements
+
+I wish to thank the [Rice Rivers Center](https://ricerivers.vcu.edu) for permission to use the images of the Center found on the mastehead of each chapter. 
+
