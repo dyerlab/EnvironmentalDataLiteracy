@@ -1,0 +1,30 @@
+blockquote {
+  font-style: italic
+}
+
+.caption {
+  text-align: left;
+  font-style: italic;
+  font-size: small;
+}
+
+
+.chapter_image {}
+
+.chapter_image img {
+  border-radius: 15px 15px 5px 5px;
+    margin:auto;
+      width:992px;
+}
+
+
+img {
+  margin-left: auto;
+  margin-right: auto;
+  width:auto !important;
+  z-index: 2;
+}
+
+blockquote {
+  margin-top: 15px;
+}
