@@ -1,2 +1,6 @@
-# EnvironmentalDataLiteracy
-Text an learning materials for the Environmental Data Literacy courses in the Center for Environmental Studies at Virginia Commonwealth University
+# Environmental Data Literacy
+
+
+Text an learning materials for the Environmental Data Literacy course at Virginia Commonwealth University.
+
+
