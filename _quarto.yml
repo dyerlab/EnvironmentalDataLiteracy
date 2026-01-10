@@ -15,11 +15,12 @@ book:
         - R.qmd
         - Positron.qmd
         - DataTypesContainers.qmd
+        - Basic_Graphics.qmd
         - Markdown.qmd
         - FactorData.qmd
         - Tidyverse.qmd
         - TabularData.qmd
-        - Graphics.qmd
+        - GGPlot_Graphics.qmd
         - Functions.qmd
         - Publishing.qmd
     - part: SpatialData.qmd
