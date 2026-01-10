@@ -1,6 +1,6 @@
 # Positron
 
-![](media/RRC_pier2_winter.jpg)
+![](media/RRC_pier2_winter.jpg){.rounded}
 
 Writing code in R, Python, Julia, or other languges benefit from an interface and ecosystem that helps you accomplish your data analysis tasks.  By default, R comes with an interface that you could use to do all your work.
 

@@ -3,17 +3,19 @@
 This is an open source textbook for the graudate-level course that serves as an introduction to data literacy for Environmental Studies majors at Virginia Commonwealth University.
 
 
-:::{.callout-information}
+::: {.callout-tip}
+## ENVS543: Environmental Data Literacy
 
-# The title
-
-this is the description.o
+*Semester course; 3 lecture hours. 3 credits. Enrollment restricted to students with graduate standing, or those with one course in statistics and permission of instructor. Develop quantitative skills for the visualization, manipulation, analysis and communication of environmental "big data." This course focuses on spatial environmental data analysis, interpretation and communication, using real-time data from the Rice Rivers Center and the R statistical analysis environment.*
 :::
 
-
+This textbook serves as the main interface for this class and includes not only background materials but also slide content and online video components that support this flipped classroom experience.
 
 
 ## Acknowledgements
 
-I wish to thank the [Rice Rivers Center](https://ricerivers.vcu.edu) for permission to use the images of the Center found on the mastehead of each chapter. 
+I wish to thank the following individuals, who have been instrumental in the development of this document:
+
+- My thesis advisor, Dr. Victoria Sork, who instilled in me the desire to dig deeper in my analytical endeavours.
+- The [Rice Rivers Center](https://ricerivers.vcu.edu) for permission to use the images of the Center found on the mastehead of each chapter. 
 

@@ -22,12 +22,23 @@ book:
         - Graphics.qmd
         - Functions.qmd
         - Publishing.qmd
-    - part: Backmatter.qmd
+    - part: SpatialData.qmd
       chapters:
-      - References.qmd
+      - Projections.qmd
+      - PointData.qmd
+      - LinesPolygons.qmd
+      - RasterData.qmd
+    - part: StatisticalInferences.qmd
+      chapters:
+      - FrequentistBayesianInferences.qmd
+      - Contingency.qmd
+      - Correlation.qmd
+      - Regression.qmd
+      - AnalysisOfVariance.qmd
+      - Ordination.qmd  
   appendices: 
+    - References.qmd
     - DataSets.qmd
-    - BloomSpread.qmd
 
 bibliography: references.bib
 
@@ -36,6 +47,7 @@ format:
     number-depth: 1
     toc-depth: 2 
     respect-user-color-scheme: true
+    css: media/style.css
     theme:
       - cosmo
       - brand

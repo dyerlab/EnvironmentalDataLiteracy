@@ -42,3 +42,4 @@ site_libs/
 **/*.quarto_ipynb
 
 _freeze/*
+*_files/*

@@ -1,6 +1,6 @@
 # Markdown
 
-![](media/RRC_Drone_Wetlands.jpg)
+![](media/RRC_Drone_Wetlands.jpg){.rounded}
 
 > The closer we keep our data, analyses, inferences, and interpretations, the more reliable our research becomes.
 
