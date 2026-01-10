@@ -1,1 +1,712 @@
 # Graphics
+
+> Data visualization is key to providing effective communication of your data.
+
+
+## The Data
+
+The `iris` flower data set (also known as *Fisher's Iris data set*) is a multivariate data set introduced by the British statistician, eugenicist, and biologist [Ronald Fisher](https://en.wikipedia.org/wiki/Ronald_Fisher) in his [1936](https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1469-1809.1936.tb02137.x) paper entitled, *The use of multiple measurements in taxonomic problems as an example of linear discriminant analysis*.
+
+These data are part of the base `R` distribution and contain sepal and pedal measurements for three species if congeneric plants, *Iris setosa*, *I. versicolor*, and *I. virginica*.  
+
+![The three species of iris in the default data set.](https://live.staticflickr.com/65535/50163458792_2e3e877468_c_d.jpg)
+
+Here is what the data summary looks like.
+
+```{r}
+summary(iris)
+```
+
+
+
+## Classic R Graphics
+
+The base `R` comes with several built-in plotting functions, each of which is accessed through a single function with a wide array of optional arguments that modify the overall appearance.
+
+*Histograms - The Density of A Single Data Vector*
+
+```{r}
+hist( iris$Sepal.Length)
+```
+
+You can see that the default values for the `hist()` function label the x-axis & title on the graph have the names of the variable passed to it, with a y-axis is set to "Frequency".
+
+- `xlab` & `ylab`: The names attached to both x- and y-axes.
+- `main`: The title on top of the graph.
+- `breaks`: This controls the way in which the original data are partitioned (e.g., the width of the bars along the x-axis).   
+   - If you pass a single number, `n` to this option, the data will be partitioned into `n` bins.
+   - If you pass a sequence of values to this, it will use this sequence as the boundaries of bins.
+- `col`: The color of the bar (not the border)
+- `probability`: A flag as either `TRUE` or `FALSE` (the default) to have the y-axis scaled by total likelihood of each bins rather than a count of the numbrer of elements in that range.
+
+
+
+### Density Plots
+
+Estimating the continuous density of data
+
+```{r}
+d_sepal.length <- density( iris$Sepal.Length )
+d_sepal.length
+```
+
+The `density()` function estimates a continuous probability density function  for the data and returns an object that has both `x` and `y` values.  In fact, it is a special kind of object.
+
+```{r}
+class(d_sepal.length)
+```
+
+Because of this, the general `plot()` function knows how to plot these kinds of things.
+
+```{r}
+plot( d_sepal.length )
+```
+
+Now, the general `plot()` function has *A TON* of options and is overloaded to be able to plot all kinds of data.  In addition to `xlab` and `ylab`, we modify the following:
+
+- `col`: Color of the line.
+- `lwd`: Line width
+- `bty`: This covers the 'box type', which is the square box around the plot area.  I typically use `bty="n"` because I hate those square boxes around my plots (compare the following 2 plots to see the differences).  But you do you.
+- `xlim` & `ylim`: These dictate the range on both the x- and y-axes.  It takes a pair of values such as `c(min,max)` and then limits (or extends) that axis to to fill that range.
+
+
+### Scatter Plots 
+
+Plotting two continuous variables
+
+```{r}
+plot( iris$Sepal.Length, iris$Sepal.Width  )
+```
+
+Here is the most general `plot()`.  The form of the arguments to this function are x-data and then y-data.  The visual representation of the data is determined by the optional values you pass (or if you do not pass any optional values, the default is the scatter plot shown above) 
+
+
+Parameter | Description
+----------|-----------------------------------------------------------------------------------------------------------
+`type`    | The kind of plot to show ('p'oint, 'l'ine, 'b'oth, or 'o'ver).  A point plot is the default.
+`pch`     | The character (or symbol) being used to plot.  There 26 recognized general characters to use for plotting.  The default is `pch=1`. 
+`col`     | The color of the symbols/lines that are plot.
+`cex`     | The magnification size of the character being plot.  The default is `cex=1` and deviation from that will increase ($cex > 1$) or decrease ($0 < cex < 1$) the scaling of the symbols.  
+`lwd`     | The width of any lines in the plot.
+`lty`     | The type of line to be plot (solid, dashed, etc.)
+
+```{r echo=FALSE}
+par(mar=c(3,3,3,3))
+num <- 0 ; 
+num1 <- 0
+plot(0,0 , xlim=c(0,21) , ylim=c(0.5,6.5), col="white" , yaxt="n" , ylab="" , xlab="", bty="n")
+
+for (i in seq(1,20)){
+   points(i,1 , pch=i , cex=3)
+   points(i,2 , col=i , pch=16 , cex=3)
+   points(i,3 , col="black" , pch=16 , cex=i*0.25)
+   if(i %in% c(seq(1,18,3))){
+      num=num+1
+      points(c(i,i+2), c(4,4) , col="black" , lty=num , type="l" , lwd=2)
+      text(i+1.1 , 4.25 , num)
+   }
+   
+   if(i %in% c(seq(1,20,5))){
+      num1=num1+1
+      points(c(i,i+1,i+2,i+3), c(5,5,5,5) , col="black"  , type=c("p","l","b","o")[num1] , lwd=2)
+      text(i+1.5 , 5.3 , c("p","l","b","o")[num1] )
+      points(c(i,i+1,i+2,i+3), c(6,6,6,6) , col="black"  , type="l",  lwd=num1)
+      text(i+1.5 , 6.25 , num1 )
+      
+   }
+}
+
+axis(2, at = c(1,2,3,4,5,6), 
+     labels = c("pch" , "col" , "cex" , "lty", "type" , "lwd" ), 
+     tick = TRUE, 
+     col = "black", 
+     las = 1 )
+```
+
+One of the relevant things you can use the parameter `pch` for is to differentiate between groups of observations (such as different species for example).  Instead of giving it one value, pass it a vector of values whose length is equal to that for x- and y-axis data.  
+
+Here is an example where I coerce the `iris$Species` data vector into numeric types and use that for symbols.
+
+```{r warning=FALSE}
+symbol <- as.numeric(iris$Species)
+symbol
+```
+
+```{r}
+plot( iris$Sepal.Length, iris$Sepal.Width, pch=symbol )
+```
+
+We can use the same technique to use `col` instead of `pch`.  Here I make a vector of color names and then use the previously defined in the variable `symbol`.
+
+```{r}
+raw_colors <- c("red","gold","forestgreen")
+colors <- raw_colors[ symbol ]
+colors[1:10]
+```
+
+In addition to the general form for the function `plot(x,y)` we used above, we can use an alternative designation based upon what is called the *functional form*.  The *functional form* is how we designate functions in `R`, such as regression anlaysis.  This basic syntax for this is `y ~ x`, that is the response variable (on the y-axis) is a function of the predictor (on the x-axis).
+
+For simplicty, I'll make `x` and `y` varibles pointing to the same same data as in the previous graph.
+
+```{r}
+y <- iris$Sepal.Width
+x <- iris$Sepal.Length
+```
+
+Then, the `plot()` function can be written as (including all the fancy additional stuff we just described):  
+
+```{r}
+plot( y ~ x , 
+      col=colors, 
+      pch=20, 
+      bty="n", 
+      xlab="Sepal Length", ylab="Sepal Width")
+```
+
+This is **much** easier to read (also notice how I used serveral lines to put in all the options to the plot function for legibility).
+
+### Bar Plots 
+
+The `barplot` function takes a set of heights, one for each bar.  Let's quickly grab the mean length for sepals across all three species.  There are many ways to do this, here are two, the first being more pedantic and the second more concise.
+
+The `iris` data is in a `data.frame` that has a column designating the species. We can see which ones using `unique()`.
+
+```{r}
+unique( iris$Species )
+```
+
+To estimate the mean for each species, we can take values in `iris$Sepal.Length` for each level of `iris$Species` using indices.
+
+```{r}
+mu.Setosa <- mean( iris$Sepal.Length[ iris$Species == "setosa" ])
+mu.Versicolor <- mean( iris$Sepal.Length[ iris$Species == "versicolor" ])
+mu.Virginica <- mean( iris$Sepal.Length[ iris$Species == "virginica" ])
+
+meanSepalLength <- c( mu.Setosa, mu.Versicolor, mu.Virginica )
+meanSepalLength
+```
+
+When we plot these data using `barplot()` we pass the values and set the names of the bars us
+
+```{r}
+barplot( meanSepalLength, 
+         names.arg = c("setosa","versicolor","virginica"), 
+         xlab="Iris Species",
+         ylab="Mean Sepal Length")
+```
+
+
+The second way to do this is to use the `by()` function (see `?by` for the complete help file).  The `by` function takes the following objects:  
+
+- The raw data to use as measurements.  Here we will use `iris$Sepal.Length` as the raw data.
+- Data designating groups to partition the raw data into (we will use `iris$Species`).
+- The function that you want to use on each group. (here we will ask for the mean).
+
+```{r}
+meanSepalLength <- by( iris$Sepal.Length, iris$Species, mean )
+meanSepalLength
+```
+
+The data returned from this function is both `numeric` *and* has a name set for each value. 
+```{r}
+is.numeric( meanSepalLength )
+names( meanSepalLength )
+```
+
+
+Then when we pass that to `barplot()` the column labels are set automatically (e.g., no need to set `names.arg` as above).
+
+```{r}
+barplot( meanSepalLength, 
+         xlab = "Iris Species",
+         ylab = "Average Sepal Length")
+```
+
+
+### Boxplots 
+
+
+A boxplot contains a high amount of information content and is appropriate when the groupings on the x-axis are categorical.  For each category, the graphical representation includes:  
+
+- The median value for the raw data
+- A box indicating the area between the first and third quartile (e.g,. the values enclosing the 25% - 75% of the data).  The top and bottoms are often referred to as the *hinges* of the box.
+- A notch (if requested), represents confidence around the estimate of the median.
+- Whiskers extending out to shows $\pm 1.5 * IQR$ (the Inner Quartile Range)
+- Any points of the data that extend beyond the whiskers are plot as points.
+
+For legibility, we can use the *functional* form for the plots as well as separate out the `data.frame` from the columns using the optional `data=` argument.
+
+```{r}
+boxplot( Sepal.Length ~ Species, 
+         data = iris, 
+         notch=TRUE, 
+         ylab="Sepal Length" )
+```
+
+
+### Colors 
+
+
+*Named Colors - * There are `r length( colors() )` pre-defined, named colors built into the base `R` distribution.  Here is a random selection of those values.
+
+```{r}
+randomColors <- sample( colors(), size = nrow(iris) )
+head(randomColors)
+```
+
+To use these colors, you can specify them by name for either all the elements 
+
+```{r}
+boxplot( Sepal.Length ~ Species, 
+         data = iris, 
+         col = randomColors[1],
+         notch=TRUE, 
+         ylab="Sepal Length" )
+```
+
+*or* for each element individually.
+
+```{r}
+boxplot( Sepal.Length ~ Species, 
+         data = iris, 
+         col = randomColors[1:3],
+         notch=TRUE, 
+         ylab="Sepal Length" )
+```
+
+*Hex Colors: *  You can also use hexadecimal representations of colors, which is most commonly used on the internet.  A hex representation of colors consists of red, green, and blue values encoded as numbers in base 16 (e.g., the single digits 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F).  There are a lot of great resources on the internet for color themes that report red, green, blue and hex values.  I often use the [coolors.co](https://coolors.co) website to look for themes that go well together for slides or presentations.  
+
+
+*Color Brewer* Finally, there is an interesting website at [colorbrewer2.org](https://colorbrewer2.org) that has some interesting built-in palettes.  There is an associated library that makes creating palettes for plots really easy and as you get more expreienced with `R`, you will find this very helpful.  For quick visualizations and estimation of built-in color palettes, you can look at the [website](https://colorbrewer2.org) (below).
+
+![ColorBrewer Site](https://live.staticflickr.com/65535/50174527901_ae29c0e624_c_d.jpg)
+or look at the colors in `R`
+
+```{r}
+library(RColorBrewer)
+display.brewer.all()
+```
+
+There are three basic kinds of palettes: divergent, qualitative, and sequential.  Each of these built-in palletes has a maximum number of colors available (though as you see below we can use them to interpolate larger sets) as well as indications if the palette is safe for colorblind individuals.
+
+```{r}
+brewer.pal.info
+```
+
+It is very helpful to look at the different kinds of data palettes available and I'll show you how to use them below when we color in the states based upon population size at the end of this document.
+
+### Plot Annotations
+
+You can easily add text onto a graph using the `text()` function.  Here is the correlation between the sepal length and width (the function `cor.test()` does the statistical test).
+
+```{r}
+cor <- cor.test( iris$Sepal.Length, iris$Sepal.Width )
+cor
+```
+
+We can put the correlation and the p-value on the plot
+
+```{r}
+cor.text <- paste( "r = ", format( cor$estimate, digits=4), "; P = ", format( cor$p.value, digits=4 ), sep="" ) 
+cor.text
+```
+
+The we can the overlay this onto an existing plot.  For the `text()` function, we need to give the x- and y- coordinates where you want it put onto the coordinate space of the existing graph.
+
+```{r}
+plot( y ~ x , 
+      col=colors, 
+      pch=20, 
+      bty="n", 
+      xlab="Sepal Length", ylab="Sepal Width")
+text( 7.4, 4.2, cor.text )
+```
+
+
+
+## GGPlot2 Graphics
+
+
+> The `ggplot2` library is a gramattical approach to data display.
+
+In base `R`, the graphics are generally produced by adding a lot of optional arguments to a single function such as `plot()` or `barplot()` or `boxplot()`.  We can get some kinds of overlays using `text()` or `points()` or `lines()` but there is not a cohesive framework for setting this up.  For even moderately complex graphical display, these approaches become unwieldy when we have to cram all that information into extra optional arguments.  
+
+![base plot in R](https://live.staticflickr.com/65535/50184447608_a5ca7680f5_c_d.jpg)
+
+Consider the graph below whose data are from a 2011 article in *The Economist* measuring human development and perception of corruption for 173 countries (@fig-economist).  Both the amount of data and the way in which the data are displayed (physically and aesthetically) are somewhat complex.
+
+```{r}
+#| echo: false
+#| warning: false 
+#| error: false
+#| label: fig-economist
+#| fig-cap: Corruption and Human Develoment among OECD countries from <i>The Economist</i> magazine.
+library( ggplot2 )
+library( ggrepel )
+library( readr )
+
+data <- read_csv("data/EconomistData.csv" , col_types = cols() )
+Region <- as.character( data$Region )
+Region[ Region == "SSA"] <- "Sub-Saharan Africa"
+Region[ Region == "Asia Pacific"] <- "Asia & Oceania"
+Region[ Region == "East EU Cemt Asia"] <- "Central & Eastern Europe"
+Region[ Region == "MENA" ] <- "Middle East & North Africa"
+Region[ Region == "SSA"] <- "Sub-Saharan Africa"
+Region[ Region == "EU W. Europe"] <- "OECD"
+region_order <- c("OECD",
+                  "Americas",
+                  "Asia & Oceania",
+                  "Central & Eastern Europe",
+                  "Middle East & North Africa",
+                  "Sub-Saharan Africa")
+Region <- factor(Region, ordered=TRUE, levels=region_order)
+data$Region <- Region
+country2label <- c("Russia", "Venezuela", "Iraq", "Myanmar", "Sudan",
+                   "Afghanistan", "Congo", "Greece", "Argentina", "Brazil",
+                   "India", "Italy", "China", "South Africa", "Spane",
+                   "Botswana", "Cape Verde", "Bhutan", "Rwanda", "France",
+                   "United States", "Germany", "Britain", "Barbados", "Norway",
+                   "Japan","New Zealand", "Singapore")
+df <- data[ data$Country %in% country2label, ]
+colors <- c("#24576D","#099DD7","#28AADC","#248E84","#F2583F","#96503F")
+p <- ggplot( data, aes( x=CPI, y=HDI))
+p <- p + stat_smooth(method="lm", formula=y~log(x), se=FALSE, color="red")
+p <- p + geom_point( aes(color=Region), shape=1, size=3)
+p <- p + scale_color_manual(name = "", values = colors)
+p <- p + geom_text_repel( aes(label=Country), data=df , force=10 )
+p <- p + ylab("Corruption Perceptions Index, 2011 (10=least corrupt)")
+p <- p + xlab("Human Development Index, 2011 (1=best)")
+p <- p + ggtitle("Corruption and Human Development")
+p <- p + xlim(c(0.5,10.5)) + ylim(c(0.2,1.0))
+p <- p + theme_minimal()
+p <- p + theme( legend.position="top",
+                panel.grid.major = element_line( color="grey50", size=0.5),
+                panel.grid.major.x = element_blank(),
+                axis.line.y = element_blank(),
+                axis.ticks.y = element_blank() )
+p
+```
+
+This graphic is constructed from several *additive* components[^1] including:  
+
+- A raw `data.frame` that has several kinds of data (CPI, HDI, region, names, etc.).  
+- A *aesthetic* statement indicating which columns of data to use and how to use them in the plot (designating x-axis vs color, etc.).  
+- An estimate of a trendline through the data (the red one), which displays a statistical summary of the raw data.   
+- A set of geometric overlays for the points which include size and shape configurations.  
+- Specified color scheme for the regions.
+- Labeling of a subset of the data (which is done using a separate `data.frame` derived from the first).
+- Labels on axes.
+- A legend positioned in a specific fashion.  
+- A title over the whole thing.  
+- A theme for the rest of the coloring and customized lines and grids.
+
+Truth be told (and you can look at the RMD of this file to verify), this one graphic required 42 relatively terse lines of code to construct!  If all of that code was stuffed into the *optional arguments* for a few functions, I think I would go mad.  
+
+Luckily for us, there are people who spend a lot of time working on these issues and thinking about how to best help us effectively display data.  One of these individuals was Leland Wilkinson, whose book *The Grammar of Graphics* defined just such a system.
+
+![The Grammar of Graphics by Leland Wilkinson](https://live.staticflickr.com/65535/50184460853_63ea8a2a97_w_d.jpg)
+
+This philosophy has been inserted into the `R` Ecosystem by Hadley Wickham in the `ggplot2` library, which is descbribed as: 
+
+> A system for 'declaratively' creating graphics, based on "The Grammar of Graphics". You provide the data, tell 'ggplot2' how to map variables to aesthetics, what graphical primitives to use, and it takes care of the details.
+
+Throughout the majority of this course, we will be using this library and this approach for all but the most trivial of graphical displays.
+
+
+
+
+### Basic ggplot
+
+As outlined above, the basis of this appraoch is an additive (and iterative) process of creating a graphic.  This all starts with the data.  For our purposes, we will use the same iris `data.frame` as in the previous section on base graphics. 
+
+![The iris data](https://live.staticflickr.com/65535/50163458792_2e3e877468_c_d.jpg)
+
+```{r}
+summary( iris )
+```
+
+
+
+We start building a graphic using the `ggplot()` function and passing it the `data.frame` object.  This will initialize the graphic, though it will not plot anything.  
+
+```{r}
+library(ggplot2)
+
+ggplot( iris )
+```
+
+Next, we need to tell the plot which variables it will be using from the `data.frame`.  For simplicity, we do not need to make special data objects with just the variables we want to plot, we can pass around the whole `data.frame` object and just indicate to ggplot which ones we want to use by specifying the *aesthetics* to be used.
+
+```{r}
+ggplot( iris , aes( x=Sepal.Length ) )
+```
+
+At this point, there is enough information to make an axis in the graph because the underlying data has been identified.  What has not been specified to date is the way in which we want to represent the data.  To do this, we add geometries to the graph.  In this case, I'm going to add a histogram 
+
+```{r}
+ggplot( iris, aes(x=Sepal.Length) ) + geom_histogram()
+```
+Now we have a base graph!
+
+
+### Aestheics and Scope
+
+The location of the data and the `aes()` determines the *scope* of the assignment.  What I mean by this is:  
+
+- If the data and `aes()` is in the the `ggplot()` function, then everything in the whole plot *inherits* that assignment.
+- If you put them in one or more of the components you add to `ggplot()` then the they are localized to *only* those layers.
+
+So the following statements are all identical for this most basic of plots.
+
+```{r eval=FALSE}
+ggplot( iris, aes(x=Sepal.Length) ) + geom_histogram()
+ggplot( iris ) + geom_historgram( aes(x=Sepal.Length) )
+ggplot() + geom_histogram( aes(x=Sepal.Length), data=iris)
+```
+
+- In the first case, the `geom_histogram()` inherits both data and aesthetics from `ggplot()`.  
+- In the second one, it inherits only the data but has it's own specification for aesthetics.
+- In the last one, `ggplot()` only specifies the presence of a graph and all the data and aesthetics are localized within `geom_histogram()` function.
+
+Where this becomes important is when we want to make more complicated graphics like the one above.  The data that has the country CDI and HDI also has the names of the countries.  However, only a subset of the country names are plot.  This is because both the geometric layer and the text layer that has the names are using different `data.frame` objects.
+
+Here is a more simplistic example where I overlay a density plot (as a red line) on top of the histogram.
+
+```{r}
+ggplot( iris, aes(x=Sepal.Length) ) + geom_histogram() + geom_density( col="red")
+```
+
+Both the `geom_histogram` and the `geom_density` use the same data and same specification for how to deal with the y-axis.  However, the density is depicted as a frequency on the y-axis whereas the histogram uses counts.  Also notice how the `col="red"` is localized just for the `geom_density()` layer.
+
+We can override the way in which `geom_histogram` uses the y-axis by changing the *aesthetics* for that particular geometric layer.  Here, I'm goint to add another `aes()` just within the `geom_histogram()` function and have it treat y as the density rather than the count (yes that is two periods before and after the word density).
+
+```{r}
+ggplot( iris, aes(x=Sepal.Length) ) + geom_histogram(aes(y=..density..)) + geom_density( col="red" )
+```
+
+By default, everything inside the `ggplot()` function call is inherited by all the remaining components unless it is specifically overridden.  Here is a more pedantic version where only the raw `data.frame` is in the `ggplot` and the rest is in each of the geometric layers.
+
+```{r}
+ggplot( iris ) + 
+  geom_histogram( aes(x=Sepal.Length, y=..density..) ) + 
+  geom_density( aes(x=Sepal.Length), col="red", lwd=2)
+```
+
+
+### Labels & Titles
+
+Just like we added geometric layers to the plot to make histograms and densities, we do the same for labels and titles.
+
+
+```{r}
+ggplot( iris,  aes(x=Sepal.Length) ) + 
+  geom_histogram( aes(y=..density..), bins = 10, fill="lightgray", col="darkgrey" ) + 
+  geom_density( col="red", lwd=1.5) + 
+  xlab("Length") + ylab("Density") + 
+  ggtitle("Sepal Lengths for Three Iris Species")
+```
+
+
+
+
+
+### Scatter Plots
+
+With two columns of data, we can make the old scatter plot using the `geom_point()` function.
+
+
+```{r}
+ggplot( iris, aes(x=Sepal.Length, y=Sepal.Width) ) + geom_point( col="purple") 
+```
+
+In this plot, we are hiding some of the information by having all the points be the same color and shape.  We could have a `geom_point` for each species as follows:
+
+```{r}
+ggplot(  ) + 
+  geom_point( aes( x = Sepal.Length, y = Sepal.Width), data=iris[ 1:50,], col="red") + 
+  geom_point( aes( x = Sepal.Length, y = Sepal.Width), data=iris[ 51:100,], col="yellow" ) + 
+  geom_point( aes( x = Sepal.Length, y = Sepal.Width), data=iris[ iris$Species == "virginica", ], col="darkgreen" ) 
+```
+
+But that is *a lot* of typing.  In cases like this, where there is a an actual column of data that we want to use to change the appearance (e.g., in this case the `Species` column), we can put this within the `aes()` directly and `ggplot()` will handle the specifics for you.  Anything we do to reduce the amount of typing we must do is going to help us be more accurate analysts.  
+
+```{r}
+ggplot( iris, aes( x = Sepal.Length, y = Sepal.Width, col=Species) ) + geom_point()
+```
+
+
+
+### In or Out of `aes()`
+
+Notice in the last graph I put the name of the data column in the aesthetic but have the color (`col`) within the `aes()` function call in the graph before that, I put color outside of the `aes()` in the `geom_point()` function.  What gives?  Here is a simple rule.  
+
+> If information from within the `data.frame` is needed to customize the display of data then it must be designated within the `aes()`, whereas if the display of the data is to be applied to the entire geometric layer, it is specified outside of the `aes()` call.
+
+Here is an example, where I have the color of the shapes determined by a value in the `data.frame` but have the shape[^2] applied to all the points, independent of any data in the `data.frame`.
+
+```{r}
+ggplot( iris ) + geom_point(aes( x = Sepal.Length, y = Sepal.Width, col=Species), shape=5)
+```
+
+We can build these things in an iterative fashion making things easier to read.  In what follows I will use the basic plot from above **but** assign it to the variable `p` as I add things to it.  It can be as iterative as you like and you can add a bunch of stuff and wait until the end to display it.
+
+```{r}
+p <- ggplot( iris ) 
+p <- p + geom_point(aes( x = Sepal.Length, y = Sepal.Width, col=Species, shape=Species), size=3, alpha=0.75 ) 
+p <- p + xlab("Sepal Length") 
+p <- p + ylab("Sepal Width")
+```
+
+The overall class of the plot varible is
+
+```{r}
+class(p)
+```
+
+And there is no plot output until we display it specifically.
+
+```{r}
+p
+```
+
+### Themes
+
+The overall coloration of the plot is determined by the theme.  
+
+
+```{r}
+p + theme_bw()
+```
+
+
+```{r}
+p + theme_dark()
+```
+
+```{r}
+p + theme_minimal()
+```
+
+
+```{r}
+p + theme_linedraw()
+```
+
+
+```{r}
+p + theme_void()
+```
+
+You can even define your own themes to customize all the text and lines.
+
+One thing that I like to do is to specify a default theme for all my plots.  You can accomplish this using  `theme_set()` and from this point forward, this theme will be used as the default (again, we need to try as hard as possible to minimzie the amount of typing we do to minimize the amount of mistakes we make).
+
+```{r}
+theme_set( theme_bw() )
+```
+
+
+
+### Boxplots
+
+
+```{r}
+ggplot( iris, aes( x = Sepal.Length) ) + geom_boxplot( notch=TRUE )
+```
+
+```{r}
+ggplot( iris, aes(x=Species, y=Sepal.Length) )  + geom_boxplot( notch=TRUE )
+```
+
+
+### Custom Color Palettes
+
+TODO: FILL THIS OUT
+
+```{r}
+library( wesanderson)
+```
+
+
+
+### Overlays
+
+Just like in the previous 
+
+```{r}
+p <- ggplot( iris, aes(Sepal.Length, Sepal.Width) ) + 
+  geom_point(col="red") + 
+  xlab("Sepal Length") + 
+  ylab("Sepal Width")
+```
+
+
+The order by which you add the components to the `ggplot()` will determine the order of the layers from bottom to top—the.  Layers added earlier will be covered by content in layers that are added later.  Compare the following plot that takes the length and width of the sepals and overlays a linear regression line over the top.
+
+```{r}
+p + geom_point(col="red") + 
+  stat_smooth( formula = y ~ x, method="lm", alpha=1.0)
+```
+
+Compare that plot to the one below.  Notice how puting `stat_smooth()` in front of the call to `geom_point()` layes the regression smoothing line and error zone *underneath* the points.
+
+```{r}
+p + stat_smooth(formula = y ~ x, method="lm", alpha=1.0) + 
+  geom_point(col="red") 
+```
+
+### Labeling
+
+We can create two kinds of annotations, text on the raw graph and text associated with some of the points.  Labels of the first kind can be added direclty by placing raw data inside the `aes()` function.  
+
+I'll start by taking the correlation between sepal width and length.
+
+```{r}
+cor <- cor.test( iris$Sepal.Length, iris$Sepal.Width )
+cor
+```
+
+And then grab the raw data from it and make a message.
+
+```{r}
+cor.text <- paste( "r = ", format( cor$estimate, digits=4), "; P = ", format( cor$p.value, digits=4 ), sep="" ) 
+cor.text
+```
+
+That I'll stick onto the graph directly 
+
+```{r}
+p + geom_text( aes(x=7.25, y=4.25, label=cor.text))
+```
+
+Alternatively, we may want to label specific points.  Here I find the mean values for each species.
+
+```{r}
+mean_Length <- by( iris$Sepal.Length, iris$Species, mean, simplify = TRUE)
+mean_Width <- by( iris$Sepal.Width, iris$Species, mean, simplify = TRUE)
+mean_Values <- data.frame(  Species = levels( iris$Species), 
+                            Sepal.Length = as.numeric( mean_Length ), 
+                            Sepal.Width = as.numeric( mean_Width ) ) 
+mean_Values
+```
+
+To plot and label these mean values, I'm going to use two steps.  First, since I named the columns of the new `data.frame` the same as before, we can just inherit the `aes()` but substitute in this new `data.frame` and add `label=Species` to the the *aesthetics*.  
+
+
+```{r}
+p + geom_text( data=mean_Values, aes(label=Species) )
+```
+
+But that is a bit messy. Here is a slick helper library for that that will try to minimize the overlap.
+
+```{r}
+library( ggrepel ) 
+p + geom_label_repel( data=mean_Values, aes(label=Species) )
+```
+Slick.
+
+
+
+
+[^1]: Literally, we add these toghter using the plus '+' sign just like we were going to develop an equation. 
+[^2]: The shapes are the same as the `pch` offerings covered in the lecture on graphing using Base R routines  [here](https://dyerlab.github.io/ENVS-Lectures/visualization/basic_visualization/narriative.nb.html).
